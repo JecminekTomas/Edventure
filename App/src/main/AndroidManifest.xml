@@ -19,6 +19,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.SelectTutorActivity"
+            android:label="@string/title_activity_select_tutor"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.FilterTutorSubjectActivity"
+            android:label="@string/title_activity_filter_tutor_subject"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.BaseActivity"
+            android:label="@string/title_activity_filter_tutor_city"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.FilterTutorActivity"
+            android:label="@string/title_activity_filter_tutor"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.TutorProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
