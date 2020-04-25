@@ -13,4 +13,9 @@
     <string name="title_activity_filter_tutor_city">Výběr města</string>
     <string name="title_activity_filter_tutor">Filtrování učitelů</string>
     <string name="title_activity_select_tutor">Výběr učitelů</string>
+    <string name="welcome_phrase">Vítejte v aplikaci TUTOR.me</string>
+    <string name="continue_phrase">Pokračovat</string>
+    <string name="search">search</string>
+    <string name="filter">filter</string>
+    <string name="choose_teacher">Výběr učitele</string>
 </resources>

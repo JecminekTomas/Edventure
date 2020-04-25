@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        if (SharedPreferencesManager.isRunForFirstTime(this)) {
+        if (!SharedPreferencesManager.isRunForFirstTime(this)) {
             startActivity(SelectTutorActivity.createIntent(this))
             finish()
         }
@@ -28,5 +28,5 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// TODO: New branch development 👌, testing - maybe later?
+// TODO: New branch develop 👌, feature - maybe later?
 // TODO: Watch some stuff about fragments... In Android Studio there is bunch of them.
