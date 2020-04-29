@@ -6,12 +6,12 @@ import android.content.SharedPreferences
 class SharedPreferencesManager {
 
     companion object {
-        private val fileName = "sptutorme"
-        private val firstRun = "first_run"
+        private const val fileName = "sptutorme"
+        private const val firstRun = "first_run"
 
         // INFO: Vrací objekt k přístupu k SharedPreferences, paratrem je context (který umí zachytit stav)
         private fun getSharedPreferences(context: Context): SharedPreferences {
-            return context.getSharedPreferences(firstRun, Context.MODE_PRIVATE)
+            return context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
         }
 
 
@@ -19,7 +19,7 @@ class SharedPreferencesManager {
 
     fun saveFirstRun(context: Context) {
         val editor = getSharedPreferences(context).edit() // INFO: editor vstoupí do SP a umožní editaci
-        editor.putBoolean(firstRun, true)
+        editor.putBoolean(firstRun, false) // INFO: POZOR - Musím nastavit hodnotu na false. (logicky - neběží poprvé)
         editor.apply()
     }
 

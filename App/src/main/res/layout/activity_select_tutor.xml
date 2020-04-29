@@ -12,13 +12,16 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/choose_teacher"
             android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Info: app:title, není potřeba, jelikož je v Andr. Man. -->
 
     <include layout="@layout/content_select_tutor"/>
 
