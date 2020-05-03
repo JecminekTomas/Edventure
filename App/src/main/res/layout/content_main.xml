@@ -18,7 +18,7 @@
         android:gravity="center"
         android:orientation="vertical"
         >
-        <!-- INFO: gravity zajišťuje zarovnání potomků v LL -->
+        <!-- gravity zajišťuje zarovnání potomků v LL -->
 
         <TextView
             android:layout_width="wrap_content"

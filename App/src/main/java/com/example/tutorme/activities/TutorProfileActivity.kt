@@ -10,5 +10,3 @@ class TutorProfileActivity: BaseActivity() {
         }
     }
 }
-
-// TODO: RecyclerView s Fragmenty?

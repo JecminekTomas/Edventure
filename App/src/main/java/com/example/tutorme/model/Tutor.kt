@@ -13,14 +13,14 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "User")
 data class Tutor(
     @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "id_user")
-    val id_user: Long? = null,
+    @ColumnInfo(name = "userId")
+    val userId: Long? = null,
 
-    @ColumnInfo(name = "first_name")
-    val first_name: String? = null,
+    @ColumnInfo(name = "firstName")
+    val firstName: String? = null,
 
-    @ColumnInfo(name = "last_name")
-    val last_name: String? = null,
+    @ColumnInfo(name = "lastName")
+    val lastName: String? = null,
 
     @ColumnInfo(name = "city")
     val city: String? = null,
@@ -28,16 +28,22 @@ data class Tutor(
     // TODO: City nebude string, ale bude to výčet českých měst a také jich bude moct být víc
     /** Bude city entita? - Nejspíš ne. Bude potřeba vytvořit nějaké konstanty ze začátku českých měst */
 
-    @ColumnInfo(name = "ranking")
-    val ranking: Long? = null,
-    // TODO: Předělat na mutable list .. aby bylo možno vypočíst průměr hodnocení.
-
-    @ColumnInfo(name = "phone_number")
-    val phone_number: Int? = null,
+    @ColumnInfo(name = "phoneNumber")
+    val phoneNumber: String? = null,
     /** Pokud bude chtít učitel sdělit telefonní číslo klintovi na jedno kliknutí */
 
     @ColumnInfo(name = "email")
-    val email: String? = null
-
+    val email: String? = null,
     // TODO: Předělat na typ e-mail, pokud je.
+
+    @ColumnInfo(name = "pricePerHour")
+    val pricePerHour: Double? = null,
+
+    @ColumnInfo(name = "rating")
+    val rating: Double? = null
+
+    //TODO: Je potřeba vytvořit stupnici od 0 do 5
+    // TODO: Předělat na mutable list .. aby bylo možno vypočíst průměr hodnocení.
+
+
 )

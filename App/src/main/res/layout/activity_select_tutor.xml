@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.SelectTutorActivity">
-    <!-- INFO: Vždy přidat kontext k vygenerovanému Const. L -->
+
+    <!-- Vždy přidat kontext k vygenerovanému Const. L -->
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Info: app:title, není potřeba, jelikož je v Andr. Man. -->
+    <!-- app:title, není potřeba, jelikož je v Andr. Man. -->
 
     <include layout="@layout/content_select_tutor"/>
 

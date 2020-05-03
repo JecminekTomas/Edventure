@@ -28,5 +28,3 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// TODO: New branch develop 👌, feature - maybe later?
-// TODO: Watch some stuff about fragments... In Android Studio there is bunch of them.

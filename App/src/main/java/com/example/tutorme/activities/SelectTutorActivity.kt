@@ -3,9 +3,8 @@ package com.example.tutorme.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.text.Layout
+import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +12,7 @@ import com.example.tutorme.R
 import com.example.tutorme.model.Tutor
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_select_tutor.*
 
 private val FILTER_TUTOR_REQUEST_CODE: Int = 100
 
@@ -25,7 +25,9 @@ class  SelectTutorActivity: BaseActivity() {
 
     private val layout: Int = R.layout.activity_select_tutor
     private val tutorList: MutableList<Tutor> = mutableListOf()
+
     private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var tutorAdapter: TutorAdapter
     /**  layoutManager se stará o pozicování - Existuje možnost i GridManageru, atd. */
 
 
@@ -34,6 +36,19 @@ class  SelectTutorActivity: BaseActivity() {
         setContentView(layout)
         setSupportActionBar(toolbar)
 
+        tutorAdapter = TutorAdapter()
+        layoutManager = LinearLayoutManager(this)
+        selectTutorRecyclerView.layoutManager = layoutManager
+        selectTutorRecyclerView.adapter = tutorAdapter
+
+        /** Vložení statických hodnot*/
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
     }
 
     /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
@@ -66,15 +81,37 @@ class  SelectTutorActivity: BaseActivity() {
         return true
     }
 
+    inner class TutorAdapter: RecyclerView.Adapter<TutorAdapter.TutorViewHolder>(){
 
-    /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
-    inner class TutorViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val tutorPicture: CircleImageView = view.findViewById(R.id.tutorPicture)
-        val tutorName: TextView = view.findViewById(R.id.tutorName)
-        val tutorCity: TextView = view.findViewById(R.id.tutorCity)
-        val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
-        val tutorRating: TextView = view.findViewById(R.id.tutorRating)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TutorViewHolder {
+            val view: View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.row_select_tutor, parent,false)
+            return TutorViewHolder(view)
+        }
+
+        override fun getItemCount() = tutorList.size
+
+        override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
+            val tutor = tutorList[position]
+            holder.tutorName.text = tutor.firstName.plus(" ").plus(tutor.lastName)
+            holder.tutorCity.text = tutor.city
+            holder.tutorPrice.text = tutor.pricePerHour?.toInt().toString()
+            holder.tutorRating.text = String.format("%.1f", tutor.rating)
+        }
+
+        /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
+        inner class TutorViewHolder(view: View): RecyclerView.ViewHolder(view){
+            // TODO: Vyměnit Dr. House
+            //val tutorPicture: CircleImageView = view.findViewById(R.id.tutorPicture)
+            val tutorName: TextView = view.findViewById(R.id.tutorName)
+            val tutorCity: TextView = view.findViewById(R.id.tutorCity)
+            val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
+            val tutorRating: TextView = view.findViewById(R.id.tutorRating)
+        }
     }
+
+
+
 
 
 }
