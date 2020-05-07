@@ -1,5 +1,6 @@
 package com.example.tutorme.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -49,6 +50,7 @@ class  SelectTutorActivity: BaseActivity() {
         tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
         tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
         tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        /** Vložení statických hodnot*/
     }
 
     /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
@@ -91,12 +93,13 @@ class  SelectTutorActivity: BaseActivity() {
 
         override fun getItemCount() = tutorList.size
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
             val tutor = tutorList[position]
             holder.tutorName.text = tutor.firstName.plus(" ").plus(tutor.lastName)
             holder.tutorCity.text = tutor.city
             holder.tutorPrice.text = tutor.pricePerHour?.toInt().toString()
-            holder.tutorRating.text = String.format("%.1f", tutor.rating)
+            holder.tutorRating.text = "★ " + String.format("%.1f", tutor.rating)
         }
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
