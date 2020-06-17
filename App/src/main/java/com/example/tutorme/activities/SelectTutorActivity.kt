@@ -43,13 +43,13 @@ class  SelectTutorActivity: BaseActivity() {
         selectTutorRecyclerView.adapter = tutorAdapter
 
         /** Vložení statických hodnot*/
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Milos", "Novy", "Karvina", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
+        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
         /** Vložení statických hodnot*/
     }
 
@@ -57,6 +57,10 @@ class  SelectTutorActivity: BaseActivity() {
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_add_tutor -> {
+                onActionAddTutor()
+                return true
+            }
             R.id.action_filter -> {
                 onActionFilter()
                 return true
@@ -67,6 +71,10 @@ class  SelectTutorActivity: BaseActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun onActionAddTutor(){
+        startActivityForResult(FilterTutorActivity.createIntent(this ), FILTER_TUTOR_REQUEST_CODE)
     }
 
     private fun onActionFilter(){
@@ -96,10 +104,10 @@ class  SelectTutorActivity: BaseActivity() {
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
             val tutor = tutorList[position]
-            holder.tutorName.text = tutor.firstName.plus(" ").plus(tutor.lastName)
+            holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
-            holder.tutorPrice.text = tutor.pricePerHour?.toInt().toString()
-            holder.tutorRating.text = "★ " + String.format("%.1f", tutor.rating)
+            holder.tutorPrice.text = String.format("%.0f Kč/h", tutor.pricePerHour) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
+            holder.tutorRating.text = String.format("★ %.1f", tutor.rating)
         }
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
