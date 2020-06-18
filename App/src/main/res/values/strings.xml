@@ -16,4 +16,5 @@
     <string name="search">search</string>
     <string name="filter">filter</string>
     <string name="choose_teacher">Výběr učitele</string>
+    <string name="addTutor">addTutor</string>
 </resources>

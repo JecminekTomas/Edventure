@@ -3,6 +3,10 @@
     <dimen name="welcome_phrase_size">24sp</dimen>
     <dimen name="basic_indentation">16dp</dimen>
     <dimen name="half_indentation">8dp</dimen>
+    <dimen name="quater_indentation">4dp</dimen>
+    <dimen name="one_indentation">1dp</dimen>
     <dimen name="zero_indentation">0dp</dimen>
-    <dimen name="civ_row_size">96dp</dimen>
+    <dimen name="civ_size">70dp</dimen>
+    <dimen name="cardRadius">10dp</dimen>
+    <dimen name="cardElevation">5dp</dimen>
 </resources>

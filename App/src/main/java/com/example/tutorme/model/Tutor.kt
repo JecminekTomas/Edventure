@@ -6,51 +6,56 @@ import android.provider.ContactsContract
 import android.telephony.PhoneNumberUtils
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
-
-// TODO: Tutor bude propojen s USER, což bude nad-entita
 
 @Entity(tableName = "tutor")
 data class Tutor(
     @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "tutorId")
-    val tutorId: Long? = null,
+    @ColumnInfo(name = "tutor_id")
+    val tutorId: Long = 0,
 
-    @ColumnInfo(name = "firstName")
-    val firstName: String? = null,
+    @ColumnInfo(name = "first_name")
+    val firstName: String = "",
 
-    @ColumnInfo(name = "lastName")
-    val lastName: String? = null,
+    @ColumnInfo(name = "last_name")
+    val lastName: String = "",
 
     @ColumnInfo(name = "city")
-    val city: String? = null,
+    val city: String = "",
 
-    // TODO: Bude city v DB? ... Neexistuje jiná kontrola města?
-    // TODO: City nebude string, ale bude to výčet českých měst a také jich bude moct být víc.. b
-    /** Bude city entita? - Nejspíš ne. Bude potřeba vytvořit nějaké konstanty ze začátku českých měst */
+    /**@Embedded val city: City */
 
-    @ColumnInfo(name = "phoneNumber")
-    val phoneNumber: String? = null,
-    /** Pokud bude chtít učitel sdělit telefonní číslo klintovi na jedno kliknutí */
+    //TODO:  Budoucnost - City bude samostatná entita
+
+    @ColumnInfo(name = "phone_number")
+    val phoneNumber: String = "",
+    /** Pokud bude chtít učitel sdělit telefonní číslo klientovi na jedno kliknutí */
 
     @ColumnInfo(name = "email")
-    val email: String? = null,
-    // TODO: Předělat na typ e-mail, pokud je.
+    val email: String = "",
+    /** Kontrolovat při vkládání */
 
     // TODO: Vymazat ... Cena může být rozdílá u kurzů
-    @ColumnInfo(name = "pricePerHour")
-    val pricePerHour: Double? = null,
+    @ColumnInfo(name = "price_per_hour")
+    val pricePerHour: Double = 0.0,
 
     @ColumnInfo(name = "rating")
-    val rating: Double? = null
+    val rating: Double = 0.0,
 
+    @Ignore
+    var avatar: TutorAvatar? = null
+
+
+
+    //Zdroj zápisu: Kotlin programming by example.
 
     /** TODO: Je potřeba vytvořit stupnici od 0 do 5
-     ** TODO: Předělat na mutable list .. aby bylo možno vypočíst průměr hodnocení. .. Nebo NE.
+     ** TODO: V budoucnu - Předělat na mutable list .. aby bylo možno vypočíst průměr hodnocení.
 
      ** TODO: Nebude to USER, nejedná se o třídu, ale o ENTITU!
-     ** TODO: Bude jenom jednou v RV, ale pokud bude mít rozdílné sazby, stanoví se rozmezí.
-     ** TODO: Pokud bude uživatel vyhledávat dle předmětu, zobrazí se již jenom cena za předmět.
+     ** TODO: Budoucnost - Bude jenom jednou v RV, ale pokud bude mít rozdílné sazby, stanoví se rozmezí.
+     ** TODO: Budoucnost - Pokud bude uživatel vyhledávat dle předmětu, zobrazí se již jenom cena za předmět.
      */
 
 )

@@ -41,16 +41,6 @@ class  SelectTutorActivity: BaseActivity() {
         layoutManager = LinearLayoutManager(this)
         selectTutorRecyclerView.layoutManager = layoutManager
         selectTutorRecyclerView.adapter = tutorAdapter
-
-        /** Vložení statických hodnot*/
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        tutorList.add(Tutor(1,"Miloš", "Nový", "Karviná", "412512861","tom@gmail.com", 200.0, 3.5 ))
-        /** Vložení statických hodnot*/
     }
 
     /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
@@ -74,7 +64,7 @@ class  SelectTutorActivity: BaseActivity() {
     }
 
     private fun onActionAddTutor(){
-        startActivityForResult(FilterTutorActivity.createIntent(this ), FILTER_TUTOR_REQUEST_CODE)
+        // TODO: Vytvořit AddTutorActivity
     }
 
     private fun onActionFilter(){
@@ -83,7 +73,6 @@ class  SelectTutorActivity: BaseActivity() {
 
     private fun onActionSearch(){
         // TODO: Vytvořit SearchTutorActivity
-        startActivityForResult(FilterTutorActivity.createIntent(this ), FILTER_TUTOR_REQUEST_CODE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -14,11 +14,9 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    card_view:cardElevation="5dp"
-    card_view:cardCornerRadius="5dp">
-
-
-
+    app:cardCornerRadius="@dimen/cardRadius"
+    app:cardElevation="@dimen/cardElevation"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,8 +26,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/tutorPicture"
             android:src="@drawable/hugh"
-            android:layout_width="@dimen/civ_row_size"
-            android:layout_height="@dimen/civ_row_size"
+            android:layout_width="@dimen/civ_size"
+            android:layout_height="@dimen/civ_size"
             android:layout_marginStart="@dimen/basic_indentation"
             android:layout_marginTop="@dimen/basic_indentation"
             android:layout_marginBottom="@dimen/basic_indentation"
@@ -51,14 +49,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
             android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tutorCity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/half_indentation"
-            android:textColor="@color/colorPrimary" />
+            android:layout_marginTop="@dimen/one_indentation"
+            android:textColor="@color/colorPrimaryDark" />
     </LinearLayout>
         <LinearLayout
             android:layout_width="@dimen/zero_indentation"
@@ -82,9 +81,9 @@
                 android:id="@+id/tutorRating"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/half_indentation"
+                android:layout_marginTop="@dimen/one_indentation"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimaryDark" />
 
             <!-- TODO: Předměty -->
         </LinearLayout>
