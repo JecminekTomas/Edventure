@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".activities.BaseActivity"
+            android:name="com.example.arch.BaseActivity"
             android:label="@string/title_activity_filter_tutor_city"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
