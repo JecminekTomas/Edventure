@@ -20,11 +20,14 @@ abstract class TutorDB : RoomDatabase() {
         fun getDatabase(context: Context): TutorDB{
             if (INSTANCE == null){
                 synchronized(TutorDB::class.java){ /** synchronized znamená, že se bude provádět pouze toto vlákno v jeden moment*/
-                   INSTANCE = Room.databaseBuilder(
-                       context.applicationContext,
-                       TutorDB::class.java, "tutor_db")
-                       .fallbackToDestructiveMigration()
-                       .build()
+                    if (INSTANCE == null) {
+                        INSTANCE = Room.databaseBuilder(
+                            context.applicationContext,
+                            TutorDB::class.java, "tutor_db"
+                        )
+                            .fallbackToDestructiveMigration()
+                            .build()
+                    }
                 }
             }
             return INSTANCE!!

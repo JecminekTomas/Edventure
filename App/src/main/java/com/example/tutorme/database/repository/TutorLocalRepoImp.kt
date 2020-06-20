@@ -89,6 +89,6 @@ class TutorLocalRepoImp (private val context: Context): ITutorRepository {
         tutorDao.delete(tutor)
     }
 
-    //TODO: tutorAvatorDao.getAvatar je velmi zvláštní. Opravit
+    //TODO: tutorAvatorDao.getAvatar je velmi zvláštní. Opravit?
 
 }

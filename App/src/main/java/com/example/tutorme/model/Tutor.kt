@@ -13,35 +13,35 @@ import androidx.room.PrimaryKey
 data class Tutor(
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "tutor_id")
-    val tutorId: Long = 0,
+    var tutorId: Long = 0,
 
     @ColumnInfo(name = "first_name")
-    val firstName: String = "",
+    var firstName: String = "",
 
     @ColumnInfo(name = "last_name")
-    val lastName: String = "",
+    var lastName: String = "",
 
     @ColumnInfo(name = "city")
-    val city: String = "",
+    var city: String = "",
 
     /**@Embedded val city: City */
 
     //TODO:  Budoucnost - City bude samostatná entita
 
     @ColumnInfo(name = "phone_number")
-    val phoneNumber: String = "",
+    var phoneNumber: String = "",
     /** Pokud bude chtít učitel sdělit telefonní číslo klientovi na jedno kliknutí */
 
     @ColumnInfo(name = "email")
-    val email: String = "",
+    var email: String = "",
     /** Kontrolovat při vkládání */
 
     // TODO: Vymazat ... Cena může být rozdílá u kurzů
     @ColumnInfo(name = "price_per_hour")
-    val pricePerHour: Double = 0.0,
+    var pricePerHour: Double? = 0.0,
 
     @ColumnInfo(name = "rating")
-    val rating: Double = 0.0,
+    var rating: Double = 0.0,
 
     @Ignore
     var avatar: TutorAvatar? = null
