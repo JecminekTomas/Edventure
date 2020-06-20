@@ -18,9 +18,9 @@ class TutorLocalRepoImp (private val context: Context): ITutorRepository {
         return getAllLiveData
     }
 
-    override suspend fun findById(id: Long): Tutor {
-        val tutor = tutorDao.findById(id)
-        tutor.avatar = tutorAvatarDao.getAvatar(id)
+    override suspend fun findById(tutorId: Long): Tutor {
+        val tutor = tutorDao.findById(tutorId)
+        tutor.avatar = tutorAvatarDao.getAvatar(tutorId)
         return tutor
     }
 
@@ -59,6 +59,36 @@ class TutorLocalRepoImp (private val context: Context): ITutorRepository {
 
     override suspend fun findByPrice(pricePerHour: Double): MutableList<Tutor> {
         val tutors = tutorDao.findByPrice(pricePerHour)
+        tutors.let {
+            for (tutor in it){
+                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+            }
+        }
+        return tutors
+    }
+
+    override suspend fun findByOnline(): MutableList<Tutor> {
+        val tutors = tutorDao.findByOnline()
+        tutors.let {
+            for (tutor in it){
+                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+            }
+        }
+        return tutors
+    }
+
+    override suspend fun findByGroup(): MutableList<Tutor> {
+        val tutors = tutorDao.findByGroup()
+        tutors.let {
+            for (tutor in it){
+                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+            }
+        }
+        return tutors
+    }
+
+    override suspend fun findByHome(): MutableList<Tutor> {
+        val tutors = tutorDao.findByHome()
         tutors.let {
             for (tutor in it){
                 tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tutorme">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:name=".TutorApplication"
         android:allowBackup="true"
@@ -23,6 +26,11 @@
         <activity
             android:name=".activities.SelectTutorActivity"
             android:label="@string/title_activity_select_tutor"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activities.AddEditTutorActivity"
+            android:label="@string/title_activity_add_tutor"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity

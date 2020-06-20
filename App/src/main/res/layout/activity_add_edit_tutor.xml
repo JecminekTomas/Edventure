@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.AddTutorActivity">
+    tools:context=".activities.AddEditTutorActivity">
 
     <!-- Vždy přidat kontext k vygenerovanému Const. L -->
 
@@ -23,6 +23,6 @@
 
     <!-- app:title, není potřeba, jelikož je v Andr. Man. -->
 
-    <include layout="@layout/content_add_tutor"/>
+    <include layout="@layout/content_add_edit_tutor"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

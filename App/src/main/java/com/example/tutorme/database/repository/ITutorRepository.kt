@@ -11,6 +11,9 @@ interface ITutorRepository {
     suspend fun findByCity(city: String): MutableList<Tutor>
     suspend fun findByRating(rating: Double): MutableList<Tutor>
     suspend fun findByPrice(pricePerHour: Double): MutableList<Tutor>
+    suspend fun findByHome(): MutableList<Tutor>
+    suspend fun findByGroup(): MutableList<Tutor>
+    suspend fun findByOnline(): MutableList<Tutor>
     suspend fun insert(tutor: Tutor): Long
     suspend fun update(tutor: Tutor)
     suspend fun delete(tutor: Tutor)

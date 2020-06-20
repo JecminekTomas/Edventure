@@ -11,13 +11,14 @@
     <string name="title_activity_filter_tutor_city">Výběr města</string>
     <string name="title_activity_filter_tutor">Filtrování učitelů</string>
     <string name="title_activity_select_tutor">Výběr učitelů</string>
+    <string name="title_activity_add_tutor">Přidej učitele</string>
+    <string name="title_activity_edit_tutor">Uprav učitele</string>
     <string name="welcome_phrase">Vítejte v aplikaci TUTOR.me</string>
     <string name="continue_phrase">Pokračovat</string>
     <string name="search">search</string>
     <string name="filter">filter</string>
     <string name="choose_teacher">Výběr učitele</string>
-    <string name="addTutor">addTutor</string>
-    <string name="jmeno">CELÉ JMÉNO</string>
+    <string name="jmeno">KŘESTNÍ JMÉNO</string>
     <string name="zmena_obrazku">Změnit obrázek</string>
     <string name="misto_vyuky">MÍSTO</string>
     <string name="hodinova_sazba">HODINOVÁ SAZBA</string>
@@ -27,4 +28,6 @@
     <string name="vyuka_u_lektora">VÝUKA U LEKTORA</string>
     <string name="ulozit">Uložit</string>
     <string name="pocet_hvezd">POČET HVĚZDIČEK</string>
+    <string name="prijmeni">PŘÍJMENÍ</string>
+    <string name="select_image_source">Vyberte zdroj obrázku</string>
 </resources>
