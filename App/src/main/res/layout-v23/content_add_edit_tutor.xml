@@ -247,7 +247,9 @@
         android:textColor="@color/white"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:foreground="?attr/selectableItemBackground"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

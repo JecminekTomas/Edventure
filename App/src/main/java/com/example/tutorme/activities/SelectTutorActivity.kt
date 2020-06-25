@@ -3,7 +3,6 @@ package com.example.tutorme.activities
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.database.Observable
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -15,15 +14,13 @@ import com.example.arch.BaseMVVMActivity
 import com.example.tutorme.R
 import com.example.tutorme.model.Tutor
 import com.example.tutorme.viewmodels.SelectTutorVM
-import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
 import java.io.File
 
-private val FILTER_TUTOR_REQUEST_CODE: Int = 100
 
-class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java) {
+class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java){
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -48,10 +45,10 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         selectTutorRecyclerView.layoutManager = layoutManager
         selectTutorRecyclerView.adapter = tutorAdapter
 
-        viewModel.getAll().observe(this, object : Observer<MutableList<Tutor>>{
+        viewModel.getAll().observe(this, object : Observer<MutableList<Tutor>> {
             override fun onChanged(t: MutableList<Tutor>?) {
                 t?.let {
-                    val diffUtil = DiffUtil.calculateDiff(object: DiffUtil.Callback(){
+                    val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
                         override fun areItemsTheSame(
                             oldItemPosition: Int,
                             newItemPosition: Int
@@ -80,10 +77,8 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     }
 
 
-
-
     /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
-    
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_add_tutor -> {
@@ -102,15 +97,15 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         }
     }
 
-    private fun onActionAddTutor(){
+    private fun onActionAddTutor() {
         startActivity(AddEditTutorActivity.createIntent(this, null))
     }
 
-    private fun onActionFilter(){
+    private fun onActionFilter() {
         //startActivityForResult(FilterTutorActivity.createIntent(this ), FILTER_TUTOR_REQUEST_CODE)
     }
 
-    private fun onActionSearch(){
+    private fun onActionSearch() {
         // TODO: Vytvořit SearchTutorActivity
     }
 
@@ -119,11 +114,11 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         return true
     }
 
-    inner class TutorAdapter: RecyclerView.Adapter<TutorAdapter.TutorViewHolder>(){
+    inner class TutorAdapter : RecyclerView.Adapter<TutorAdapter.TutorViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TutorViewHolder {
             val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.row_select_tutor, parent,false)
+                .inflate(R.layout.row_select_tutor, parent, false)
             return TutorViewHolder(view)
         }
 
@@ -134,12 +129,15 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             val tutor = tutorList[position]
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
-            holder.tutorPrice.text = String.format("%.0f Kč/h", tutor.pricePerHour) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
+            holder.tutorPrice.text = String.format(
+                "%.0f Kč/h",
+                tutor.pricePerHour
+            ) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
             holder.tutorRating.text = String.format("★ %.1f", tutor.rating)
         }
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
-        inner class TutorViewHolder(view: View): RecyclerView.ViewHolder(view){
+        inner class TutorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val tutorAvatar: CircleImageView = view.findViewById(R.id.tutorAvatar)
             val tutorName: TextView = view.findViewById(R.id.tutorName)
             val tutorCity: TextView = view.findViewById(R.id.tutorCity)
@@ -147,9 +145,6 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             val tutorRating: TextView = view.findViewById(R.id.tutorRating)
         }
     }
-
-
-
-
-
 }
+
+
