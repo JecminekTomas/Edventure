@@ -24,17 +24,39 @@
                 android:layout_marginTop="@dimen/basic_indentation"
                 android:layout_marginBottom="@dimen/basic_indentation"
                 android:gravity="center"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/tutorAvatar"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:clickable="true"
-                    android:contentDescription="@string/avatar_description"
-                    android:focusable="true"
-                    android:src="@drawable/ic_account_circle_color_secondary_24dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/tutorAvatarPicture"
+                        android:visibility="invisible"
+                        android:layout_width="@dimen/imageSize"
+                        android:layout_height="@dimen/imageSize"
+                        android:clickable="true"
+                        android:contentDescription="@string/avatar_description"
+                        android:focusable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/tutorAvatarIcon"
+                        android:layout_width="@dimen/imageSize"
+                        android:layout_height="@dimen/imageSize"
+                        android:clickable="true"
+                        android:contentDescription="@string/avatar_description"
+                        android:focusable="true"
+                        android:src="@drawable/ic_account_circle_color_secondary_24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/tutorChangePicture"
@@ -45,43 +67,43 @@
             </LinearLayout>
 
 
-                <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/half_indentation"
+                android:layout_marginBottom="@dimen/basic_indentation"
+                android:backgroundTint="@color/colorSecondaryLight"
+                app:cardCornerRadius="@dimen/basic_indentation">
+
+                <EditText
+                    android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/half_indentation"
-                    android:layout_marginBottom="@dimen/basic_indentation"
-                    android:backgroundTint="@color/colorSecondaryLight"
-                    app:cardCornerRadius="@dimen/basic_indentation">
+                    android:hint="@string/jmeno"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:theme="@android:style/Theme.Holo" />
+            </androidx.cardview.widget.CardView>
 
-                    <EditText
-                        android:id="@+id/first_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/jmeno"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@color/black"
-                        android:theme="@android:style/Theme.Holo" />
-                </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/half_indentation"
+                android:layout_marginBottom="@dimen/basic_indentation"
+                android:backgroundTint="@color/colorSecondaryLight"
+                app:cardCornerRadius="@dimen/basic_indentation">
 
-                <androidx.cardview.widget.CardView
+                <EditText
+                    android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/half_indentation"
-                    android:layout_marginBottom="@dimen/basic_indentation"
-                    android:backgroundTint="@color/colorSecondaryLight"
-                    app:cardCornerRadius="@dimen/basic_indentation">
-
-                    <EditText
-                        android:id="@+id/last_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/prijmeni"
-                        android:textColor="@color/black"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:theme="@android:style/Theme.Holo" />
-                </androidx.cardview.widget.CardView>
+                    android:hint="@string/prijmeni"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:theme="@android:style/Theme.Holo" />
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -95,12 +117,12 @@
                     android:id="@+id/place"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/black"
                     android:drawableStart="@drawable/ic_place_color_secondary_dark_24dp"
                     android:drawablePadding="@dimen/basic_indentation"
                     android:hint="@string/misto_vyuky"
                     android:importantForAutofill="no"
                     android:inputType="textNoSuggestions"
+                    android:textColor="@color/black"
                     android:theme="@android:style/Theme.Holo" />
             </androidx.cardview.widget.CardView>
 
@@ -115,13 +137,13 @@
                 <EditText
                     android:id="@+id/pricePerHour"
                     android:layout_width="match_parent"
-                    android:textColor="@color/black"
                     android:layout_height="match_parent"
                     android:drawableStart="@drawable/ic_attach_money_color_secondary_dark_24dp"
                     android:drawablePadding="@dimen/basic_indentation"
                     android:hint="@string/hodinova_sazba"
                     android:importantForAutofill="no"
                     android:inputType="number"
+                    android:textColor="@color/black"
                     android:theme="@android:style/Theme.Holo" />
             </androidx.cardview.widget.CardView>
 
@@ -135,7 +157,6 @@
 
                 <EditText
                     android:id="@+id/stars"
-                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableStart="@drawable/ic_star_color_secondary_dark_24dp"
@@ -143,6 +164,7 @@
                     android:hint="@string/pocet_hvezd"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:textColor="@color/black"
                     android:theme="@android:style/Theme.Holo" />
             </androidx.cardview.widget.CardView>
 
@@ -243,10 +265,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:text="@string/ulozit"
-        android:textColor="@color/white"
         android:clickable="true"
         android:focusable="true"
+        android:text="@string/ulozit"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

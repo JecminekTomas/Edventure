@@ -23,5 +23,5 @@ data class TutorAvatar(
     var avatarId: Long = 0,
 
     @ColumnInfo(name = "name")
-    var name: String = ""
+    var avatarName: String = ""
 )

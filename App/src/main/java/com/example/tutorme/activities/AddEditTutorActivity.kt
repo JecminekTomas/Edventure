@@ -3,6 +3,7 @@ package com.example.tutorme.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -16,14 +17,20 @@ import com.example.arch.BaseMVVMActivity
 import com.example.tutorme.R
 import com.example.tutorme.constants.IntentConstants
 import com.example.tutorme.model.Tutor
+import com.example.tutorme.model.TutorAvatar
+import com.example.tutorme.utils.FileUtils
 import com.example.tutorme.utils.PermissionUtil
 import com.example.tutorme.viewmodels.AddEditTutorVM
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.*
+import kotlinx.android.synthetic.main.content_add_edit_tutor.tutorAvatarIcon
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
+import java.util.*
 
 
 class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::class.java), ChooseImageSourceListener {
@@ -79,7 +86,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
     private fun setInteractionsListener() {
         saveChanges.setOnClickListener { saveTutor() }
-        tutorAvatar.setOnClickListener { openAddImageBottomSheet() }
+        tutorAvatarIcon.setOnClickListener { openAddImageBottomSheet() }
         tutorChangePicture.setOnClickListener { openAddImageBottomSheet()}
 
 
@@ -240,11 +247,11 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
     override fun captureWithCamera() {
         if (PermissionUtil.checkCameraStoragePermission(this)) {
-            val takePictureIntent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
             if (takePictureIntent.resolveActivity(packageManager) != null) {
                 try {
-                    tempPhotoFile = com.example.tutorme.utils.FileUtils.createImageFile(this)
+                    tempPhotoFile = FileUtils.createImageFile(this)
                 } catch (ex: IOException) {
                     ex.printStackTrace()
                 }
@@ -272,7 +279,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             val intent = Intent()
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
             intent.action = Intent.ACTION_GET_CONTENT
 
             startActivityForResult(
@@ -314,6 +321,52 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         fragment.chooseImageSourceListener = this
         fragment.show(supportFragmentManager, "choose_image_source")
 
+    }
+
+    private fun saveImageFile(uri: Uri){
+        launch(Dispatchers.Main) {
+            val path = FileUtils.getRealPath(this@AddEditTutorActivity, uri)
+            val sourceFile = File(path!!)
+            val destinationFile = File(filesDir, sourceFile.name)
+            try {
+                FileUtils.copy(sourceFile, destinationFile)
+                tutor.avatar = TutorAvatar(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
+            } catch (ex: IOException){
+                ex.printStackTrace()
+            }
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+            tutor.avatar = TutorAvatar(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
+            showAvatarPictureFromFile(tempPhotoFile!!)
+        }
+
+        if (requestCode == GALLERY_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            if (data?.data != null){
+                val uri = data.data
+                uri?.let {
+                    saveImageFile(it)
+                    showAvatarPictureFromUri(uri)
+                }
+            }
+        }
+    }
+
+    private fun showAvatarPictureFromUri (uri: Uri){
+        tutorAvatarPicture.visibility = View.VISIBLE
+        tutorAvatarIcon.visibility = View.INVISIBLE
+        Picasso.get().load(uri).into(tutorAvatarPicture)
+    }
+
+    private fun showAvatarPictureFromFile (file: File){
+        tutorAvatarPicture.visibility = View.VISIBLE
+        tutorAvatarIcon.visibility = View.INVISIBLE
+        Picasso.get().load(file).into(tutorAvatarPicture)
     }
 
 }

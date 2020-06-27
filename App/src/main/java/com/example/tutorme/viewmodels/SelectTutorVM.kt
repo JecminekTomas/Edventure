@@ -9,6 +9,7 @@ class SelectTutorVM(app: Application): BaseTutorVM(app) {
     fun getAll(): LiveData<MutableList<Tutor>>{
         return tutorRepository.getAll()
     }
+
     suspend fun findByName(
         firstName: String,
         lastName: String

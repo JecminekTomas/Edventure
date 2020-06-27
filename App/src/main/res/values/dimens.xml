@@ -10,4 +10,5 @@
     <dimen name="cardRadius">10dp</dimen>
     <dimen name="cardElevation">5dp</dimen>
     <dimen name="double_indentation">32dp</dimen>
+    <dimen name="imageSize">100dp</dimen>
 </resources>

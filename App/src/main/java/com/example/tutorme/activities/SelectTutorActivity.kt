@@ -3,9 +3,11 @@ package com.example.tutorme.activities
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +16,12 @@ import com.example.arch.BaseMVVMActivity
 import com.example.tutorme.R
 import com.example.tutorme.model.Tutor
 import com.example.tutorme.viewmodels.SelectTutorVM
+import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
+import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
-import java.io.File
+import kotlinx.coroutines.launch
 
 
 class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java){
@@ -71,7 +75,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                     tutorList.clear()
                     tutorList.addAll(it)
                 }
-                /** DiffUtil je velice užitečné využívat, jelikož může velice zrychlit proces.*/
+                /** DiffUtil je velice užitečné využívat, jelikož může velice zrychlit proces při načítání změny RV.*/
             }
         })
     }
@@ -127,6 +131,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
             val tutor = tutorList[position]
+            Picasso.get().load(tutor.avatar?.avatarName).into(holder.tutorAvatar)
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
             holder.tutorPrice.text = String.format(
@@ -138,7 +143,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
         inner class TutorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tutorAvatar: CircleImageView = view.findViewById(R.id.tutorAvatar)
+            val tutorAvatar: CircleImageView = view.findViewById(R.id.tutorAvatarIcon)
             val tutorName: TextView = view.findViewById(R.id.tutorName)
             val tutorCity: TextView = view.findViewById(R.id.tutorCity)
             val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
