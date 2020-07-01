@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">Tutor.Me</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
     <string name="title_activity_filter_tutor_subject">Výběr předmětů</string>
     <string name="title_activity_filter_tutor_city">Výběr města</string>
     <string name="title_activity_filter_tutor">Filtrování učitelů</string>
@@ -35,4 +28,5 @@
     <string name="vyfotografovat">Vyfotografovat</string>
     <string name="file_provider_path" translatable="false">com.example.tutorme.fileprovider</string>
     <string name="vybrat_z_galerie">Vybrat z galerie</string>
+    <string name="rozmezi">Hodnota se pohybuje v rozmezí od 0.0 do 5.0!</string>
 </resources>

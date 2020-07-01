@@ -3,11 +3,9 @@ package com.example.tutorme.activities
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +17,7 @@ import com.example.tutorme.viewmodels.SelectTutorVM
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
-import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
-import kotlinx.coroutines.launch
 
 
 class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java){

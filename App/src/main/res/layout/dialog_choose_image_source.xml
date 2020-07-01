@@ -24,7 +24,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_capture_image_black_24dp"
-            style="@style/dialog_image_option_image"/>
+            style="@style/dialog_image_option_image"
+            android:contentDescription="TODO" />
 
         <TextView
             android:text="@string/vyfotografovat"
@@ -44,7 +45,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_open_gallery_black_24dp"
-            style="@style/dialog_image_option_image"/>
+            style="@style/dialog_image_option_image"
+            android:contentDescription="TODO" />
 
         <TextView
             android:text="@string/vybrat_z_galerie"

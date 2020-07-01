@@ -38,7 +38,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     companion object {
 
         fun createIntent(context: Context, id: Long?): Intent {
-            val intent: Intent = Intent(context, AddEditTutorActivity::class.java)
+            val intent = Intent(context, AddEditTutorActivity::class.java)
             id?.let {
                 intent.putExtra(IntentConstants.ID, id)
             }
@@ -77,7 +77,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                     fillLayout()
                 }
             }
-        } ?: kotlin.run {
+        } ?: run {
             supportActionBar?.title = getString(R.string.title_activity_add_tutor)
             tutor = Tutor()
         }
@@ -152,7 +152,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     }
 
     private fun saveTutor() {
-        if (first_name.text.isNotEmpty() && last_name.text.isNotEmpty() && place.text.isNotEmpty() && pricePerHour.text.isNotEmpty() && stars.text.isNotEmpty()) {
+        if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && pricePerHour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
             id?.let {
                 launch {
                     viewModel.update(tutor)
@@ -169,19 +169,19 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                 finish()
             }
         } else {
-            if (first_name.text.isEmpty()) {
+            if (first_name.text!!.isEmpty()) {
                 first_name.error = getString(R.string.povinne_pole)
             }
-            if (last_name.text.isEmpty()) {
+            if (last_name.text!!.isEmpty()) {
                 last_name.error = getString(R.string.povinne_pole)
             }
-            if (place.text.isEmpty()) {
+            if (place.text!!.isEmpty()) {
                 place.error = getString(R.string.povinne_pole)
             }
-            if (pricePerHour.text.isEmpty()) {
+            if (pricePerHour.text!!.isEmpty()) {
                 pricePerHour.error = getString(R.string.povinne_pole)
             }
-            if (stars.text.isEmpty()) {
+            if (stars.text!!.isEmpty()) {
                 stars.error = getString(R.string.povinne_pole)
             }
         }

@@ -1,9 +1,4 @@
 package com.example.tutorme.model
-
-import android.os.Parcel
-import android.os.Parcelable
-import android.provider.ContactsContract
-import android.telephony.PhoneNumberUtils
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore

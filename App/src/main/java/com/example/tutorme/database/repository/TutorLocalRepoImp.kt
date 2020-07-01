@@ -7,7 +7,7 @@ import com.example.tutorme.database.dao.TutorAvatarDao
 import com.example.tutorme.database.dao.TutorDao
 import com.example.tutorme.model.Tutor
 
-class TutorLocalRepoImp (private val context: Context): ITutorRepository {
+class TutorLocalRepoImp (context: Context): ITutorRepository {
 
     private val tutorDao: TutorDao = TutorDB.getDatabase(context).tutorDao()
     private val tutorAvatarDao: TutorAvatarDao = TutorDB.getDatabase(context).tutorAvatarDao()

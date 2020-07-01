@@ -3,7 +3,6 @@ package com.example.tutorme.database.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.tutorme.model.Tutor
-import javax.security.auth.Subject
 
 @Dao
 interface TutorDao {
