@@ -93,66 +93,76 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         first_name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.firstName = s.toString().trim()
+                first_name_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
         })
 
         last_name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.lastName = s.toString().trim()
+                last_name_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
         })
 
         place.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.city = s.toString().trim()
+                place_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
         })
 
-        pricePerHour.addTextChangedListener(object : TextWatcher {
+        price_per_hour.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.pricePerHour = s.toString().trim().toDouble()
+                price_per_hour_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
         })
 
         stars.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.rating = s.toString().trim().toDouble()
+                stars_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
         })
     }
 
     private fun saveTutor() {
-        if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && pricePerHour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+        if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
             id?.let {
                 launch {
                     viewModel.update(tutor)
@@ -170,19 +180,19 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
         } else {
             if (first_name.text!!.isEmpty()) {
-                first_name.error = getString(R.string.povinne_pole)
+                first_name_layout.error = getString(R.string.required_field)
             }
             if (last_name.text!!.isEmpty()) {
-                last_name.error = getString(R.string.povinne_pole)
+                last_name_layout.error = getString(R.string.required_field)
             }
             if (place.text!!.isEmpty()) {
-                place.error = getString(R.string.povinne_pole)
+                place_layout.error = getString(R.string.required_field)
             }
-            if (pricePerHour.text!!.isEmpty()) {
-                pricePerHour.error = getString(R.string.povinne_pole)
+            if (price_per_hour.text!!.isEmpty()) {
+                price_per_hour_layout.error = getString(R.string.required_field)
             }
             if (stars.text!!.isEmpty()) {
-                stars.error = getString(R.string.povinne_pole)
+                stars_layout.error = getString(R.string.required_field)
             }
         }
     }
@@ -201,7 +211,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             first_name.setText(it)
         }
         tutor.pricePerHour.let {
-            pricePerHour.setText(String.format("%.0f", it))
+            price_per_hour.setText(String.format("%.0f", it))
         }
         tutor.rating.let {
             stars.setText(String.format("%.1f", it))
