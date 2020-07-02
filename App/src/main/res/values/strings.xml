@@ -29,4 +29,5 @@
     <string name="choose_from_gallery">Vybrat z galerie</string>
     <string name="range">Hodnota se pohybuje v rozmezí od 0.0 do 5.0!</string>
     <string name="required_field">*Povinné pole</string>
+    <string name="subject">PŘEDMĚT</string>
 </resources>

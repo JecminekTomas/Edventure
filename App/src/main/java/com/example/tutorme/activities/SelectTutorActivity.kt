@@ -102,7 +102,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     }
 
     private fun onActionFilter() {
-        //startActivityForResult(FilterTutorActivity.createIntent(this ), FILTER_TUTOR_REQUEST_CODE)
+        startActivity(FilterTutorActivity.createIntent(this))
     }
 
     private fun onActionSearch() {
