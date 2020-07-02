@@ -11,22 +11,22 @@
     <string name="search">search</string>
     <string name="filter">filter</string>
     <string name="choose_teacher">Výběr učitele</string>
-    <string name="jmeno">KŘESTNÍ JMÉNO</string>
-    <string name="zmena_obrazku">Změnit obrázek</string>
-    <string name="misto_vyuky">MÍSTO</string>
-    <string name="hodinova_sazba">HODINOVÁ SAZBA</string>
-    <string name="online_vyuka">ONLINE VÝUKA</string>
+    <string name="first_name">KŘESTNÍ JMÉNO</string>
+    <string name="change_avatar">Změnit obrázek</string>
+    <string name="place">MÍSTO</string>
+    <string name="hour_rate">HODINOVÁ SAZBA</string>
+    <string name="online_class">ONLINE VÝUKA</string>
     <string name="avatar_description">avatar</string>
-    <string name="skupinova_vyuka">SKUPINOVÁ VÝUKA</string>
-    <string name="vyuka_u_lektora">VÝUKA U LEKTORA</string>
-    <string name="ulozit">Uložit</string>
+    <string name="group_class">SKUPINOVÁ VÝUKA</string>
+    <string name="home_class">VÝUKA U LEKTORA</string>
+    <string name="save">Uložit</string>
     <string name="select_image">Vyber obrázek</string>
-    <string name="pocet_hvezd">POČET HVĚZDIČEK</string>
-    <string name="prijmeni">PŘÍJMENÍ</string>
+    <string name="rating">POČET HVĚZDIČEK</string>
+    <string name="last_name">PŘÍJMENÍ</string>
     <string name="select_image_source">Vyberte zdroj obrázku</string>
-    <string name="povinne_pole">Povinné pole</string>
-    <string name="vyfotografovat">Vyfotografovat</string>
+    <string name="take_picture">Vyfotografovat</string>
     <string name="file_provider_path" translatable="false">com.example.tutorme.fileprovider</string>
-    <string name="vybrat_z_galerie">Vybrat z galerie</string>
-    <string name="rozmezi">Hodnota se pohybuje v rozmezí od 0.0 do 5.0!</string>
+    <string name="choose_from_gallery">Vybrat z galerie</string>
+    <string name="range">Hodnota se pohybuje v rozmezí od 0.0 do 5.0!</string>
+    <string name="required_field">*Povinné pole</string>
 </resources>

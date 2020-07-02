@@ -10,9 +10,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,18 +64,23 @@
                     android:id="@+id/tutorChangePicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/zmena_obrazku"
+                    android:text="@string/change_avatar"
                     android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/first_name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:hint="@string/jmeno">
+                android:layout_marginBottom="@dimen/half_indentation"
+                android:hint="@string/first_name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/first_name"
@@ -84,12 +90,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/last_name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:hint="@string/prijmeni">
+                android:layout_marginBottom="@dimen/half_indentation"
+                android:hint="@string/last_name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/last_name"
@@ -99,12 +110,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/place_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:hint="@string/misto_vyuky"
+                android:layout_marginBottom="@dimen/half_indentation"
+                android:hint="@string/place"
                 app:startIconDrawable="@drawable/ic_place_color_secondary_dark_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -115,16 +131,21 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/price_per_hour_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:hint="@string/hodinova_sazba"
+                android:layout_marginBottom="@dimen/half_indentation"
+                android:hint="@string/hour_rate"
                 app:startIconDrawable="@drawable/ic_attach_money_color_secondary_dark_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/pricePerHour"
+                    android:id="@+id/price_per_hour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
@@ -133,14 +154,17 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/stars_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:helperTextEnabled="true"
-                app:helperText="@string/rozmezi"
+                app:helperText="@string/range"
+                app:errorEnabled="true"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:hint="@string/pocet_hvezd"
+                android:layout_marginBottom="@dimen/half_indentation"
+                android:hint="@string/rating"
                 app:startIconDrawable="@drawable/ic_star_color_secondary_dark_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -164,7 +188,7 @@
                     android:layout_marginStart="@dimen/half_indentation"
                     android:drawableStart="@drawable/ic_computer_color_secondary_dark_24dp"
                     android:drawablePadding="@dimen/basic_indentation"
-                    android:text="@string/online_vyuka"
+                    android:text="@string/online_class"
                     android:textColor="?attr/colorSecondaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +219,7 @@
                     android:layout_marginStart="@dimen/half_indentation"
                     android:drawableStart="@drawable/ic_group_color_secondary_dark_24dp"
                     android:drawablePadding="@dimen/basic_indentation"
-                    android:text="@string/skupinova_vyuka"
+                    android:text="@string/group_class"
                     android:textColor="?attr/colorSecondaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -226,7 +250,7 @@
                     android:layout_marginStart="@dimen/half_indentation"
                     android:drawableStart="@drawable/ic_home_color_dark_secondary_24dp"
                     android:drawablePadding="@dimen/basic_indentation"
-                    android:text="@string/vyuka_u_lektora"
+                    android:text="@string/home_class"
                     android:textColor="?attr/colorSecondaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -253,7 +277,8 @@
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/ulozit"
+        android:text="@string/save"
+        app:cornerRadius="0dp"
         android:textColor="@color/white"
         android:layout_margin="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
