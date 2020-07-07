@@ -9,6 +9,9 @@ interface TutorDao {
     @Query("SELECT * FROM tutor")
     fun getAll(): LiveData<MutableList<Tutor>>
 
+    @Query("SELECT city FROM tutor")
+    fun findCities(): MutableList<String>
+
     @Query("SELECT * FROM tutor WHERE tutor_id = :tutorId ")
     suspend fun findById(tutorId: Long): Tutor
 

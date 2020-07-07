@@ -11,7 +11,7 @@ import com.example.tutorme.database.dao.TutorDao
 import com.example.tutorme.model.Tutor
 import com.example.tutorme.model.TutorAvatar
 
-@Database(entities = [Tutor::class, TutorAvatar::class], version = 1, exportSchema = true)
+@Database(entities = [Tutor::class, TutorAvatar::class], version = 1, exportSchema = false)
 abstract class TutorDB : RoomDatabase() {
     abstract fun tutorDao(): TutorDao
     abstract fun tutorAvatarDao(): TutorAvatarDao

@@ -5,6 +5,7 @@
     <string name="title_activity_filter_tutor">Filtrování učitelů</string>
     <string name="title_activity_select_tutor">Výběr učitelů</string>
     <string name="title_activity_add_tutor">Přidej učitele</string>
+    <string name="title_cancel_filter">Zrušit filter</string>
     <string name="title_activity_edit_tutor">Uprav učitele</string>
     <string name="welcome_phrase">Vítejte v aplikaci TUTOR.me</string>
     <string name="continue_phrase">Pokračovat</string>

@@ -18,6 +18,10 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         return getAllLiveData
     }
 
+    override fun findCities(): MutableList<String> {
+        return tutorDao.findCities()
+    }
+
     override suspend fun findById(tutorId: Long): Tutor {
         val tutor = tutorDao.findById(tutorId)
         tutor.avatar = tutorAvatarDao.getAvatar(tutorId)
@@ -96,6 +100,7 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         }
         return tutors
     }
+
 
     override suspend fun insert(tutor: Tutor): Long {
         val id = tutorDao.insert(tutor)

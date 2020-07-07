@@ -6,6 +6,7 @@ import com.example.tutorme.model.Tutor
 interface ITutorRepository {
 
     fun getAll(): LiveData<MutableList<Tutor>>
+    fun findCities(): MutableList<String>
     suspend fun findById(tutorId: Long): Tutor
     suspend fun findByName(firstName: String, lastName: String): MutableList<Tutor>
     suspend fun findByCity(city: String): MutableList<Tutor>
