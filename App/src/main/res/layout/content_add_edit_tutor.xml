@@ -52,7 +52,7 @@
                         android:clickable="true"
                         android:contentDescription="@string/avatar_description"
                         android:focusable="true"
-                        android:src="@drawable/ic_account_circle_color_secondary_24dp"
+                        android:src="@drawable/ic_account_circle_color_secondary_dark_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

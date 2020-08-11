@@ -50,6 +50,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     override val layout: Int = R.layout.activity_add_edit_tutor
     private var id: Long? = null
     private lateinit var tutor: Tutor
+    private lateinit var tutorAvatar: TutorAvatar
     private var tempPhotoFile: File? = null
 
     private val REQUEST_IMAGE_CAPTURE = 100
