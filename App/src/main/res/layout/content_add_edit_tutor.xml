@@ -71,14 +71,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/first_name_layout"
+                app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:layout_marginBottom="@dimen/half_indentation"
                 android:hint="@string/first_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -90,14 +88,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/last_name_layout"
+                app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:layout_marginBottom="@dimen/half_indentation"
                 android:hint="@string/last_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -109,14 +105,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/place_layout"
+                app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:helperText="@string/required_field"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:layout_marginBottom="@dimen/half_indentation"
                 android:hint="@string/place"
                 app:startIconDrawable="@drawable/ic_place_color_secondary_dark_24dp">
 
@@ -129,14 +123,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/price_per_hour_layout"
+                app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:helperText="@string/required_field"
+
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:layout_marginBottom="@dimen/half_indentation"
                 android:hint="@string/hour_rate"
                 app:startIconDrawable="@drawable/ic_attach_money_color_secondary_dark_24dp">
 
@@ -151,6 +144,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/stars_layout"
+                app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:helperTextEnabled="true"
@@ -176,12 +170,12 @@
         android:id="@+id/saveChanges"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/white"
+        android:focusable="false"
         android:text="@string/save"
         app:cornerRadius="0dp"
-        android:textColor="@color/white"
         android:layout_margin="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
