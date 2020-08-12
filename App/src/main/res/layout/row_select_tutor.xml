@@ -23,7 +23,7 @@
 
         <!--TODO: Odstranit statický obrázek-->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/tutorAvatarIcon"
+            android:id="@+id/profilePictureIcon"
             android:src="@drawable/hugh"
             android:layout_width="@dimen/civ_size"
             android:layout_height="@dimen/civ_size"
@@ -40,7 +40,7 @@
         android:layout_marginStart="@dimen/basic_indentation"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tutorAvatarIcon"
+        app:layout_constraintStart_toEndOf="@id/profilePictureIcon"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

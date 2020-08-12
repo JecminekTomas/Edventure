@@ -17,7 +17,7 @@ import com.example.arch.BaseMVVMActivity
 import com.example.tutorme.R
 import com.example.tutorme.constants.IntentConstants
 import com.example.tutorme.model.Tutor
-import com.example.tutorme.model.TutorAvatar
+import com.example.tutorme.model.ProfilePicture
 import com.example.tutorme.utils.FileUtils
 import com.example.tutorme.utils.PermissionUtil
 import com.example.tutorme.viewmodels.AddEditTutorVM
@@ -25,7 +25,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.*
-import kotlinx.android.synthetic.main.content_add_edit_tutor.tutorAvatarIcon
+import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -50,7 +50,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     override val layout: Int = R.layout.activity_add_edit_tutor
     private var id: Long? = null
     private lateinit var tutor: Tutor
-    private lateinit var tutorAvatar: TutorAvatar
+    private lateinit var profilePicture: ProfilePicture
     private var tempPhotoFile: File? = null
 
     private val REQUEST_IMAGE_CAPTURE = 100
@@ -87,7 +87,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
     private fun setInteractionsListener() {
         saveChanges.setOnClickListener { saveTutor() }
-        tutorAvatarIcon.setOnClickListener { openAddImageBottomSheet() }
+        profilePictureIcon.setOnClickListener { openAddImageBottomSheet() }
         tutorChangePicture.setOnClickListener { openAddImageBottomSheet()}
 
 
@@ -217,15 +217,6 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         tutor.rating.let {
             stars.setText(String.format("%.1f", it))
         }
-        tutor.onlineLecture.let {
-            onlineLecture.isChecked = it
-        }
-        tutor.groupLecture.let {
-            groupLecture.isChecked = it
-        }
-        tutor.homeLecture.let {
-            homeLecture.isChecked = it
-        }
     }
 
     class ChooseImageSourceBottomSheet : BottomSheetDialogFragment() {
@@ -341,7 +332,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             val destinationFile = File(filesDir, sourceFile.name)
             try {
                 FileUtils.copy(sourceFile, destinationFile)
-                tutor.avatar = TutorAvatar(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
+                tutor.profilePicture = ProfilePicture(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
             } catch (ex: IOException){
                 ex.printStackTrace()
             }
@@ -353,8 +344,8 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
-            tutor.avatar = TutorAvatar(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
-            showAvatarPictureFromFile(tempPhotoFile!!)
+            tutor.profilePicture = ProfilePicture(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
+            showProfilePictureFromFile(tempPhotoFile!!)
         }
 
         if (requestCode == GALLERY_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
@@ -362,22 +353,22 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                 val uri = data.data
                 uri?.let {
                     saveImageFile(it)
-                    showAvatarPictureFromUri(uri)
+                    showProfilePictureFromUri(uri)
                 }
             }
         }
     }
 
-    private fun showAvatarPictureFromUri (uri: Uri){
-        tutorAvatarPicture.visibility = View.VISIBLE
-        tutorAvatarIcon.visibility = View.INVISIBLE
-        Picasso.get().load(uri).into(tutorAvatarPicture)
+    private fun showProfilePictureFromUri (uri: Uri){
+        newProfilePicture.visibility = View.VISIBLE
+        profilePictureIcon.visibility = View.INVISIBLE
+        Picasso.get().load(uri).into(newProfilePicture)
     }
 
-    private fun showAvatarPictureFromFile (file: File){
-        tutorAvatarPicture.visibility = View.VISIBLE
-        tutorAvatarIcon.visibility = View.INVISIBLE
-        Picasso.get().load(file).into(tutorAvatarPicture)
+    private fun showProfilePictureFromFile (file: File){
+        newProfilePicture.visibility = View.VISIBLE
+        profilePictureIcon.visibility = View.INVISIBLE
+        Picasso.get().load(file).into(newProfilePicture)
     }
 
 }

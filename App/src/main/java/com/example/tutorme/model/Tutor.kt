@@ -38,17 +38,8 @@ data class Tutor(
     @ColumnInfo(name = "rating")
     var rating: Double = 0.0,
 
-    @ColumnInfo(name = "online_lecture")
-    var onlineLecture: Boolean = false,
-
-    @ColumnInfo(name = "group_lecture")
-    var groupLecture: Boolean = false,
-
-    @ColumnInfo(name = "home_lecture")
-    var homeLecture: Boolean = false,
-
     @Ignore
-    var avatar: TutorAvatar? = null
+    var profilePicture: ProfilePicture? = null
 
 
 

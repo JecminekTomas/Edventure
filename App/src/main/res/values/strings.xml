@@ -13,11 +13,11 @@
     <string name="filter">filter</string>
     <string name="choose_teacher">Výběr učitele</string>
     <string name="first_name">KŘESTNÍ JMÉNO</string>
-    <string name="change_avatar">Změnit obrázek</string>
+    <string name="change_profile_picture">Změnit obrázek</string>
     <string name="place">MÍSTO</string>
     <string name="hour_rate">HODINOVÁ SAZBA</string>
     <string name="online_class">ONLINE VÝUKA</string>
-    <string name="avatar_description">avatar</string>
+    <string name="profile_picture_description">Profile picture</string>
     <string name="group_class">SKUPINOVÁ VÝUKA</string>
     <string name="home_class">VÝUKA U LEKTORA</string>
     <string name="save">Uložit</string>

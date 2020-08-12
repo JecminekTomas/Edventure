@@ -127,7 +127,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
             val tutor = tutorList[position]
-            Picasso.get().load(tutor.avatar?.avatarName).into(holder.tutorAvatar)
+            Picasso.get().load(tutor.profilePicture?.name).into(holder.tutorProfilePicture)
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
             holder.tutorPrice.text = String.format(
@@ -139,7 +139,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
         inner class TutorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tutorAvatar: CircleImageView = view.findViewById(R.id.tutorAvatarIcon)
+            val tutorProfilePicture: CircleImageView = view.findViewById(R.id.profilePictureIcon)
             val tutorName: TextView = view.findViewById(R.id.tutorName)
             val tutorCity: TextView = view.findViewById(R.id.tutorCity)
             val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)

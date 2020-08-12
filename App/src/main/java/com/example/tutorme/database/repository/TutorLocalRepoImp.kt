@@ -3,14 +3,14 @@ package com.example.tutorme.database.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.tutorme.database.TutorDB
-import com.example.tutorme.database.dao.TutorAvatarDao
+import com.example.tutorme.database.dao.ProfilePictureDao
 import com.example.tutorme.database.dao.TutorDao
 import com.example.tutorme.model.Tutor
 
 class TutorLocalRepoImp (context: Context): ITutorRepository {
 
     private val tutorDao: TutorDao = TutorDB.getDatabase(context).tutorDao()
-    private val tutorAvatarDao: TutorAvatarDao = TutorDB.getDatabase(context).tutorAvatarDao()
+    private val profilePictureDao: ProfilePictureDao = TutorDB.getDatabase(context).profilePictureDao()
 
     private val getAllLiveData: LiveData<MutableList<Tutor>> = tutorDao.getAll()
 
@@ -24,7 +24,7 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
 
     override suspend fun findById(tutorId: Long): Tutor {
         val tutor = tutorDao.findById(tutorId)
-        tutor.avatar = tutorAvatarDao.getAvatar(tutorId)
+        tutor.profilePicture = profilePictureDao.getProfilePicture(tutorId)
         return tutor
     }
 
@@ -35,7 +35,7 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         val tutors = tutorDao.findByName(firstName, lastName)
         tutors.let {
             for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+                tutor.profilePicture = profilePictureDao.getProfilePicture(tutor.tutorId)
             }
         }
         return tutors
@@ -45,7 +45,7 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         val tutors = tutorDao.findByCity(city)
         tutors.let {
             for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+                tutor.profilePicture = profilePictureDao.getProfilePicture(tutor.tutorId)
             }
         }
         return tutors
@@ -55,7 +55,7 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         val tutors = tutorDao.findByRating(rating)
         tutors.let {
             for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+                tutor.profilePicture = profilePictureDao.getProfilePicture(tutor.tutorId)
             }
         }
         return tutors
@@ -65,62 +65,31 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         val tutors = tutorDao.findByPrice(pricePerHour)
         tutors.let {
             for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
+                tutor.profilePicture = profilePictureDao.getProfilePicture(tutor.tutorId)
             }
         }
         return tutors
     }
-
-    override suspend fun findByOnline(): MutableList<Tutor> {
-        val tutors = tutorDao.findByOnline()
-        tutors.let {
-            for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
-            }
-        }
-        return tutors
-    }
-
-    override suspend fun findByGroup(): MutableList<Tutor> {
-        val tutors = tutorDao.findByGroup()
-        tutors.let {
-            for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
-            }
-        }
-        return tutors
-    }
-
-    override suspend fun findByHome(): MutableList<Tutor> {
-        val tutors = tutorDao.findByHome()
-        tutors.let {
-            for (tutor in it){
-                tutor.avatar = tutorAvatarDao.getAvatar(tutor.tutorId)
-            }
-        }
-        return tutors
-    }
-
 
     override suspend fun insert(tutor: Tutor): Long {
         val id = tutorDao.insert(tutor)
-        tutor.avatar!!.avatarId = id
-        tutorAvatarDao.insert(tutorAvatarDao.getAvatar(id))
+        tutor.profilePicture!!.profilePictureId = id
+        profilePictureDao.insert(profilePictureDao.getProfilePicture(id))
         return id
     }
 
     override suspend fun update(tutor: Tutor) {
         tutorDao.update(tutor)
-        if(tutor.avatar!= null){
-            tutorAvatarDao.update(tutorAvatarDao.getAvatar(tutor.tutorId))
+        if(tutor.profilePicture!= null){
+            profilePictureDao.update(profilePictureDao.getProfilePicture(tutor.tutorId))
         }
         else{
-            tutorAvatarDao.insert(tutorAvatarDao.getAvatar(tutor.tutorId))
+            profilePictureDao.insert(profilePictureDao.getProfilePicture(tutor.tutorId))
         }
     }
 
     override suspend fun delete(tutor: Tutor) {
-        tutorAvatarDao.delete(tutorAvatarDao.getAvatar(tutor.tutorId))
+        profilePictureDao.delete(profilePictureDao.getProfilePicture(tutor.tutorId))
         tutorDao.delete(tutor)
     }
 

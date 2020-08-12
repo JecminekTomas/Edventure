@@ -2,5 +2,5 @@ package com.example.tutorme.constants
 
 object IntentConstants {
     const val ID = "id"
-    const val avatar_image_name = "avatar_image_name"
+    const val profilePictureName = "profile_picture_name"
 }
