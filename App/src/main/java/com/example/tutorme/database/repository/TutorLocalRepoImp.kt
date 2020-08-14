@@ -1,11 +1,14 @@
 package com.example.tutorme.database.repository
 
 import android.content.Context
+import android.os.Environment
 import androidx.lifecycle.LiveData
 import com.example.tutorme.database.TutorDB
 import com.example.tutorme.database.dao.ProfilePictureDao
 import com.example.tutorme.database.dao.TutorDao
+import com.example.tutorme.model.ProfilePicture
 import com.example.tutorme.model.Tutor
+import com.example.tutorme.utils.ImageUtils
 
 class TutorLocalRepoImp (context: Context): ITutorRepository {
 
@@ -73,23 +76,27 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
 
     override suspend fun insert(tutor: Tutor): Long {
         val id = tutorDao.insert(tutor)
-        tutor.profilePicture!!.profilePictureId = id
-        profilePictureDao.insert(profilePictureDao.getProfilePicture(id))
+        val profilePicture = tutor.profilePicture
+        if (profilePicture != null){
+            profilePicture.tutorId = id
+            profilePictureDao.insert(profilePicture)
+        }
         return id
     }
 
     override suspend fun update(tutor: Tutor) {
         tutorDao.update(tutor)
-        if(tutor.profilePicture!= null){
-            profilePictureDao.update(profilePictureDao.getProfilePicture(tutor.tutorId))
-        }
-        else{
-            profilePictureDao.insert(profilePictureDao.getProfilePicture(tutor.tutorId))
+        val profilePicture = tutor.profilePicture
+        if (profilePicture != null) {
+            profilePictureDao.update(profilePicture)
         }
     }
 
     override suspend fun delete(tutor: Tutor) {
-        profilePictureDao.delete(profilePictureDao.getProfilePicture(tutor.tutorId))
+        val profilePicture = tutor.profilePicture
+        if (profilePicture != null) {
+            profilePictureDao.delete(profilePicture)
+        }
         tutorDao.delete(tutor)
     }
 

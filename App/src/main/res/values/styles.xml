@@ -55,12 +55,4 @@
         <item name="colorSecondary">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="Widget.App.TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
-    </style>
-
-    <style name="ThemeOverlay.App.TextInputLayout" parent="@style/Widget.Design.TextInputLayout">
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-    </style>
-
 </resources>

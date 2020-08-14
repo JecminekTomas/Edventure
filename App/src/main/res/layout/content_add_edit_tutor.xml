@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintBottom_toTopOf="@id/saveChanges">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,13 +170,9 @@
         android:id="@+id/saveChanges"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:clickable="false"
         android:backgroundTint="@color/colorSecondary"
-        android:textColor="@color/white"
-        android:focusable="false"
+        android:enabled="false"
         android:text="@string/save"
-        app:cornerRadius="0dp"
-        android:layout_margin="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

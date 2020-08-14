@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
+import java.io.File
 
 
 class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java){
@@ -127,7 +128,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
             val tutor = tutorList[position]
-            Picasso.get().load(tutor.profilePicture?.name).into(holder.tutorProfilePicture)
+            Picasso.get().load(File(tutor.profilePicture!!.name)).into(holder.tutorProfilePicture)
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
             holder.tutorPrice.text = String.format(
@@ -139,7 +140,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
         inner class TutorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tutorProfilePicture: CircleImageView = view.findViewById(R.id.profilePictureIcon)
+            val tutorProfilePicture: CircleImageView = view.findViewById(R.id.profilePictureIconSelect)
             val tutorName: TextView = view.findViewById(R.id.tutorName)
             val tutorCity: TextView = view.findViewById(R.id.tutorCity)
             val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
