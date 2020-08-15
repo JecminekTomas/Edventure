@@ -31,4 +31,12 @@
     <string name="range">Hodnota se pohybuje v rozmezí od 0.0 do 5.0!</string>
     <string name="required_field">*Povinné pole</string>
     <string name="subject">PŘEDMĚT</string>
+    <string name="app_intro_title_1">Registrace na jedno kliknutí?</string>
+    <string name="app_intro_title_2">Online rezervace výuky?!</string>
+    <string name="app_intro_title_3">Platba kartou přímo v aplikaci?!?!</string>
+    <string name="app_intro_text_1">Jste tu správně!</string>
+    <string name="app_intro_text_2">Ano, ano…</string>
+    <string name="app_intro_text_3">Ehh… Žádné další otázky? Pojďme tedy na to!</string>
+    <string name="done">Hotovo</string>
+    <string name="skip">Další</string>
 </resources>
