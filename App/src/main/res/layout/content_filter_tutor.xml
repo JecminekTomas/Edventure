@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,24 +22,23 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/chooseSubject"
-                android:focusable="false"
-                android:clickable="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:layout_marginBottom="@dimen/half_indentation"
+                android:clickable="false"
+                android:focusable="false"
                 android:hint="@string/subject"
-                app:startIconDrawable="@drawable/ic_subject_color_primary_dark_24dp"
-                >
+                app:startIconDrawable="@drawable/ic_subject_color_primary_dark_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:focusable="false"
-                    android:clickable="false"
                     android:id="@+id/subject"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,10 +55,10 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/place"
-                    android:focusable="false"
-                    android:clickable="false"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,13 +68,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:helperTextEnabled="true"
-                app:helperText="@string/range"
-                app:errorEnabled="true"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:layout_marginBottom="@dimen/half_indentation"
                 android:hint="@string/rating"
+                app:errorEnabled="true"
+                app:helperText="@string/range"
+                app:helperTextEnabled="true"
                 app:startIconDrawable="@drawable/ic_star_color_secondary_dark_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -91,104 +89,10 @@
                 android:id="@+id/price_slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:stepSize="50.0"
                 android:valueFrom="0.0"
                 android:valueTo="1000.0"
-                android:stepSize="50.0"
-                app:values="@array/initial_slider_values"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/half_indentation"
-                android:layout_marginEnd="@dimen/half_indentation"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/half_indentation"
-                    android:drawableStart="@drawable/ic_computer_color_secondary_dark_24dp"
-                    android:drawablePadding="@dimen/basic_indentation"
-                    android:text="@string/online_class"
-                    android:textColor="?attr/colorSecondaryVariant"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/onlineLecture"
-                    style="@style/Widget.App.Switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:layout_marginEnd="@dimen/double_indentation"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/half_indentation"
-                android:layout_marginEnd="@dimen/half_indentation"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/half_indentation"
-                    android:drawableStart="@drawable/ic_group_color_secondary_dark_24dp"
-                    android:drawablePadding="@dimen/basic_indentation"
-                    android:text="@string/group_class"
-                    android:textColor="?attr/colorSecondaryVariant"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/groupLecture"
-                    style="@style/Widget.App.Switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:layout_marginEnd="@dimen/double_indentation"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/half_indentation"
-                android:layout_marginEnd="@dimen/half_indentation"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/half_indentation"
-                    android:drawableStart="@drawable/ic_home_color_dark_secondary_24dp"
-                    android:drawablePadding="@dimen/basic_indentation"
-                    android:text="@string/home_class"
-                    android:textColor="?attr/colorSecondaryVariant"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/homeLecture"
-                    style="@style/Widget.App.Switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:layout_marginEnd="@dimen/double_indentation"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:values="@array/initial_slider_values" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -196,18 +100,18 @@
         android:id="@+id/saveChanges"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_margin="0dp"
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:focusable="true"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="@string/save"
-        app:cornerRadius="0dp"
         android:textColor="@color/white"
-        android:layout_margin="0dp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:insetTop="0dp"
-        android:insetBottom="0dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

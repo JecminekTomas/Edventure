@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidDomInspection -->
 <paths>
-    <external-path name="my_images" path="tutorme" />
+    <external-path name="my_images" path="edventure" />
     <files-path name="files" path="" />
 </paths>

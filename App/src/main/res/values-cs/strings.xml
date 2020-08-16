@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EdVenture</string>
+    <string name="title_activity_filter_tutor">Filtrování učitelů</string>
+    <string name="title_activity_select_tutor">Výběr učitelů</string>
+    <string name="title_activity_add_tutor">Přidat učitele</string>
+    <string name="welcome_phrase">Vítejte v aplikaci EdVenture</string>
+    <string name="title_activity_edit_tutor">Upravit</string>
+    <string name="title_cancel_filter">Zrušit filtr</string>
+    <string name="continue_phrase">Pokračovat</string>
+    <string name="search">vyhledat</string>
+    <string name="filter">filtr</string>
+    <string name="choose_teacher">Najít učitele</string>
+    <string name="first_name">JMÉNO</string>
+    <string name="change_profile_picture">Změnit obrázek</string>
+    <string name="place">MÍSTO</string>
+    <string name="hour_rate">HODINOVÁ SAZBA</string>
+    <string name="online_class">ONLINE</string>
+    <string name="profile_picture_description">Profilový obrázek</string>
+    <string name="save">Uložit</string>
+    <string name="select_image">Vybrat obrázek</string>
+    <string name="rating">Počet hvězdiček</string>
+    <string name="last_name">PŘÍJMENÍ</string>
+    <string name="select_image_source">Vybrat zdroj obrázku</string>
+    <string name="take_picture">Vyfotografovat</string>
+    <string name="choose_from_gallery">Vybrat z galerie</string>
+    <string name="range">Hodnota musí být mezi 0.0 a 5.0</string>
+    <string name="required_field">*Povinné</string>
+    <string name="subject">PŘEDMĚT</string>
+    <string name="app_intro_title_1">Registrace na jeden klik?</string>
+    <string name="app_intro_title_2">Fitrování učitelů</string>
+    <string name="app_intro_title_3">Platba kartou?!?!</string>
+    <string name="app_intro_text_1">Jste na správném místě!</string>
+    <string name="app_intro_text_2">Óóó, ano..</string>
+    <string name="app_intro_text_3">Ehh…Už žádné otázky? Výborně! Pojďme na to!</string>
+    <string name="done">Hotovo</string>
+    <string name="skip">Přeskočit</string>
+</resources>

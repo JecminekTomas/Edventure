@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EdVenture</string>
+    <string name="title_activity_filter_tutor">Filtrovanie učiteľov</string>
+    <string name="title_activity_select_tutor">Výběr učiteľov</string>
+    <string name="title_activity_add_tutor">Přidat učiteľa</string>
+    <string name="title_cancel_filter">Zrušiť filter</string>
+    <string name="title_activity_edit_tutor">Upraviť</string>
+    <string name="welcome_phrase">Vitajte v aplikaci EdVenture</string>
+    <string name="continue_phrase">Pokračovať</string>
+    <string name="search">vyhľadať</string>
+    <string name="filter">filter</string>
+    <string name="choose_teacher">Najít učiteľa</string>
+    <string name="first_name">MENO</string>
+    <string name="change_profile_picture">Zmeniť obrázok</string>
+    <string name="place">MIESTO</string>
+    <string name="hour_rate">HODINOVÁ SADZBA</string>
+    <string name="online_class">ONLINE</string>
+    <string name="profile_picture_description">Profilový obrázok</string>
+    <string name="save">Uložiť</string>
+    <string name="select_image">Vybrať obrázok</string>
+    <string name="rating">Počet hvězdiček</string>
+    <string name="last_name">PŘÍJMENÍ</string>
+    <string name="select_image_source">Vybrať zdroj obrázku</string>
+    <string name="take_picture">Vyfotografovať</string>
+    <string name="choose_from_gallery">Vybrať z galérie</string>
+    <string name="range">Hodnota musí byť medzi 0.0 a 5.0</string>
+    <string name="required_field">*Povinné</string>
+    <string name="subject">PREDMET</string>
+    <string name="app_intro_title_1">Registrácia na jeden klik?</string>
+    <string name="app_intro_title_2">Fitrovanie učiteľov</string>
+    <string name="app_intro_title_3">Platba kartou?!?!</string>
+    <string name="app_intro_text_1">Ste na správnom mieste!</string>
+    <string name="app_intro_text_2">Óóó, ano..</string>
+    <string name="app_intro_text_3">Ehh… Už žiadne otázky? Výborne! Poďme na to!</string>
+    <string name="done">Hotovo</string>
+    <string name="skip">Preskočiť</string>
+</resources>
