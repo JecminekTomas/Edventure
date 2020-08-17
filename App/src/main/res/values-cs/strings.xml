@@ -19,7 +19,7 @@
     <string name="profile_picture_description">Profilový obrázek</string>
     <string name="save">Uložit</string>
     <string name="select_image">Vybrat obrázek</string>
-    <string name="rating">Počet hvězdiček</string>
+    <string name="rating">POČET HVĚZDIČEK</string>
     <string name="last_name">PŘÍJMENÍ</string>
     <string name="select_image_source">Vybrat zdroj obrázku</string>
     <string name="take_picture">Vyfotografovat</string>
@@ -35,4 +35,6 @@
     <string name="app_intro_text_3">Ehh…Už žádné otázky? Výborně! Pojďme na to!</string>
     <string name="done">Hotovo</string>
     <string name="skip">Přeskočit</string>
+    <string name="max_price">MAX. CENA</string>
+    <string name="min_price">MIN. CENA</string>
 </resources>

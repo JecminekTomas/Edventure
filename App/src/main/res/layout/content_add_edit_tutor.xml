@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
     tools:context=".activities.AddEditTutorActivity"
     tools:showIn="@layout/activity_add_edit_tutor">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/saveChanges">
 
         <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -68,13 +65,11 @@
                     android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/first_name_layout"
                 app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:hint="@string/first_name">
@@ -91,7 +86,6 @@
                 app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:hint="@string/last_name">
@@ -108,7 +102,6 @@
                 app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:hint="@string/place"
@@ -126,8 +119,6 @@
                 app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
-
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:hint="@string/hour_rate"
@@ -152,7 +143,6 @@
                 app:errorEnabled="true"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
-                android:layout_marginBottom="@dimen/half_indentation"
                 android:hint="@string/rating"
                 app:startIconDrawable="@drawable/ic_star_color_secondary_dark_24dp">
 
@@ -164,7 +154,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveChanges"

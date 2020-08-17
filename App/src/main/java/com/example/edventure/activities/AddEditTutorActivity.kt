@@ -203,18 +203,22 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
         } else {
             if (first_name.text!!.isEmpty()) {
+                first_name_layout.isErrorEnabled = true
                 first_name_layout.error = getString(R.string.required_field)
             }
             if (last_name.text!!.isEmpty()) {
+                last_name_layout.isErrorEnabled = true
                 last_name_layout.error = getString(R.string.required_field)
             }
             if (place.text!!.isEmpty()) {
                 place_layout.error = getString(R.string.required_field)
             }
             if (price_per_hour.text!!.isEmpty()) {
+                price_per_hour_layout.isErrorEnabled = true
                 price_per_hour_layout.error = getString(R.string.required_field)
             }
             if (stars.text!!.isEmpty()) {
+                stars_layout.isErrorEnabled = true
                 stars_layout.error = getString(R.string.required_field)
             }
         }

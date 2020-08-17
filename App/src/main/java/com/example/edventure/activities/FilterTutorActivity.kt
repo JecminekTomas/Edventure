@@ -37,10 +37,6 @@ class FilterTutorActivity: BaseActivity() {
             finish()
         }
 
-        price_slider.setLabelFormatter { value: Float ->
-            return@setLabelFormatter String.format("%.0f Kč", value)
-        }
-
         setInteractionsListener()
     }
 

@@ -35,4 +35,6 @@
     <string name="app_intro_text_3">Ehh… Už žiadne otázky? Výborne! Poďme na to!</string>
     <string name="done">Hotovo</string>
     <string name="skip">Preskočiť</string>
+    <string name="max_price">MAX. CENA</string>
+    <string name="min_price">MIN. CENA</string>
 </resources>

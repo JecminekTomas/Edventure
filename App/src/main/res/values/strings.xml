@@ -35,4 +35,6 @@
     <string name="app_intro_text_3">Ehh… No more questions? Great! Let\'s get started!</string>
     <string name="done">Done</string>
     <string name="skip">Skip</string>
+    <string name="max_price">MAX. PRICE</string>
+    <string name="min_price">MIN. PRICE</string>
 </resources>
