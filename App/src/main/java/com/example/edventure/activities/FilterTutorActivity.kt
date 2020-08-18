@@ -5,20 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import com.example.arch.BaseActivity
 import com.example.edventure.R
 import kotlinx.android.synthetic.main.activity_select_tutor.toolbar
 import kotlinx.android.synthetic.main.content_filter_tutor.*
 
 class FilterTutorActivity: BaseActivity() {
-
-    private lateinit var subjects: MutableList<String>
-    private lateinit var cities: MutableList<String>
-    private var prices = arrayOfNulls<Double>(2)
-    private var onlineLecture: Boolean = false
-    private var groupLecture: Boolean = false
-    private var homeLecture: Boolean = false
-
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, FilterTutorActivity::class.java)
@@ -27,15 +20,23 @@ class FilterTutorActivity: BaseActivity() {
 
     override val layout: Int = R.layout.activity_filter_tutor
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
             setResult(Activity.RESULT_CANCELED)
             finish()
         }
+
+        val places: Array<String> = resources.getStringArray(R.array.places_cz)
+        val subjects: Array<String> = resources.getStringArray(R.array.subjects_cz)
+
+        val arrayPlacesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, places)
+        filter_place_textview.setAdapter(arrayPlacesAdapter)
+        val arrayActivitiesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, subjects)
+        filter_subject_textview.setAdapter(arrayActivitiesAdapter)
 
         setInteractionsListener()
     }

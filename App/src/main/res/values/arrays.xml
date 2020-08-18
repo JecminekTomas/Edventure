@@ -4,4 +4,18 @@
         <item>250.0</item>
         <item>750.0</item>
     </array>
+    <string-array name="places_cz">
+        <item>Brno</item>
+        <item>Praha</item>
+        <item>Ostrava</item>
+        <item>Pardubice</item>
+        <item>Olomouc</item>
+    </string-array>
+    <string-array name="subjects_cz">
+        <item>Matematika</item>
+        <item>Fyzika</item>
+        <item>Chemie</item>
+        <item>Biologie</item>
+        <item>Angličtina</item>
+    </string-array>
 </resources>

@@ -53,6 +53,7 @@ class MainActivity : AppIntro() {
         val sliderPage = SliderPage()
         sliderPage.title = getString(R.string.app_intro_title_1)
         sliderPage.description = getString(R.string.app_intro_text_1)
+        sliderPage.imageDrawable = R.drawable.one_click
         sliderPage.backgroundColor = Color.WHITE
         sliderPage.titleColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         sliderPage.descriptionColor = ContextCompat.getColor(this, R.color.colorSecondaryDark)
@@ -63,6 +64,7 @@ class MainActivity : AppIntro() {
         val sliderPage = SliderPage()
         sliderPage.title = getString(R.string.app_intro_title_2)
         sliderPage.description = getString(R.string.app_intro_text_2)
+        sliderPage.imageDrawable = R.drawable.calendar
         sliderPage.backgroundColor = Color.WHITE
         sliderPage.titleColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         sliderPage.descriptionColor = ContextCompat.getColor(this, R.color.colorSecondaryDark)
@@ -73,6 +75,7 @@ class MainActivity : AppIntro() {
         val sliderPage = SliderPage()
         sliderPage.title = getString(R.string.app_intro_title_3)
         sliderPage.description = getString(R.string.app_intro_text_3)
+        sliderPage.imageDrawable = R.drawable.no_card
         sliderPage.backgroundColor = Color.WHITE
         sliderPage.titleColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         sliderPage.descriptionColor = ContextCompat.getColor(this, R.color.colorSecondaryDark)

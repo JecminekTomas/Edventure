@@ -11,6 +11,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -27,6 +28,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
+import kotlinx.android.synthetic.main.content_add_edit_tutor.saveChanges
+import kotlinx.android.synthetic.main.content_add_edit_tutor.stars_layout
+import kotlinx.android.synthetic.main.content_filter_tutor.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -70,6 +74,14 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             finish()
         }
 
+        val places: Array<String> = resources.getStringArray(R.array.places_cz)
+        val subjects: Array<String> = resources.getStringArray(R.array.subjects_cz)
+
+        val arrayPlacesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, places)
+        add_place_textview.setAdapter(arrayPlacesAdapter)
+        val arrayActivitiesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, subjects)
+        add_subject_textview.setAdapter(arrayActivitiesAdapter)
+
         id?.let {
             supportActionBar?.title = getString(R.string.title_activity_edit_tutor)
             launch {
@@ -102,7 +114,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
                     saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
                     saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
                     saveChanges.isEnabled = true
@@ -120,7 +132,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
                     saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
                     saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
                     saveChanges.isEnabled = true
@@ -128,17 +140,17 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
         })
 
-        place.addTextChangedListener(object : TextWatcher {
+        add_place_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.city = s.toString().trim()
-                place_layout.error = null
+                add_place_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
                     saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
                     saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
                     saveChanges.isEnabled = true
@@ -156,7 +168,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
                     saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
                     saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
                     saveChanges.isEnabled = true
@@ -172,7 +184,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
                     tutor.rating = s.toString().toDouble()
                     stars_layout.error = null
                     saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
@@ -184,7 +196,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     }
 
     private fun saveTutor() {
-        if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && place.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+        if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
             id?.let {
                 launch {
                     viewModel.update(tutor)
@@ -210,8 +222,8 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                 last_name_layout.isErrorEnabled = true
                 last_name_layout.error = getString(R.string.required_field)
             }
-            if (place.text!!.isEmpty()) {
-                place_layout.error = getString(R.string.required_field)
+            if (add_place_textview.text!!.isEmpty()) {
+                add_place_layout.error = getString(R.string.required_field)
             }
             if (price_per_hour.text!!.isEmpty()) {
                 price_per_hour_layout.isErrorEnabled = true
@@ -232,7 +244,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             last_name.setText(it)
         }
         tutor.city.let {
-            place.setText(it)
+            add_place_textview.setText(it)
         }
         tutor.firstName.let {
             first_name.setText(it)

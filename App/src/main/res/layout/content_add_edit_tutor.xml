@@ -13,6 +13,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -98,19 +99,42 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/place_layout"
+                android:id="@+id/add_subject_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/half_indentation"
+                android:layout_marginEnd="@dimen/half_indentation"
+                android:hint="@string/subject"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                app:boxBackgroundColor="@color/white"
+                app:startIconDrawable="@drawable/ic_subject_color_primary_dark_24dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_subject_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_place_layout"
                 app:boxBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_indentation"
                 android:layout_marginEnd="@dimen/half_indentation"
                 android:hint="@string/place"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 app:startIconDrawable="@drawable/ic_place_color_secondary_dark_24dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/place"
+                <AutoCompleteTextView
+                    android:id="@+id/add_place_textview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
