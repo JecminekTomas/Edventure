@@ -37,4 +37,6 @@
     <string name="skip">Skip</string>
     <string name="max_price">MAX. PRICE</string>
     <string name="min_price">MIN. PRICE</string>
+    <string name="profile">Profile</string>
+    <string name="message">Delete</string>
 </resources>

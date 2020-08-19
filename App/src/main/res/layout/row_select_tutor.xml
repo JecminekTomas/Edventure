@@ -3,87 +3,130 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/basic_indentation"
     android:layout_marginStart="@dimen/basic_indentation"
+    android:layout_marginTop="@dimen/basic_indentation"
     android:layout_marginEnd="@dimen/basic_indentation"
     android:layout_marginBottom="@dimen/basic_indentation"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/colorSecondaryLight"
+    android:stateListAnimator="@drawable/row_button_transition"
+    app:cardCornerRadius="@dimen/cardRadius"
+    app:cardElevation="@dimen/cardElevation"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:cardCornerRadius="@dimen/cardRadius"
-    app:cardElevation="@dimen/cardElevation"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/half_indentation"
+        android:layout_marginEnd="@dimen/half_indentation"
+        >
 
-        <!--TODO: Odstranit statický obrázek-->
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePictureIconSelect"
-            android:layout_width="@dimen/civ_size"
-            android:layout_height="@dimen/civ_size"
-            android:layout_marginStart="@dimen/basic_indentation"
-            android:layout_marginTop="@dimen/basic_indentation"
-            android:layout_marginBottom="@dimen/basic_indentation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-        android:layout_width="@dimen/zero_indentation"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/basic_indentation"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profilePictureIconSelect"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tutorName"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_view_information"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:id="@+id/tutorCity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/one_indentation"
-            android:textColor="@color/colorPrimaryDark" />
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="@dimen/zero_indentation"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/basic_indentation"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tutorPrice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@android:color/black"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textStyle="bold"
-                android:textAlignment="textEnd" />
+            <!--TODO: Odstranit statický obrázek-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePictureIconSelect"
+                android:layout_width="@dimen/civ_size"
+                android:layout_height="@dimen/civ_size"
+                android:layout_marginStart="@dimen/basic_indentation"
+                android:layout_marginTop="@dimen/basic_indentation"
+                android:layout_marginBottom="@dimen/basic_indentation"
+                android:src="@drawable/hugh"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tutorRating"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/one_indentation"
-                android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimaryDark" />
+            <LinearLayout
+                android:layout_width="@dimen/zero_indentation"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/basic_indentation"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/profilePictureIconSelect"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <!-- TODO: Předměty -->
+                <TextView
+                    android:id="@+id/tutorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tutorCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/one_indentation"
+                    android:textColor="@color/colorPrimaryDark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/zero_indentation"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/basic_indentation"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tutorPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tutorRating"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/one_indentation"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <!-- TODO: Předměty -->
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/card_view_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card_view_information"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/profile"
+                android:layout_marginEnd="@dimen/basic_indentation"
+                app:icon="@drawable/ic_person_color_secondary_dark_24dp"
+                />
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/message"
+                app:icon="@drawable/ic_baseline_delete_forever_24"
+                />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

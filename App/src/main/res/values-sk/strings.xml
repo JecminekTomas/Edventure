@@ -37,4 +37,6 @@
     <string name="skip">Preskočiť</string>
     <string name="max_price">MAX. CENA</string>
     <string name="min_price">MIN. CENA</string>
+    <string name="profile">Profil</string>
+    <string name="message">Zmazať</string>
 </resources>

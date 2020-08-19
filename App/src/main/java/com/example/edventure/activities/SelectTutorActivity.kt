@@ -4,8 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.transition.TransitionManager
 import android.view.*
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +18,10 @@ import com.example.arch.BaseMVVMActivity
 import com.example.edventure.R
 import com.example.edventure.model.Tutor
 import com.example.edventure.viewmodels.SelectTutorVM
-import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
-import java.io.File
+import kotlinx.coroutines.launch
 
 
 class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java){
@@ -31,6 +34,8 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
     override val layout: Int = R.layout.activity_select_tutor
     private val tutorList: MutableList<Tutor> = mutableListOf()
+    private var mExpandedPosition = -1
+    private var previousExpandedPosition = -1
 
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var tutorAdapter: TutorAdapter
@@ -115,6 +120,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         return true
     }
 
+
     inner class TutorAdapter : RecyclerView.Adapter<TutorAdapter.TutorViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TutorViewHolder {
@@ -127,8 +133,32 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
+
+            val isExpanded = position == mExpandedPosition
+            holder.buttons.visibility = if (isExpanded) View.VISIBLE else View.GONE
+            holder.informations.isActivated = isExpanded
+
+            if (isExpanded)
+                previousExpandedPosition = position
+
+            holder.informations.setOnClickListener {
+                mExpandedPosition = if (isExpanded) -1 else position
+                notifyItemChanged(previousExpandedPosition)
+                notifyItemChanged(position)
+            }
+
+            holder.buttonDelete.setOnClickListener{
+                launch {
+                    viewModel.delete(tutorList[holder.adapterPosition])
+                }
+            }
+
+            holder.buttonProfile.setOnClickListener{
+                startActivity(TutorProfileActivity.createIntent(applicationContext))
+            }
+
             val tutor = tutorList[position]
-            Picasso.get().load(File(tutor.profilePicture!!.name)).into(holder.tutorProfilePicture)
+           // Picasso.get().load(File(tutor.profilePicture!!.name)).into(holder.tutorProfilePicture)
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
             holder.tutorPrice.text = String.format(
@@ -145,6 +175,10 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             val tutorCity: TextView = view.findViewById(R.id.tutorCity)
             val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
             val tutorRating: TextView = view.findViewById(R.id.tutorRating)
+            val buttonProfile: Button = view.findViewById(R.id.buttonProfile)
+            val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
+            val buttons: LinearLayout = view.findViewById(R.id.card_view_buttons)
+            val informations: ConstraintLayout = view.findViewById(R.id.card_view_information)
         }
     }
 }
