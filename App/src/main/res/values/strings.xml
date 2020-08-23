@@ -39,4 +39,10 @@
     <string name="min_price">MIN. PRICE</string>
     <string name="profile">Profile</string>
     <string name="message">Delete</string>
+    <string name="teachers_profile">Teacher\'s profile</string>
+    <string name="number_of_enrolled_students">Number of enrolled\nstudents</string>
+    <string name="total_number_of_students">Total number of\nstudents</string>
+    <string name="average_lesson_time">Average lesson\ntime</string>
+    <string name="about">About</string>
+    <string name="contact">Contact</string>
 </resources>

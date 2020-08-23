@@ -67,6 +67,8 @@ dependencies {
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
 
     implementation "androidx.room:room-runtime:$room_version"

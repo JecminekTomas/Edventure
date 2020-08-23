@@ -1,6 +1,7 @@
 package com.example.edventure.database.repository
 
 import androidx.lifecycle.LiveData
+import com.example.edventure.model.ProfilePicture
 import com.example.edventure.model.Tutor
 
 interface ITutorRepository {
@@ -12,6 +13,7 @@ interface ITutorRepository {
     suspend fun findByCity(city: String): MutableList<Tutor>
     suspend fun findByRating(rating: Double): MutableList<Tutor>
     suspend fun findByPrice(pricePerHour: Double): MutableList<Tutor>
+    suspend fun findProfilePicture(tutorId: Long): ProfilePicture
     suspend fun insert(tutor: Tutor): Long
     suspend fun update(tutor: Tutor)
     suspend fun delete(tutor: Tutor)

@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.*
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
@@ -18,13 +18,16 @@ import com.example.arch.BaseMVVMActivity
 import com.example.edventure.R
 import com.example.edventure.model.Tutor
 import com.example.edventure.viewmodels.SelectTutorVM
+import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
 import kotlinx.coroutines.launch
+import java.io.File
+import java.util.*
 
 
-class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java){
+class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class.java) {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -37,8 +40,11 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     private var mExpandedPosition = -1
     private var previousExpandedPosition = -1
 
+    private val FILTER_TUTOR_REQUEST = 100
+
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var tutorAdapter: TutorAdapter
+
     /**  layoutManager se stará o pozicování - Existuje možnost i GridManageru, atd. */
 
 
@@ -76,6 +82,11 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                     diffUtil.dispatchUpdatesTo(tutorAdapter)
                     tutorList.clear()
                     tutorList.addAll(it)
+                    for (tutor in tutorList) {
+                        launch {
+                            tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
+                        }
+                    }
                 }
                 /** DiffUtil je velice užitečné využívat, jelikož může velice zrychlit proces při načítání změny RV.*/
             }
@@ -133,44 +144,51 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: TutorViewHolder, position: Int) {
-
             val isExpanded = position == mExpandedPosition
             holder.buttons.visibility = if (isExpanded) View.VISIBLE else View.GONE
-            holder.informations.isActivated = isExpanded
+            holder.tutorCardView.isActivated = isExpanded
 
             if (isExpanded)
                 previousExpandedPosition = position
 
-            holder.informations.setOnClickListener {
+            holder.tutorCardView.setOnClickListener {
                 mExpandedPosition = if (isExpanded) -1 else position
                 notifyItemChanged(previousExpandedPosition)
                 notifyItemChanged(position)
             }
 
-            holder.buttonDelete.setOnClickListener{
+            holder.buttonDelete.setOnClickListener {
                 launch {
                     viewModel.delete(tutorList[holder.adapterPosition])
                 }
             }
 
-            holder.buttonProfile.setOnClickListener{
-                startActivity(TutorProfileActivity.createIntent(applicationContext))
+            holder.buttonProfile.setOnClickListener {
+                startActivity(
+                    TutorProfileActivity.createIntent(
+                        applicationContext,
+                        tutorList[holder.adapterPosition].tutorId
+                    )
+                )
             }
 
             val tutor = tutorList[position]
-           // Picasso.get().load(File(tutor.profilePicture!!.name)).into(holder.tutorProfilePicture)
+            Picasso.get().load(File(filesDir, tutor.profilePicture!!.name))
+                .into(holder.tutorProfilePicture)
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city
             holder.tutorPrice.text = String.format(
                 "%.0f Kč/h",
                 tutor.pricePerHour
             ) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
-            holder.tutorRating.text = String.format("★ %.1f", tutor.rating)
+            holder.tutorRating.text = String.format(Locale.US, "★ %.1f", tutor.rating)
         }
+
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
         inner class TutorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tutorProfilePicture: CircleImageView = view.findViewById(R.id.profilePictureIconSelect)
+            val tutorProfilePicture: CircleImageView =
+                view.findViewById(R.id.profilePictureIconSelect)
             val tutorName: TextView = view.findViewById(R.id.tutorName)
             val tutorCity: TextView = view.findViewById(R.id.tutorCity)
             val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
@@ -178,7 +196,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             val buttonProfile: Button = view.findViewById(R.id.buttonProfile)
             val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
             val buttons: LinearLayout = view.findViewById(R.id.card_view_buttons)
-            val informations: ConstraintLayout = view.findViewById(R.id.card_view_information)
+            val tutorCardView: CardView = view.findViewById(R.id.tutor_card_view)
         }
     }
 }

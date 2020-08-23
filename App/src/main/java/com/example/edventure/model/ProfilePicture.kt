@@ -12,12 +12,12 @@ import androidx.room.PrimaryKey
         ForeignKey(
             entity = Tutor::class,
             parentColumns = ["tutor_id"],
-            childColumns = ["profile_picture_id"],
+            childColumns = ["tutor_id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
-data class ProfilePicture(
+class ProfilePicture(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "profile_picture_id")
     var profilePictureId: Long = 0,

@@ -9,7 +9,7 @@ import com.example.edventure.database.dao.TutorDao
 import com.example.edventure.model.Tutor
 import com.example.edventure.model.ProfilePicture
 
-@Database(entities = [Tutor::class, ProfilePicture::class], version = 2, exportSchema = false)
+@Database(entities = [Tutor::class, ProfilePicture::class], version = 3, exportSchema = false)
 abstract class TutorDB : RoomDatabase() {
     abstract fun tutorDao(): TutorDao
     abstract fun profilePictureDao(): ProfilePictureDao

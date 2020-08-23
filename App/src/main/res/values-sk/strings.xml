@@ -39,4 +39,9 @@
     <string name="min_price">MIN. CENA</string>
     <string name="profile">Profil</string>
     <string name="message">Zmazať</string>
+    <string name="teachers_profile">Profil učiteľa</string>
+    <string name="number_of_enrolled_students">Počet zapísaných\\nštudentov</string>
+    <string name="average_lesson_time">"Priemerná dĺžka\\nlekcie "</string>
+    <string name="total_number_of_students">Celkový počet\\nštudentov</string>
+    <string name="about">O mne</string>
 </resources>

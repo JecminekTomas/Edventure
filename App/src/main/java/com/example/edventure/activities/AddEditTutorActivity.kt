@@ -29,8 +29,7 @@ import kotlinx.android.synthetic.main.activity_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
 import kotlinx.android.synthetic.main.content_add_edit_tutor.saveChanges
-import kotlinx.android.synthetic.main.content_add_edit_tutor.stars_layout
-import kotlinx.android.synthetic.main.content_filter_tutor.*
+import kotlinx.android.synthetic.main.content_add_edit_tutor.rating_layout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -38,7 +37,8 @@ import java.io.IOException
 import java.util.*
 
 
-class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::class.java), ChooseImageSourceListener {
+class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::class.java),
+    ChooseImageSourceListener {
 
     companion object {
 
@@ -79,7 +79,8 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
         val arrayPlacesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, places)
         add_place_textview.setAdapter(arrayPlacesAdapter)
-        val arrayActivitiesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, subjects)
+        val arrayActivitiesAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, subjects)
         add_subject_textview.setAdapter(arrayActivitiesAdapter)
 
         id?.let {
@@ -101,7 +102,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     private fun setInteractionsListener() {
         saveChanges.setOnClickListener { saveTutor() }
         profilePictureIcon.setOnClickListener { openAddImageBottomSheet() }
-        tutorChangePicture.setOnClickListener { openAddImageBottomSheet()}
+        tutorChangePicture.setOnClickListener { openAddImageBottomSheet() }
 
 
         first_name.addTextChangedListener(object : TextWatcher {
@@ -115,8 +116,18 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-                    saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
+                    saveChanges.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.colorPrimary
+                        )
+                    )
+                    saveChanges.setTextColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.white
+                        )
+                    )
                     saveChanges.isEnabled = true
                 }
             }
@@ -133,8 +144,18 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-                    saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
+                    saveChanges.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.colorPrimary
+                        )
+                    )
+                    saveChanges.setTextColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.white
+                        )
+                    )
                     saveChanges.isEnabled = true
                 }
             }
@@ -151,8 +172,18 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-                    saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
+                    saveChanges.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.colorPrimary
+                        )
+                    )
+                    saveChanges.setTextColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.white
+                        )
+                    )
                     saveChanges.isEnabled = true
                 }
             }
@@ -169,8 +200,18 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-                    saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
+                    saveChanges.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.colorPrimary
+                        )
+                    )
+                    saveChanges.setTextColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.white
+                        )
+                    )
                     saveChanges.isEnabled = true
                 }
             }
@@ -186,9 +227,19 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
                     tutor.rating = s.toString().toDouble()
-                    stars_layout.error = null
-                    saveChanges.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-                    saveChanges.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
+                    rating_layout.error = null
+                    saveChanges.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.colorPrimary
+                        )
+                    )
+                    saveChanges.setTextColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.white
+                        )
+                    )
                     saveChanges.isEnabled = true
                 }
             }
@@ -211,7 +262,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                 }.invokeOnCompletion {
                     setResult(Activity.RESULT_OK)
                     finish()
-            }
+                }
             }
         } else {
             if (first_name.text!!.isEmpty()) {
@@ -230,8 +281,8 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                 price_per_hour_layout.error = getString(R.string.required_field)
             }
             if (stars.text!!.isEmpty()) {
-                stars_layout.isErrorEnabled = true
-                stars_layout.error = getString(R.string.required_field)
+                rating_layout.isErrorEnabled = true
+                rating_layout.error = getString(R.string.required_field)
             }
         }
     }
@@ -363,15 +414,16 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
     }
 
-    private fun saveImageFile(uri: Uri){
+    private fun saveImageFile(uri: Uri) {
         launch(Dispatchers.Main) {
             val path = FileUtils.getRealPath(this@AddEditTutorActivity, uri)
-            val sourceFile = File(path!!)
+            val sourceFile = File(path)
             val destinationFile = File(filesDir, sourceFile.name)
             try {
                 FileUtils.copy(sourceFile, destinationFile)
-                tutor.profilePicture = ProfilePicture(Calendar.getInstance().timeInMillis, destinationFile.name)
-            } catch (ex: IOException){
+                tutor.profilePicture =
+                    ProfilePicture(Calendar.getInstance().timeInMillis, destinationFile.name)
+            } catch (ex: IOException) {
                 ex.printStackTrace()
             }
         }
@@ -381,29 +433,37 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
-            tutor.profilePicture = ProfilePicture(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            tutor.profilePicture =
+                ProfilePicture(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
             showProfilePictureFromFile(tempPhotoFile!!)
         }
 
-        if (requestCode == GALLERY_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            if (data?.data != null){
+        if (requestCode == GALLERY_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data?.clipData != null) {
+                val count = data.clipData?.itemCount
+                (0 until count!!).forEach { i ->
+                    val imageUri: Uri = data.clipData!!.getItemAt(i).uri
+                    saveImageFile(imageUri)
+                    showProfilePictureFromUri(imageUri)
+                }
+            } else if (data?.data != null) {
                 val uri = data.data
                 uri?.let {
-                    saveImageFile(it)
+                    saveImageFile(uri)
                     showProfilePictureFromUri(uri)
                 }
             }
         }
     }
 
-    private fun showProfilePictureFromUri (uri: Uri){
+    private fun showProfilePictureFromUri(uri: Uri) {
         newProfilePicture.visibility = View.VISIBLE
         profilePictureIcon.visibility = View.INVISIBLE
         Picasso.get().load(uri).into(newProfilePicture)
     }
 
-    private fun showProfilePictureFromFile (file: File){
+    private fun showProfilePictureFromFile(file: File) {
         newProfilePicture.visibility = View.VISIBLE
         profilePictureIcon.visibility = View.INVISIBLE
         Picasso.get().load(file).into(newProfilePicture)

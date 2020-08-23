@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.edventure.database.TutorDB
 import com.example.edventure.database.dao.ProfilePictureDao
 import com.example.edventure.database.dao.TutorDao
+import com.example.edventure.model.ProfilePicture
 import com.example.edventure.model.Tutor
 
 class TutorLocalRepoImp (context: Context): ITutorRepository {
@@ -26,6 +27,10 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         val tutor = tutorDao.findById(tutorId)
         tutor.profilePicture = profilePictureDao.getProfilePicture(tutorId)
         return tutor
+    }
+
+     override suspend fun findProfilePicture(tutorId: Long): ProfilePicture {
+        return profilePictureDao.getProfilePicture(tutorId)
     }
 
     override suspend fun findByName(
