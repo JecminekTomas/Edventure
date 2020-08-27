@@ -34,12 +34,9 @@
                         android:id="@+id/newProfilePicture"
                         android:layout_width="@dimen/imageSize"
                         android:layout_height="@dimen/imageSize"
-                        android:clickable="true"
-                        android:contentDescription="@string/profile_picture_description"
-                        android:focusable="true"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -180,7 +177,7 @@
         </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveChanges"
+        android:id="@+id/saveTutor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:backgroundTint="@color/colorSecondary"

@@ -28,8 +28,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
-import kotlinx.android.synthetic.main.content_add_edit_tutor.saveChanges
+import kotlinx.android.synthetic.main.content_add_edit_tutor.saveTutor
 import kotlinx.android.synthetic.main.content_add_edit_tutor.rating_layout
+import kotlinx.android.synthetic.main.content_filter_tutor.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -55,7 +56,6 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     override val layout: Int = R.layout.activity_add_edit_tutor
     private var id: Long? = null
     private lateinit var tutor: Tutor
-    private lateinit var profilePicture: ProfilePicture
     private var tempPhotoFile: File? = null
 
     private val REQUEST_IMAGE_CAPTURE = 100
@@ -74,14 +74,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             finish()
         }
 
-        val places: Array<String> = resources.getStringArray(R.array.places_cz)
-        val subjects: Array<String> = resources.getStringArray(R.array.subjects_cz)
-
-        val arrayPlacesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, places)
-        add_place_textview.setAdapter(arrayPlacesAdapter)
-        val arrayActivitiesAdapter =
-            ArrayAdapter(this, android.R.layout.simple_list_item_1, subjects)
-        add_subject_textview.setAdapter(arrayActivitiesAdapter)
+        loadArrayStrings()
 
         id?.let {
             supportActionBar?.title = getString(R.string.title_activity_edit_tutor)
@@ -100,7 +93,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     }
 
     private fun setInteractionsListener() {
-        saveChanges.setOnClickListener { saveTutor() }
+        saveTutor.setOnClickListener { saveTutor() }
         profilePictureIcon.setOnClickListener { openAddImageBottomSheet() }
         tutorChangePicture.setOnClickListener { openAddImageBottomSheet() }
 
@@ -115,20 +108,10 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.colorPrimary
-                        )
-                    )
-                    saveChanges.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.white
-                        )
-                    )
-                    saveChanges.isEnabled = true
+                if (isFilled()) {
+                    saveTutorEnabled()
+                } else {
+                    saveTutorDisabled()
                 }
             }
         })
@@ -143,20 +126,10 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.colorPrimary
-                        )
-                    )
-                    saveChanges.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.white
-                        )
-                    )
-                    saveChanges.isEnabled = true
+                if (isFilled()) {
+                    saveTutorEnabled()
+                } else {
+                    saveTutorDisabled()
                 }
             }
         })
@@ -171,20 +144,10 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.colorPrimary
-                        )
-                    )
-                    saveChanges.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.white
-                        )
-                    )
-                    saveChanges.isEnabled = true
+                if (isFilled()) {
+                    saveTutorEnabled()
+                } else {
+                    saveTutorDisabled()
                 }
             }
         })
@@ -199,20 +162,10 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
-                    saveChanges.setBackgroundColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.colorPrimary
-                        )
-                    )
-                    saveChanges.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.white
-                        )
-                    )
-                    saveChanges.isEnabled = true
+                if (isFilled()) {
+                    saveTutorEnabled()
+                } else {
+                    saveTutorDisabled()
                 }
             }
         })
@@ -225,29 +178,19 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+                if (isFilled()) {
                     tutor.rating = s.toString().toDouble()
                     rating_layout.error = null
-                    saveChanges.setBackgroundColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.colorPrimary
-                        )
-                    )
-                    saveChanges.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext,
-                            R.color.white
-                        )
-                    )
-                    saveChanges.isEnabled = true
+                    saveTutorEnabled()
+                } else {
+                    saveTutorDisabled()
                 }
             }
         })
     }
 
     private fun saveTutor() {
-        if (first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()) {
+        if (isFilled()) {
             id?.let {
                 launch {
                     viewModel.update(tutor)
@@ -258,32 +201,13 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             } ?: kotlin.run {
                 launch {
                     viewModel.insert(tutor)
-                    //TODO: Tady bude chyba!
                 }.invokeOnCompletion {
                     setResult(Activity.RESULT_OK)
                     finish()
                 }
             }
         } else {
-            if (first_name.text!!.isEmpty()) {
-                first_name_layout.isErrorEnabled = true
-                first_name_layout.error = getString(R.string.required_field)
-            }
-            if (last_name.text!!.isEmpty()) {
-                last_name_layout.isErrorEnabled = true
-                last_name_layout.error = getString(R.string.required_field)
-            }
-            if (add_place_textview.text!!.isEmpty()) {
-                add_place_layout.error = getString(R.string.required_field)
-            }
-            if (price_per_hour.text!!.isEmpty()) {
-                price_per_hour_layout.isErrorEnabled = true
-                price_per_hour_layout.error = getString(R.string.required_field)
-            }
-            if (stars.text!!.isEmpty()) {
-                rating_layout.isErrorEnabled = true
-                rating_layout.error = getString(R.string.required_field)
-            }
+            indicateError()
         }
     }
 
@@ -306,6 +230,74 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         tutor.rating.let {
             stars.setText(String.format("%.1f", it))
         }
+    }
+
+    private fun isFilled(): Boolean {
+        return first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()
+    }
+
+    private fun saveTutorEnabled() {
+        saveTutor.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.colorPrimary
+            )
+        )
+        saveTutor.setTextColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.white
+            )
+        )
+        saveTutor.isEnabled = true
+    }
+
+    private fun saveTutorDisabled() {
+        saveTutor.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.colorSecondary
+            )
+        )
+        saveTutor.isEnabled = false
+    }
+
+    private fun indicateError() {
+        if (first_name.text!!.isEmpty()) {
+            first_name_layout.isErrorEnabled = true
+            first_name_layout.error = getString(R.string.required_field)
+        }
+        if (last_name.text!!.isEmpty()) {
+            last_name_layout.isErrorEnabled = true
+            last_name_layout.error = getString(R.string.required_field)
+        }
+        if (add_place_textview.text!!.isEmpty()) {
+            add_place_layout.error = getString(R.string.required_field)
+        }
+        if (price_per_hour.text!!.isEmpty()) {
+            price_per_hour_layout.isErrorEnabled = true
+            price_per_hour_layout.error = getString(R.string.required_field)
+        }
+        if (stars.text!!.isEmpty()) {
+            rating_layout.isErrorEnabled = true
+            rating_layout.error = getString(R.string.required_field)
+        }
+    }
+
+    private fun loadArrayStrings() {
+        val arrayPlacesAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            resources.getStringArray(R.array.subjects_cz)
+        )
+        val arrayActivitiesAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            resources.getStringArray(R.array.places_cz)
+        )
+
+        add_place_textview.setAdapter(arrayPlacesAdapter)
+        add_subject_textview.setAdapter(arrayActivitiesAdapter)
     }
 
     class ChooseImageSourceBottomSheet : BottomSheetDialogFragment() {

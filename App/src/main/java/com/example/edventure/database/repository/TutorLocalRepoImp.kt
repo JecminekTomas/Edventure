@@ -66,13 +66,24 @@ class TutorLocalRepoImp (context: Context): ITutorRepository {
         return tutors
     }
 
-    override suspend fun findByPrice(pricePerHour: Double): MutableList<Tutor> {
-        val tutors = tutorDao.findByPrice(pricePerHour)
+    override suspend fun findByPriceLowerThan(pricePerHour: Double): MutableList<Tutor> {
+        val tutors = tutorDao.findByPriceLowerThan(pricePerHour)
         tutors.let {
             for (tutor in it){
                 tutor.profilePicture = profilePictureDao.getProfilePicture(tutor.tutorId)
             }
         }
+        return tutors
+    }
+
+    override suspend fun findByPriceHigherThan(pricePerHour: Double): MutableList<Tutor> {
+        val tutors = tutorDao.findByPriceLowerThan(pricePerHour)
+        tutors.let {
+            for (tutor in it){
+                tutor.profilePicture = profilePictureDao.getProfilePicture(tutor.tutorId)
+            }
+        }
+        //TODO: Změnit .. udělat průnik dvou seznamů.
         return tutors
     }
 

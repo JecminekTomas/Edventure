@@ -1,6 +1,7 @@
 package com.example.edventure.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +22,7 @@ import com.example.edventure.viewmodels.SelectTutorVM
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
+import kotlinx.android.synthetic.main.content_filter_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
 import kotlinx.coroutines.launch
 import java.io.File
@@ -39,6 +41,12 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     private val tutorList: MutableList<Tutor> = mutableListOf()
     private var mExpandedPosition = -1
     private var previousExpandedPosition = -1
+    private var filtered: Boolean = false
+
+    var filterRating: Double? = -1.0
+    var filterPriceMin: Double? = -1.0
+    var filterPriceMax: Double? = -1.0
+    var filterPlace: String? = ""
 
     private val FILTER_TUTOR_REQUEST = 100
 
@@ -82,6 +90,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                     diffUtil.dispatchUpdatesTo(tutorAdapter)
                     tutorList.clear()
                     tutorList.addAll(it)
+                    
                     for (tutor in tutorList) {
                         launch {
                             tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
@@ -119,7 +128,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     }
 
     private fun onActionFilter() {
-        startActivity(FilterTutorActivity.createIntent(this))
+        startActivityForResult(FilterTutorActivity.createIntent(this), FILTER_TUTOR_REQUEST)
     }
 
     private fun onActionSearch() {
@@ -129,6 +138,27 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_select_tutor, menu)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == FILTER_TUTOR_REQUEST && resultCode == Activity.RESULT_OK) {
+            when (data?.getStringExtra("filter_type")) {
+                "filter_rating" -> {
+                    filterRating = data.getDoubleExtra("filter_rating", -1.0)
+                }
+                "filter_place" -> {
+                    filterPlace = data.getStringExtra("filter_place")
+                }
+                "filter_price_min" -> {
+                    filterPriceMin = data.getDoubleExtra("filter_price_min", -1.0)
+                }
+                "filter_price_max" -> {
+                    filterPriceMax = data.getDoubleExtra("filter_price_max", -1.0)
+                }
+            }
+            filtered = true
+        }
     }
 
 
@@ -173,7 +203,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             }
 
             val tutor = tutorList[position]
-            Picasso.get().load(File(filesDir, tutor.profilePicture!!.name))
+            Picasso.get().load(File(filesDir, tutor.profilePicture!!.name)).noFade()
                 .into(holder.tutorProfilePicture)
             holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
             holder.tutorCity.text = tutor.city

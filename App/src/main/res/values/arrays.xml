@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="initial_slider_values">
-        <item>250.0</item>
-        <item>750.0</item>
-    </array>
     <string-array name="places_cz">
+        <item/>
         <item>Brno</item>
         <item>Praha</item>
         <item>Ostrava</item>
@@ -12,6 +9,7 @@
         <item>Olomouc</item>
     </string-array>
     <string-array name="subjects_cz">
+        <item />
         <item>Matematika</item>
         <item>Fyzika</item>
         <item>Chemie</item>

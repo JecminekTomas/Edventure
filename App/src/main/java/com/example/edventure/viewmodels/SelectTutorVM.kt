@@ -1,7 +1,6 @@
 package com.example.edventure.viewmodels
 
 import android.app.Application
-import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import com.example.edventure.model.ProfilePicture
 import com.example.edventure.model.Tutor
@@ -36,13 +35,15 @@ class SelectTutorVM(app: Application): BaseTutorVM(app) {
         return tutorRepository.findByRating(rating)
     }
 
-    suspend fun findByPrice(pricePerHour: Double): MutableList<Tutor> {
-        return tutorRepository.findByPrice(pricePerHour)
+    suspend fun findByPriceLowerThan(pricePerHour: Double): MutableList<Tutor> {
+        return tutorRepository.findByPriceLowerThan(pricePerHour)
+    }
+
+    suspend fun findByPriceHigherThan(pricePerHour: Double): MutableList<Tutor> {
+        return tutorRepository.findByPriceHigherThan(pricePerHour)
     }
 
     suspend fun delete(tutor: Tutor){
         tutorRepository.delete(tutor)
-    } //TO bude nejspíš právě zde.. Jelikož bude možnost mazat v této aktivitě.
-
-    //TODO: Bude to určitě tady? ... NEBUDE TO až ve FilterActivity? .. A zde bude jenom findByName?
+    }
 }

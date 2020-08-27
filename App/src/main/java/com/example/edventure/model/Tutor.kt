@@ -19,9 +19,7 @@ data class Tutor(
     @ColumnInfo(name = "city")
     var city: String = "",
 
-    /**@Embedded val city: City */
-
-    //TODO:  Budoucnost - City bude samostatná entita
+    //TODO:  Budoucnost - City bude nalezeno v DB
 
     @ColumnInfo(name = "phone_number")
     var phoneNumber: String = "",
@@ -47,9 +45,7 @@ data class Tutor(
 
     /** TODO: Je potřeba vytvořit stupnici od 0 do 5
      ** TODO: V budoucnu - Předělat na mutable list .. aby bylo možno vypočíst průměr hodnocení.
-
-     ** TODO: Nebude to USER, nejedná se o třídu, ale o ENTITU!
-     ** TODO: Budoucnost - Bude jenom jednou v RV, ale pokud bude mít rozdílné sazby, stanoví se rozmezí.
+     ** TODO: Budoucnost - Bude jenom jednou v RV, ale pokud bude mít rozdílné sazby, stanoví se cena od.
      ** TODO: Budoucnost - Pokud bude uživatel vyhledávat dle předmětu, zobrazí se již jenom cena za předmět.
      */
 

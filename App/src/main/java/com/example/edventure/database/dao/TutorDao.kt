@@ -25,7 +25,10 @@ interface TutorDao {
     suspend fun findByRating(rating: Double): MutableList<Tutor>
 
     @Query("SELECT * FROM tutor WHERE price_per_hour <= :pricePerHour ")
-    suspend fun findByPrice(pricePerHour: Double): MutableList<Tutor>
+    suspend fun findByPriceLowerThan(pricePerHour: Double): MutableList<Tutor>
+
+    @Query("SELECT * FROM tutor WHERE price_per_hour >= :pricePerHour")
+    suspend fun findByPriceHigherThan(pricePerHour: Double): MutableList<Tutor>
 
     @Insert
     suspend fun insert(tutor: Tutor): Long

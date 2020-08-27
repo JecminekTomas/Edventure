@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filter_subject_layout"
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
             app:startIconDrawable="@drawable/ic_subject_color_primary_dark_24dp">
 
             <AutoCompleteTextView
-                android:id="@+id/filter_subject_textview"
+                android:id="@+id/subject_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
@@ -57,7 +56,7 @@
             app:startIconDrawable="@drawable/ic_place_color_secondary_dark_24dp">
 
             <AutoCompleteTextView
-                android:id="@+id/filter_place_textview"
+                android:id="@+id/place_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
@@ -80,7 +79,7 @@
             app:startIconDrawable="@drawable/ic_star_color_secondary_dark_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/rating"
+                android:id="@+id/rating_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal" />
@@ -92,10 +91,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/half_indentation"
             android:layout_marginEnd="@dimen/half_indentation"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/price_min"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -107,6 +106,7 @@
                 app:startIconDrawable="@drawable/ic_outline_monetization_on_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/price_min_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />
@@ -114,7 +114,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/price_max"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -126,6 +125,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_monetization_on_24">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/price_max_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />
@@ -138,7 +138,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveChanges"
+        android:id="@+id/saveFilter"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_margin="0dp"
