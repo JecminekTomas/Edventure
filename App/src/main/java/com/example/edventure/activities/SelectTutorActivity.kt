@@ -38,7 +38,8 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
     }
 
     override val layout: Int = R.layout.activity_select_tutor
-    private val tutorList: MutableList<Tutor> = mutableListOf()
+    private var tutorList: MutableList<Tutor> = mutableListOf()
+    private var saveTutorList: MutableList<Tutor> = mutableListOf()
     private var mExpandedPosition = -1
     private var previousExpandedPosition = -1
     private var filtered: Boolean = false
@@ -90,7 +91,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                     diffUtil.dispatchUpdatesTo(tutorAdapter)
                     tutorList.clear()
                     tutorList.addAll(it)
-                    
+
                     for (tutor in tutorList) {
                         launch {
                             tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
@@ -119,8 +120,19 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                 onActionSearch()
                 return true
             }
+            R.id.action_cancel_filter -> {
+                onActionCancelFilter()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun onActionCancelFilter() {
+        tutorList = saveTutorList
+        selectTutorRecyclerView.adapter = tutorAdapter
+        filtered = false
+        invalidateOptionsMenu()
     }
 
     private fun onActionAddTutor() {
@@ -135,29 +147,57 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
         // TODO: Vytvořit SearchTutorActivity
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_select_tutor, menu)
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.clear()
+        if (!filtered) {
+            menuInflater.inflate(R.menu.menu_select_tutor, menu)
+        } else {
+            menuInflater.inflate(R.menu.menu_filter_tutor, menu)
+        }
         return true
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == FILTER_TUTOR_REQUEST && resultCode == Activity.RESULT_OK) {
+            saveTutorList = tutorList.toMutableList()
             when (data?.getStringExtra("filter_type")) {
                 "filter_rating" -> {
                     filterRating = data.getDoubleExtra("filter_rating", -1.0)
+                    for (tutor in tutorList) {
+                        if (tutor.rating < filterRating!!) {
+                            tutorList.remove(tutor)
+                        }
+                    }
                 }
                 "filter_place" -> {
                     filterPlace = data.getStringExtra("filter_place")
+                    for (tutor in tutorList) {
+                        if (tutor.city != filterPlace) {
+                            tutorList.remove(tutor)
+                        }
+                    }
                 }
                 "filter_price_min" -> {
                     filterPriceMin = data.getDoubleExtra("filter_price_min", -1.0)
+                    for (tutor in tutorList) {
+                        if (tutor.pricePerHour!! <= filterPriceMin!!) {
+                            tutorList.remove(tutor)
+                        }
+                    }
                 }
                 "filter_price_max" -> {
                     filterPriceMax = data.getDoubleExtra("filter_price_max", -1.0)
+                    for (tutor in tutorList) {
+                        if (tutor.pricePerHour!! >= filterPriceMax!!) {
+                            tutorList.remove(tutor)
+                        }
+                    }
                 }
             }
             filtered = true
+            invalidateOptionsMenu()
         }
     }
 

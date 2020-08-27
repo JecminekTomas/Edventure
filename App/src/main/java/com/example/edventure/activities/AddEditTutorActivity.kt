@@ -154,16 +154,27 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
         price_per_hour.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                tutor.pricePerHour = s.toString().toDouble()
-                price_per_hour_layout.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                tutor.pricePerHour = s.toString().toDouble()
+                price_per_hour_layout.error = null
                 if (isFilled()) {
-                    saveTutorEnabled()
+                    if (tutor.pricePerHour!! in 0.0..1000.0) {
+                        saveTutorEnabled()
+                    } else {
+                        price_per_hour_layout.isErrorEnabled = true
+                        if (tutor.pricePerHour!! < 0) {
+                            price_per_hour_layout.error = getString(R.string.not_possible)
+                        }
+                        else {
+                            price_per_hour_layout.error = getString(R.string.student_should_need_loan_for_your_services)
+                        }
+                    }
+
                 } else {
                     saveTutorDisabled()
                 }
@@ -180,8 +191,13 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isFilled()) {
                     tutor.rating = s.toString().toDouble()
-                    rating_layout.error = null
-                    saveTutorEnabled()
+                    if (tutor.rating in 0.0..5.0) {
+                        rating_layout.error = null
+                        saveTutorEnabled()
+                    } else {
+                        rating_layout.isErrorEnabled = true
+                        rating_layout.error = getString(R.string.required_field)
+                    }
                 } else {
                     saveTutorDisabled()
                 }

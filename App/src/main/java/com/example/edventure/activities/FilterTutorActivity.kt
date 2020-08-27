@@ -75,7 +75,14 @@ class FilterTutorActivity : BaseActivity() {
             override fun afterTextChanged(s: Editable?) {
                 filterRating = s.toString().toDoubleOrNull()
                 if (isFilled()) {
-                    saveFilterEnabled()
+                    if (filterRating!! in 0.0..5.0) {
+                        saveFilterEnabled()
+                    }
+                    else {
+                        rating_layout.isErrorEnabled = true
+                        rating_layout.error = getString(R.string.range)
+                        saveFilterDisabled()
+                    }
                 } else {
                     saveFilterDisabled()
                 }

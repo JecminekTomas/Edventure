@@ -45,4 +45,6 @@
     <string name="average_lesson_time">Average lesson\ntime</string>
     <string name="about">About</string>
     <string name="contact">Contact</string>
+    <string name="not_possible">Not possible</string>
+    <string name="student_should_need_loan_for_your_services">Student should need a loan for your services?</string>
 </resources>

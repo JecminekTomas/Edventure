@@ -44,4 +44,7 @@
     <string name="total_number_of_students">Celkový počet\nstudentů</string>
     <string name="average_lesson_time">Průměrná délka\nlekce</string>
     <string name="about">O mně</string>
+    <string name="contact">Kontakt</string>
+    <string name="not_possible">Není možné</string>
+    <string name="student_should_need_loan_for_your_services">Student by si neměl brát půjčku za vaše služby</string>
 </resources>

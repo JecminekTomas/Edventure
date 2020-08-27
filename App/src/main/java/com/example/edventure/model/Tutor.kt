@@ -29,7 +29,7 @@ data class Tutor(
     var email: String = "",
     /** Kontrolovat při vkládání */
 
-    // TODO: Vymazat ... Cena může být rozdílá u kurzů
+    // TODO: Chyba ... necessery
     @ColumnInfo(name = "price_per_hour")
     var pricePerHour: Double? = 0.0,
 

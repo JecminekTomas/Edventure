@@ -8,7 +8,6 @@
     tools:context=".activities.AddEditTutorActivity"
     tools:showIn="@layout/activity_add_edit_tutor">
 
-
         <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    />
+                    tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    />
+                    tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
