@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +21,6 @@ import com.example.edventure.viewmodels.SelectTutorVM
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
-import kotlinx.android.synthetic.main.content_filter_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
 import kotlinx.coroutines.launch
 import java.io.File
@@ -165,38 +163,23 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             when (data?.getStringExtra("filter_type")) {
                 "filter_rating" -> {
                     filterRating = data.getDoubleExtra("filter_rating", -1.0)
-                    for (tutor in tutorList) {
-                        if (tutor.rating < filterRating!!) {
-                            tutorList.remove(tutor)
-                        }
-                    }
+                    tutorList.removeAll {it.rating < filterRating!!}
                 }
                 "filter_place" -> {
                     filterPlace = data.getStringExtra("filter_place")
-                    for (tutor in tutorList) {
-                        if (tutor.city != filterPlace) {
-                            tutorList.remove(tutor)
-                        }
-                    }
+                    tutorList.removeAll {it.city != filterPlace}
                 }
                 "filter_price_min" -> {
                     filterPriceMin = data.getDoubleExtra("filter_price_min", -1.0)
-                    for (tutor in tutorList) {
-                        if (tutor.pricePerHour!! <= filterPriceMin!!) {
-                            tutorList.remove(tutor)
-                        }
-                    }
+                    tutorList.removeAll {it.pricePerHour!! <= filterPriceMin!!}
                 }
                 "filter_price_max" -> {
                     filterPriceMax = data.getDoubleExtra("filter_price_max", -1.0)
-                    for (tutor in tutorList) {
-                        if (tutor.pricePerHour!! >= filterPriceMax!!) {
-                            tutorList.remove(tutor)
-                        }
-                    }
+                    tutorList.removeAll {it.pricePerHour!! >= filterPriceMax!!}
                 }
             }
             filtered = true
+            selectTutorRecyclerView.adapter = tutorAdapter
             invalidateOptionsMenu()
         }
     }
