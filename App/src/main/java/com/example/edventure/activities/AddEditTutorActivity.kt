@@ -48,7 +48,6 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             id?.let {
                 intent.putExtra(IntentConstants.ID, id)
             }
-
             return intent
         }
     }
@@ -76,9 +75,13 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
 
         loadArrayStrings()
 
+        if (intent.hasExtra(IntentConstants.ID)) {
+            id = intent.getLongExtra(IntentConstants.ID, -1)
+        }
+
         id?.let {
             supportActionBar?.title = getString(R.string.title_activity_edit_tutor)
-            launch {
+            launch(Dispatchers.Main) {
                 tutor = viewModel.findById(it)
             }.invokeOnCompletion {
                 runOnUiThread {
@@ -169,9 +172,9 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                         price_per_hour_layout.isErrorEnabled = true
                         if (tutor.pricePerHour!! < 0) {
                             price_per_hour_layout.error = getString(R.string.not_possible)
-                        }
-                        else {
-                            price_per_hour_layout.error = getString(R.string.student_should_need_loan_for_your_services)
+                        } else {
+                            price_per_hour_layout.error =
+                                getString(R.string.student_should_need_loan_for_your_services)
                         }
                     }
 
@@ -222,8 +225,6 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
                     finish()
                 }
             }
-        } else {
-            indicateError()
         }
     }
 
@@ -249,7 +250,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     }
 
     private fun isFilled(): Boolean {
-        return first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty()
+        return first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty() && tutor.profilePicture != null
     }
 
     private fun saveTutorEnabled() {
@@ -278,38 +279,16 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         saveTutor.isEnabled = false
     }
 
-    private fun indicateError() {
-        if (first_name.text!!.isEmpty()) {
-            first_name_layout.isErrorEnabled = true
-            first_name_layout.error = getString(R.string.required_field)
-        }
-        if (last_name.text!!.isEmpty()) {
-            last_name_layout.isErrorEnabled = true
-            last_name_layout.error = getString(R.string.required_field)
-        }
-        if (add_place_textview.text!!.isEmpty()) {
-            add_place_layout.error = getString(R.string.required_field)
-        }
-        if (price_per_hour.text!!.isEmpty()) {
-            price_per_hour_layout.isErrorEnabled = true
-            price_per_hour_layout.error = getString(R.string.required_field)
-        }
-        if (stars.text!!.isEmpty()) {
-            rating_layout.isErrorEnabled = true
-            rating_layout.error = getString(R.string.required_field)
-        }
-    }
-
     private fun loadArrayStrings() {
         val arrayPlacesAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            resources.getStringArray(R.array.subjects_cz)
+            resources.getStringArray(R.array.places_cz)
         )
         val arrayActivitiesAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            resources.getStringArray(R.array.places_cz)
+            resources.getStringArray(R.array.subjects_cz)
         )
 
         add_place_textview.setAdapter(arrayPlacesAdapter)

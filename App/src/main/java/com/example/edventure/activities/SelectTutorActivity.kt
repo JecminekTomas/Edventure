@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Contacts
 import android.view.*
 import android.widget.Button
 import android.widget.LinearLayout
@@ -22,6 +23,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
+import kotlinx.android.synthetic.main.row_select_tutor.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
@@ -90,11 +93,11 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                     tutorList.clear()
                     tutorList.addAll(it)
 
-                    for (tutor in tutorList) {
+                    /*for (tutor in tutorList) {
                         launch {
                             tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
                         }
-                    }
+                    }*/
                 }
                 /** DiffUtil je velice užitečné využívat, jelikož může velice zrychlit proces při načítání změny RV.*/
             }
@@ -163,19 +166,19 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             when (data?.getStringExtra("filter_type")) {
                 "filter_rating" -> {
                     filterRating = data.getDoubleExtra("filter_rating", -1.0)
-                    tutorList.removeAll {it.rating < filterRating!!}
+                    tutorList.removeAll { it.rating < filterRating!! }
                 }
                 "filter_place" -> {
                     filterPlace = data.getStringExtra("filter_place")
-                    tutorList.removeAll {it.city != filterPlace}
+                    tutorList.removeAll { it.city != filterPlace }
                 }
                 "filter_price_min" -> {
                     filterPriceMin = data.getDoubleExtra("filter_price_min", -1.0)
-                    tutorList.removeAll {it.pricePerHour!! <= filterPriceMin!!}
+                    tutorList.removeAll { it.pricePerHour!! <= filterPriceMin!! }
                 }
                 "filter_price_max" -> {
                     filterPriceMax = data.getDoubleExtra("filter_price_max", -1.0)
-                    tutorList.removeAll {it.pricePerHour!! >= filterPriceMax!!}
+                    tutorList.removeAll { it.pricePerHour!! >= filterPriceMax!! }
                 }
             }
             filtered = true
@@ -226,15 +229,23 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
             }
 
             val tutor = tutorList[position]
-            Picasso.get().load(File(filesDir, tutor.profilePicture!!.name)).noFade()
-                .into(holder.tutorProfilePicture)
-            holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
-            holder.tutorCity.text = tutor.city
-            holder.tutorPrice.text = String.format(
-                "%.0f Kč/h",
-                tutor.pricePerHour
-            ) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
-            holder.tutorRating.text = String.format(Locale.US, "★ %.1f", tutor.rating)
+            launch(Dispatchers.Main) {
+                tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
+                Picasso.get().load(File(filesDir, tutor.profilePicture!!.name)).noFade()
+                    .into(holder.tutorProfilePicture)
+            }.invokeOnCompletion {
+                runOnUiThread {
+
+                    holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
+                    holder.tutorCity.text = tutor.city
+                    holder.tutorPrice.text = String.format(
+                        "%.0f Kč/h",
+                        tutor.pricePerHour
+                    ) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
+                    holder.tutorRating.text = String.format(Locale.US, "★ %.1f", tutor.rating)
+                }
+            }
+
         }
 
 

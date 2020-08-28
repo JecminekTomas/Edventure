@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.arch.BaseMVVMActivity
 import com.example.edventure.R
 import com.example.edventure.constants.IntentConstants
@@ -13,6 +15,7 @@ import com.example.edventure.viewmodels.TutorProfileVM
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tutor_profile.*
 import kotlinx.android.synthetic.main.content_tutor_profile.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
@@ -40,6 +43,25 @@ class TutorProfileActivity : BaseMVVMActivity<TutorProfileVM>(TutorProfileVM::cl
         }
         id = intent.getLongExtra(IntentConstants.ID, -1)
         getTask()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_tutor_profile, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_edit_tutor -> {
+                onActionEditTutor()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun onActionEditTutor() {
+        startActivity(AddEditTutorActivity.createIntent(this, id))
     }
 
     private fun getTask() {

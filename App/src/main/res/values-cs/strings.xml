@@ -8,7 +8,7 @@
     <string name="title_activity_edit_tutor">Upravit</string>
     <string name="title_cancel_filter">Zrušit filtr</string>
     <string name="continue_phrase">Pokračovat</string>
-    <string name="search">vyhledat</string>
+    <string name="search">Hledat</string>
     <string name="filter">filtr</string>
     <string name="choose_teacher">Najít učitele</string>
     <string name="first_name">JMÉNO</string>
@@ -47,4 +47,6 @@
     <string name="contact">Kontakt</string>
     <string name="not_possible">Není možné</string>
     <string name="student_should_need_loan_for_your_services">Student by si neměl brát půjčku za vaše služby</string>
+    <string name="home">Domů</string>
+    <string name="calendar">Kalendář</string>
 </resources>

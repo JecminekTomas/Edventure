@@ -22,6 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_marginStart="@dimen/half_indentation"
         android:layout_marginEnd="@dimen/half_indentation"
         >
@@ -115,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/profile"
+                android:layout_marginBottom="@dimen/basic_indentation"
                 android:layout_marginEnd="@dimen/basic_indentation"
                 app:icon="@drawable/ic_person_color_secondary_dark_24dp"
                 />
@@ -123,6 +125,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginBottom="@dimen/basic_indentation"
                 android:text="@string/message"
                 app:icon="@drawable/ic_baseline_delete_forever_24"
                 />

@@ -8,7 +8,7 @@
     <string name="title_activity_edit_tutor">Upraviť</string>
     <string name="welcome_phrase">Vitajte v aplikaci EdVenture</string>
     <string name="continue_phrase">Pokračovať</string>
-    <string name="search">vyhľadať</string>
+    <string name="search">Hledať</string>
     <string name="filter">filter</string>
     <string name="choose_teacher">Najít učiteľa</string>
     <string name="first_name">MENO</string>
@@ -47,4 +47,6 @@
     <string name="student_should_need_loan_for_your_services">Student by si neměl brát půjčku za vaše služby</string>
     <string name="not_possible">Není možné</string>
     <string name="contact">Kontakt</string>
+    <string name="home">Domů</string>
+    <string name="calendar">Kalendář</string>
 </resources>
