@@ -93,7 +93,7 @@ class MainActivity : AppIntro() {
     }
 
     fun continueToApp () {
-        SharedPreferencesManager.saveFirstRun(this)
+        //SharedPreferencesManager.saveFirstRun(this)
         startActivity(SelectTutorActivity.createIntent(this))
         finish()
     }
