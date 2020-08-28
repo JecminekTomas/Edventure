@@ -177,13 +177,13 @@ class FilterTutorActivity : BaseActivity() {
     private fun saveFilterEnabled() {
         saveFilter.setBackgroundColor(
             ContextCompat.getColor(
-                applicationContext,
+                this,
                 R.color.colorPrimary
             )
         )
         saveFilter.setTextColor(
             ContextCompat.getColor(
-                applicationContext,
+                this,
                 R.color.white
             )
         )
@@ -193,7 +193,7 @@ class FilterTutorActivity : BaseActivity() {
     private fun saveFilterDisabled() {
         saveFilter.setBackgroundColor(
             ContextCompat.getColor(
-                applicationContext,
+                this,
                 R.color.colorSecondary
             )
         )

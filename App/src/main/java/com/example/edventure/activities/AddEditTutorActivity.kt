@@ -256,13 +256,13 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     private fun saveTutorEnabled() {
         saveTutor.setBackgroundColor(
             ContextCompat.getColor(
-                applicationContext,
+                this,
                 R.color.colorPrimary
             )
         )
         saveTutor.setTextColor(
             ContextCompat.getColor(
-                applicationContext,
+                this,
                 R.color.white
             )
         )
@@ -272,7 +272,7 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     private fun saveTutorDisabled() {
         saveTutor.setBackgroundColor(
             ContextCompat.getColor(
-                applicationContext,
+                this,
                 R.color.colorSecondary
             )
         )
@@ -453,7 +453,13 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
     private fun showProfilePictureFromFile(file: File) {
         newProfilePicture.visibility = View.VISIBLE
         profilePictureIcon.visibility = View.INVISIBLE
-        Picasso.get().load(file).into(newProfilePicture)
+        Picasso.get()
+            .load(file)
+            .placeholder(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+            .error(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+            .centerCrop()
+            .fit()
+            .into(newProfilePicture)
     }
 
 }

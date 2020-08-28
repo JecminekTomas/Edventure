@@ -76,7 +76,12 @@ class TutorProfileActivity : BaseMVVMActivity<TutorProfileVM>(TutorProfileVM::cl
 
     @SuppressLint("SetTextI18n")
     private fun fillLayout() {
-        Picasso.get().load(File(filesDir, tutor.profilePicture!!.name)).noFade().into(profile_picture)
+        Picasso.get().load(File(filesDir, tutor.profilePicture!!.name))
+            .placeholder(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+            .error(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+            .centerCrop()
+            .fit()
+            .into(profile_picture)
         profile_name.text = "${tutor.firstName} ${tutor.lastName}"
         profile_city.text = tutor.city
         profile_rating.text = String.format(Locale.US, "★ %.1f", tutor.rating)
