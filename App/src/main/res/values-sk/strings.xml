@@ -49,4 +49,6 @@
     <string name="contact">Kontakt</string>
     <string name="home">Domů</string>
     <string name="calendar">Kalendář</string>
+    <string name="edit_tutor">Upravit Učitele</string>
+    <string name="date">Datum</string>
 </resources>

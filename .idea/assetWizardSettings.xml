@@ -322,7 +322,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/edit/baseline_edit_24.xml" />
+                                      <entry key="url" value="jar:file:/D:/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/headset_mic/baseline_headset_mic_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -333,7 +333,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_baseline_edit_24" />
+                            <entry key="outputName" value="ic_baseline_headset_mic_24" />
                             <entry key="sourceFile" value="C:\Users\jecmi" />
                           </map>
                         </option>

@@ -1,2 +1,2 @@
-# Projekt - Tutor.me - xjecmine
+# Projekt - Edventure - xjecmine
 

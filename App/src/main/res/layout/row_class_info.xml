@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tutor_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/basic_indentation"
+    android:layout_marginTop="@dimen/basic_indentation"
+    android:layout_marginEnd="@dimen/basic_indentation"
+    android:layout_marginBottom="@dimen/basic_indentation"
+    android:clickable="true"
+    android:focusable="true"
+    android:stateListAnimator="@drawable/row_button_transition"
+    app:cardBackgroundColor="@color/colorSecondaryLight"
+    app:cardCornerRadius="@dimen/cardRadius"
+    app:cardElevation="@dimen/cardElevation"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <!--TODO: Vytvořit custom class pro CARDVIEW, které je používáno v aplikaci - MUSTR.-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/half_indentation"
+            android:layout_marginBottom="@dimen/half_indentation"
+            android:layout_marginStart="@dimen/half_indentation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_subject_color_primary_dark_24dp"
+                android:drawablePadding="@dimen/half_indentation" />
+
+
+            <TextView
+                android:id="@+id/place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_place_color_secondary_dark_24dp"
+                android:drawablePadding="@dimen/half_indentation" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_baseline_event_24"
+                android:drawablePadding="@dimen/half_indentation"
+                android:drawableTint="@color/colorSecondaryDark" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_baseline_access_time_24"
+                android:drawablePadding="@dimen/half_indentation"
+                android:drawableTint="@color/colorSecondaryDark" />
+
+            <TextView
+                android:id="@+id/capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_group_color_secondary_dark_24dp"
+                android:drawablePadding="@dimen/half_indentation"
+                android:drawableTint="@color/colorSecondaryDark" />
+
+            <TextView
+                android:id="@+id/online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_baseline_headset_mic_24"
+                android:drawablePadding="@dimen/half_indentation"
+                android:drawableTint="@color/colorSecondaryDark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/half_indentation"
+            android:layout_marginEnd="@dimen/half_indentation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="X Kč/h"
+            android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:text="per person"
+                android:layout_marginBottom="@dimen/half_indentation"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
