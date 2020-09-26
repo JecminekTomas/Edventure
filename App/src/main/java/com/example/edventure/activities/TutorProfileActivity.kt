@@ -15,7 +15,6 @@ import com.example.edventure.viewmodels.TutorProfileVM
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_tutor_profile.*
 import kotlinx.android.synthetic.main.content_tutor_profile.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
@@ -77,8 +76,8 @@ class TutorProfileActivity : BaseMVVMActivity<TutorProfileVM>(TutorProfileVM::cl
     @SuppressLint("SetTextI18n")
     private fun fillLayout() {
         Picasso.get().load(File(filesDir, tutor.profilePicture!!.name))
-            .placeholder(R.drawable.ic_account_circle_color_secondary_dark_24dp)
-            .error(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+            .placeholder(R.drawable.ic_custom_profile_secondary_dark_24)
+            .error(R.drawable.ic_custom_profile_secondary_dark_24)
             .centerCrop()
             .fit()
             .into(profile_picture)

@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
 import kotlinx.android.synthetic.main.content_add_edit_tutor.saveTutor
 import kotlinx.android.synthetic.main.content_add_edit_tutor.rating_layout
-import kotlinx.android.synthetic.main.content_filter_tutor.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -455,8 +454,8 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
         profilePictureIcon.visibility = View.INVISIBLE
         Picasso.get()
             .load(file)
-            .placeholder(R.drawable.ic_account_circle_color_secondary_dark_24dp)
-            .error(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+            .placeholder(R.drawable.ic_custom_profile_secondary_dark_24)
+            .error(R.drawable.ic_custom_profile_secondary_dark_24)
             .centerCrop()
             .fit()
             .into(newProfilePicture)

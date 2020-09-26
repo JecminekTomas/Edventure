@@ -5,14 +5,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.transition.AutoTransition
-import android.transition.TransitionManager
 import android.view.*
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +24,6 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
-import kotlinx.android.synthetic.main.row_select_tutor.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
@@ -281,8 +277,8 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
                 tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
                 Picasso.get()
                     .load(File(filesDir, tutor.profilePicture!!.name))
-                    .placeholder(R.drawable.ic_account_circle_color_secondary_dark_24dp)
-                    .error(R.drawable.ic_account_circle_color_secondary_dark_24dp)
+                    .placeholder(R.drawable.ic_custom_profile_secondary_dark_24)
+                    .error(R.drawable.ic_custom_profile_secondary_dark_24)
                     .centerCrop()
                     .fit()
                     .into(holder.tutorProfilePicture)

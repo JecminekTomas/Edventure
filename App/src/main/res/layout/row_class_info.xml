@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:drawableStart="@drawable/ic_subject_color_primary_dark_24dp"
+                android:drawableStart="@drawable/ic_baseline_subject_24"
                 android:drawablePadding="@dimen/half_indentation" />
 
 
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:drawableStart="@drawable/ic_place_color_secondary_dark_24dp"
+                android:drawableStart="@drawable/ic_baseline_place_24"
                 android:drawablePadding="@dimen/half_indentation" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:drawableStart="@drawable/ic_group_color_secondary_dark_24dp"
+                android:drawableStart="@drawable/ic_baseline_group_24"
                 android:drawablePadding="@dimen/half_indentation"
                 android:drawableTint="@color/colorSecondaryDark" />
 

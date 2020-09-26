@@ -32,7 +32,7 @@
             android:hint="@string/subject"
             app:boxBackgroundColor="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            app:startIconDrawable="@drawable/ic_subject_color_primary_dark_24dp">
+            app:startIconDrawable="@drawable/ic_baseline_subject_24">
 
             <AutoCompleteTextView
                 android:id="@+id/subject_textview"
@@ -53,7 +53,7 @@
             android:hint="@string/place"
             app:boxBackgroundColor="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            app:startIconDrawable="@drawable/ic_place_color_secondary_dark_24dp">
+            app:startIconDrawable="@drawable/ic_baseline_place_24">
 
             <AutoCompleteTextView
                 android:id="@+id/place_textview"
@@ -76,7 +76,7 @@
             app:errorEnabled="true"
             app:helperText="@string/range"
             app:helperTextEnabled="true"
-            app:startIconDrawable="@drawable/ic_star_color_secondary_dark_24dp">
+            app:startIconDrawable="@drawable/ic_baseline_star_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/rating_edittext"

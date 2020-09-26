@@ -119,7 +119,7 @@
                 android:text="@string/profile"
                 android:layout_marginBottom="@dimen/basic_indentation"
                 android:layout_marginEnd="@dimen/basic_indentation"
-                app:icon="@drawable/ic_person_color_secondary_dark_24dp"
+                app:icon="@drawable/ic_baseline_person_24"
                 />
             <Button
                 android:id="@+id/buttonDelete"
