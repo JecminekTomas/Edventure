@@ -14,7 +14,7 @@
     <string name="change_profile_picture">Change picture</string>
     <string name="place">PLACE</string>
     <string name="hour_rate">HOUR RATE</string>
-    <string name="online_class">ONLINE</string>
+    <string name="online_class">Online</string>
     <string name="profile_picture_description">Profile picture</string>
     <string name="save">Save</string>
     <string name="select_image">Select an image</string>
@@ -52,4 +52,6 @@
     <string name="calendar">Calendar</string>
     <string name="edit_tutor">Edit Tutor</string>
     <string name="date">Date</string>
+    <string name="currency_per_hour">$/hr</string>
+    <string name="per_person">per person</string>
 </resources>

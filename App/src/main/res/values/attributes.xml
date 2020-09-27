@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ClassInfoView">
+        <attr name="subject" format="string" />
+        <attr name="place" format="string" />
+        <attr name="date" format="string" />
+        <attr name="time" format="string" />
+        <attr name="capacity" format="string" />
+        <attr name="online" format="boolean" />
+        <attr name="price" format="integer" />
+    </declare-styleable>
+</resources>

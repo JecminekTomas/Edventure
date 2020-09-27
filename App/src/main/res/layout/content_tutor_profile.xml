@@ -84,7 +84,9 @@
                     android:paddingBottom="@dimen/half_indentation"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profile_basic_info">
+                    app:layout_constraintTop_toBottomOf="@id/profile_basic_info"
+                    android:baselineAligned="false">
+
 
                     <LinearLayout
                         android:layout_width="0dp"

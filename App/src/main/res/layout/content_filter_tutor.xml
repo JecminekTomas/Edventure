@@ -137,6 +137,21 @@
         </LinearLayout>
     </ScrollView>
 
+    <com.example.edventure.view.ClassInfoView
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/saveFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:subject="Bobek"
+        app:place="Testovaci"
+        app:date="27.5.2020"
+        app:time="17.00"
+        app:online="true"
+        app:capacity="0/10"
+        app:price="500"
+        />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveFilter"
         android:layout_width="match_parent"
