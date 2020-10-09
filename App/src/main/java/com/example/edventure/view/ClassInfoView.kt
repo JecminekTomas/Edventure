@@ -50,7 +50,7 @@ class ClassInfoView : FrameLayout {
         val priceAttr = attributes.getInteger(R.styleable.ClassInfoView_price, 0)
         attributes.recycle()
 
-        View.inflate(context, R.layout.row_class_info, this)
+        View.inflate(context, R.layout.class_info, this)
         subject = findViewById(R.id.subject)
         place = findViewById(R.id.place)
         date = findViewById(R.id.date)
