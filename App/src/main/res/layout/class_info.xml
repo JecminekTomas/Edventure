@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tutor_card_view"
+    android:id="@+id/class_info_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/basic_indentation"
-    android:layout_marginTop="@dimen/basic_indentation"
-    android:layout_marginEnd="@dimen/basic_indentation"
-    android:layout_marginBottom="@dimen/basic_indentation"
-    android:clickable="true"
-    android:focusable="true"
-    android:stateListAnimator="@drawable/row_button_transition"
-    app:cardBackgroundColor="@color/colorSecondaryLight"
-    app:cardCornerRadius="@dimen/cardRadius"
-    app:cardElevation="@dimen/cardElevation"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    style="@style/standard_cardview"
+    >
 
     <!--TODO: Vytvořit custom class pro CARDVIEW, které je používáno v aplikaci - MUSTR.-->
 

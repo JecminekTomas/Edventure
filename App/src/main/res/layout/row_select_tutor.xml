@@ -4,19 +4,10 @@
     android:id="@+id/tutor_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/basic_indentation"
-    android:layout_marginTop="@dimen/basic_indentation"
-    android:layout_marginEnd="@dimen/basic_indentation"
-    android:layout_marginBottom="@dimen/basic_indentation"
-    android:clickable="true"
-    android:focusable="true"
-    app:cardBackgroundColor="@color/colorSecondaryLight"
-    android:stateListAnimator="@drawable/row_button_transition"
-    app:cardCornerRadius="@dimen/cardRadius"
-    app:cardElevation="@dimen/cardElevation"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
+    style="@style/standard_cardview"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
