@@ -3,7 +3,7 @@ package com.example.edventure.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.example.arch.BaseActivity
+import com.example.arch.activities.BaseActivity
 import com.example.edventure.R
 
 class BottomNavigationActivity : BaseActivity(){

@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arch.BaseMVVMActivity
+import com.example.arch.activities.BaseMVVMActivity
 import com.example.edventure.R
 import com.example.edventure.model.Tutor
 import com.example.edventure.sharedpreferences.SharedPreferencesManager

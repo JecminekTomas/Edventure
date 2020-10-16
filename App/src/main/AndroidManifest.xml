@@ -40,7 +40,7 @@
             android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
-            android:name="com.example.arch.BaseActivity"
+            android:name="com.example.arch.activities.BaseActivity"
             android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity

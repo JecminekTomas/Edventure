@@ -9,7 +9,7 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
-import com.example.arch.BaseActivity
+import com.example.arch.activities.BaseActivity
 import com.example.edventure.R
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_filter_tutor.*

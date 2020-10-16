@@ -1,4 +1,4 @@
-package com.example.arch
+package com.example.arch.activities
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

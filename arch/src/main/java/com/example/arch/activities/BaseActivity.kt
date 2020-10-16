@@ -1,4 +1,4 @@
-package com.example.arch
+package com.example.arch.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle

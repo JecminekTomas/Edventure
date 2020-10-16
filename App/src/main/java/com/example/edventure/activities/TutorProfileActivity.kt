@@ -7,7 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.example.arch.BaseMVVMActivity
+import com.example.arch.activities.BaseMVVMActivity
 import com.example.edventure.R
 import com.example.edventure.constants.IntentConstants
 import com.example.edventure.model.Tutor
