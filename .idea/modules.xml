@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Edventure.iml" filepath="$PROJECT_DIR$/.idea/modules/Edventure.iml" group="Edventure" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Edventure/app" />
-      <module fileurl="file://$PROJECT_DIR$/arch/arch.iml" filepath="$PROJECT_DIR$/arch/arch.iml" group="Edventure/arch" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Edventure.iml" filepath="$PROJECT_DIR$/.idea/modules/Edventure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/App/Edventure.app.iml" filepath="$PROJECT_DIR$/.idea/modules/App/Edventure.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/arch/Edventure.arch.iml" filepath="$PROJECT_DIR$/.idea/modules/arch/Edventure.arch.iml" />
     </modules>
   </component>
 </project>

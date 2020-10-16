@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.edventure">
+    package="com.example.edventure" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name="com.example.edventure.TutorApplication"
+        android:name=".TutorApplication"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:theme="@style/Theme.App" >
         <activity
-            android:name="com.example.edventure.activities.MainActivity"
+            android:name=".activities.BottomNavigationActivity"
+            android:label="@string/title_activity_bottom_navigation" >
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.App.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,40 +30,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.edventure.activities.SelectTutorActivity"
+            android:name=".activities.SelectTutorActivity"
             android:label="@string/title_activity_select_tutor"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
-            android:name="com.example.edventure.activities.AddEditTutorActivity"
+            android:name=".activities.AddEditTutorActivity"
             android:label="@string/title_activity_add_tutor"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
             android:name="com.example.arch.BaseActivity"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
-            android:name="com.example.edventure.activities.FilterTutorActivity"
+            android:name=".activities.FilterTutorActivity"
             android:label="@string/title_activity_filter_tutor"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
             android:name=".activities.TutorProfileActivity"
             android:label="@string/teachers_profile"
-            android:theme="@style/Theme.App.NoActionBar">
+            android:theme="@style/Theme.App.NoActionBar" >
         </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.edventure.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/paths" />
         </provider>
-
     </application>
 
 </manifest>
