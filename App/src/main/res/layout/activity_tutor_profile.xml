@@ -57,6 +57,6 @@
     <!-- app:title, není potřeba, jelikož je v Andr. Man. -->
 
 
-    <include layout="@layout/content_tutor_profile" />
+    <include layout="@layout/fragment_profile" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

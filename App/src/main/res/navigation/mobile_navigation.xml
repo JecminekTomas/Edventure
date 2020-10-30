@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_search_teacher">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -11,12 +11,25 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_search_teacher"
         android:name="com.example.edventure.activities.ui.search.SearchTeacherFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_search_teacher"
+        />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_chat"
         android:name="com.example.edventure.activities.ui.chat.ChatFragment"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.edventure.activities.ui.calendar.CalendarFragment"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.edventure.activities.ui.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+
 </navigation>
