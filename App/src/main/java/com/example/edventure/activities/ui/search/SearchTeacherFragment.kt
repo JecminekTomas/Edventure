@@ -19,6 +19,7 @@ import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.R
 import com.example.edventure.activities.AddEditTutorActivity
 import com.example.edventure.activities.FilterTutorActivity
+import com.example.edventure.activities.ui.filter_teacher.FilterTeacherViewModel
 import com.example.edventure.activities.ui.profile.ProfileFragment
 import com.example.edventure.model.Tutor
 import com.example.edventure.sharedpreferences.SharedPreferencesManager
@@ -28,6 +29,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
+import kotlinx.android.synthetic.main.content_select_tutor.selectTutorRecyclerView
+import kotlinx.android.synthetic.main.fragment_search_teacher.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
@@ -61,10 +64,16 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     savedInstanceState: Bundle?
   ): View? {
 
+    //setHasOptionsMenu(true)
+    return inflater.inflate(layout, container, false)
+  }
+
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
     teachersAdapter = TeachersAdapter()
     layoutManager = LinearLayoutManager(this.context)
-    selectTutorRecyclerView.layoutManager = layoutManager
-    selectTutorRecyclerView.adapter = teachersAdapter
+    searchTeacherRecyclerView.layoutManager = layoutManager
+    searchTeacherRecyclerView.adapter = teachersAdapter
 
     viewModel.getAll().observe(viewLifecycleOwner, object : Observer<MutableList<Tutor>> {
       override fun onChanged(t: MutableList<Tutor>?) {
@@ -99,10 +108,9 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     if (SharedPreferencesManager.isRunForFirstTime(this.context!!)) {
       SharedPreferencesManager.saveFirstRun(this.context!!)
     }
-
-    //setHasOptionsMenu(true)
-    return inflater.inflate(layout, container, false)
   }
+
+
 /*
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
@@ -128,7 +136,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
   private fun onActionCancelFilter() {
     teachersList = savedTeachersList
-    selectTutorRecyclerView.adapter = teachersAdapter
+    searchTeacherRecyclerView.adapter = teachersAdapter
     filtered = false
     invalidateOptionsMenu()
   }
