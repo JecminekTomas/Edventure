@@ -5,17 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseFragment<B: ViewDataBinding>(@LayoutRes var layout: Int) : Fragment(), CoroutineScope {
+abstract class BaseFragment : Fragment(), CoroutineScope {
 
-    private lateinit var binding: B
+    abstract val layout: Int
 
     private val coroutinesJob = Job()
     override val coroutineContext: CoroutineContext
@@ -26,7 +23,6 @@ abstract class BaseFragment<B: ViewDataBinding>(@LayoutRes var layout: Int) : Fr
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layout, container, false)
-        return binding.root
+        return inflater.inflate(layout, container, false)
     }
 }
