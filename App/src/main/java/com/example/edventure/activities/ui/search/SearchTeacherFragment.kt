@@ -1,16 +1,16 @@
 package com.example.edventure.activities.ui.search
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +19,7 @@ import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.R
 import com.example.edventure.activities.AddEditTutorActivity
 import com.example.edventure.activities.FilterTutorActivity
-import com.example.edventure.activities.ui.filter_teacher.FilterTeacherViewModel
+import com.example.edventure.activities.TutorProfileActivity
 import com.example.edventure.activities.ui.profile.ProfileFragment
 import com.example.edventure.model.Tutor
 import com.example.edventure.sharedpreferences.SharedPreferencesManager
@@ -29,8 +29,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_select_tutor.*
 import kotlinx.android.synthetic.main.content_select_tutor.*
-import kotlinx.android.synthetic.main.content_select_tutor.selectTutorRecyclerView
 import kotlinx.android.synthetic.main.fragment_search_teacher.*
+import kotlinx.android.synthetic.main.fragment_search_teacher.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
@@ -40,8 +40,7 @@ import java.util.*
 
 class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::class.java) {
 
-  override val layout: Int = R.layout.activity_select_tutor
-
+  override val layout: Int = R.layout.fragment_search_teacher
   private var teachersList: MutableList<Tutor> = mutableListOf()
   private var savedTeachersList: MutableList<Tutor> = mutableListOf()
   private var mExpandedPosition = -1
@@ -53,29 +52,35 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
   var filterPriceMax: Double? = -1.0
   var filterPlace: String? = ""
 
-  private val FILTER_TEACHERS_REQUEST = 100
+  private val FILTER_TEACHER_REQUEST = 100
 
-  private lateinit var layoutManager: LinearLayoutManager
+  private lateinit var teachersLayoutManager: LinearLayoutManager
   private lateinit var teachersAdapter: TeachersAdapter
+
+  /**  layoutManager se stará o pozicování - Existuje možnost i GridManageru, atd. */
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
+    val view = inflater.inflate(layout, container, false)
 
-    //setHasOptionsMenu(true)
-    return inflater.inflate(layout, container, false)
+    teachersAdapter = TeachersAdapter()
+    teachersLayoutManager = LinearLayoutManager(activity)
+    view.searchTeacherRecyclerView.layoutManager = teachersLayoutManager
+    view.searchTeacherRecyclerView.adapter = teachersAdapter
+
+    return view
   }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    teachersAdapter = TeachersAdapter()
-    layoutManager = LinearLayoutManager(this.context)
-    searchTeacherRecyclerView.layoutManager = layoutManager
-    searchTeacherRecyclerView.adapter = teachersAdapter
 
-    viewModel.getAll().observe(viewLifecycleOwner, object : Observer<MutableList<Tutor>> {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    //setSupportActionBar(toolbar)
+
+
+    viewModel.getAll().observe(this, object : Observer<MutableList<Tutor>> {
       override fun onChanged(t: MutableList<Tutor>?) {
         t?.let {
           val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -106,13 +111,15 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
       }
     })
     if (SharedPreferencesManager.isRunForFirstTime(this.context!!)) {
-      SharedPreferencesManager.saveFirstRun(this.context!!)
+      setHelp()
+      SharedPreferencesManager.saveFirstRun(this.context !!)
     }
   }
 
 
-/*
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+  /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
+
+  /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.action_add_tutor -> {
         onActionAddTutor()
@@ -135,27 +142,26 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
   }
 
   private fun onActionCancelFilter() {
-    teachersList = savedTeachersList
-    searchTeacherRecyclerView.adapter = teachersAdapter
+    tutorList = saveTutorList
+    selectTutorRecyclerView.adapter = tutorAdapter
     filtered = false
     invalidateOptionsMenu()
   }
 
   private fun onActionAddTutor() {
-    //startActivity(AddEditTutorActivity.createIntent(this, null))
+    startActivity(AddEditTutorActivity.createIntent(this, null))
   }
 
   private fun onActionFilter() {
-    //startActivityForResult(FilterTutorActivity.createIntent(this), FILTER_TEACHERS_REQUEST)
+    startActivityForResult(FilterTutorActivity.createIntent(this), FILTER_TUTOR_REQUEST)
   }
 
   private fun onActionSearch() {
     // TODO: Vytvořit SearchTutorActivity
   }
 
-  override fun onPrepareOptionsMenu(menu: Menu) {
-    super.onPrepareOptionsMenu(menu)
-    menu.clear()
+  override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+    menu?.clear()
     if (!filtered) {
       menuInflater.inflate(R.menu.menu_select_tutor, menu)
     } else {
@@ -163,16 +169,90 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     }
     return true
   }
-*/
+  */
+
+/*
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == FILTER_TUTOR_REQUEST && resultCode == Activity.RESULT_OK) {
+      saveTutorList = tutorList.toMutableList()
+      when (data?.getStringExtra("filter_type")) {
+        "filter_rating" -> {
+          filterRating = data.getDoubleExtra("filter_rating", -1.0)
+          tutorList.removeAll { it.rating < filterRating!! }
+        }
+        "filter_place" -> {
+          filterPlace = data.getStringExtra("filter_place")
+          tutorList.removeAll { it.city != filterPlace }
+        }
+        "filter_price_min" -> {
+          filterPriceMin = data.getDoubleExtra("filter_price_min", -1.0)
+          tutorList.removeAll { it.pricePerHour!! <= filterPriceMin!! }
+        }
+        "filter_price_max" -> {
+          filterPriceMax = data.getDoubleExtra("filter_price_max", -1.0)
+          tutorList.removeAll { it.pricePerHour!! >= filterPriceMax!! }
+        }
+      }
+      filtered = true
+      selectTutorRecyclerView.adapter = tutorAdapter
+      invalidateOptionsMenu()
+    }
+  }
+  */
+
+
+  private fun setHelp() {
+    val config = ShowcaseConfig()
+    val navHome = view?.findViewById<BottomNavigationItemView>(R.id.navigation_home)
+    val navSearch = view?.findViewById<BottomNavigationItemView>(R.id.navigation_search)
+    val navChat = view?.findViewById<BottomNavigationItemView>(R.id.navigation_chat)
+    val navCalendar = view?.findViewById<BottomNavigationItemView>(R.id.navigation_calendar)
+    val navProfile = view?.findViewById<BottomNavigationItemView>(R.id.navigation_profile)
+    config.delay = 500 // half second between each showcase view
+    config.maskColor = R.color.colorPrimary
+
+
+    val sequence = MaterialShowcaseSequence(this.activity, "Show me app")
+
+    sequence.setConfig(config)
+
+    sequence.addSequenceItem(
+      navHome,
+      "Here you can see...", "GOT IT"
+    )
+
+    sequence.addSequenceItem(
+      navSearch,
+      "Here you can see...", "GOT IT"
+    )
+
+    sequence.addSequenceItem(
+      navChat,
+      "Here you can see...", "GOT IT"
+    )
+
+    sequence.addSequenceItem(
+      navCalendar,
+      "Here you can see...", "GOT IT"
+    )
+
+    sequence.addSequenceItem(
+      navProfile,
+      "Here you can see...", "GOT IT"
+    )
+
+    sequence.start()
+  }
+
 
   inner class TeachersAdapter : RecyclerView.Adapter<TeachersAdapter.TeachersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeachersViewHolder {
       val view: View = LayoutInflater.from(parent.context)
-        .inflate(R.layout.row_select_tutor, parent, false)
+        .inflate(R.layout.row_select_teacher, parent, false)
       return TeachersViewHolder(view)
     }
-
 
     override fun getItemCount() = teachersList.size
 
@@ -180,12 +260,12 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     override fun onBindViewHolder(holder: TeachersViewHolder, position: Int) {
       val isExpanded = position == mExpandedPosition
       holder.buttons.visibility = if (isExpanded) View.VISIBLE else View.GONE
-      holder.teacherCardView.isActivated = isExpanded
+      holder.tutorCardView.isActivated = isExpanded
 
       if (isExpanded)
         previousExpandedPosition = position
 
-      holder.teacherCardView.setOnClickListener {
+      holder.tutorCardView.setOnClickListener {
         mExpandedPosition = if (isExpanded) -1 else position
         notifyItemChanged(previousExpandedPosition)
         notifyItemChanged(position)
@@ -197,45 +277,49 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
         }
       }
 
-      holder.buttonProfile.setOnClickListener {
-        ProfileFragment.newInstance()
-      }
+      /*holder.buttonProfile.setOnClickListener {
+        startActivity(
+          TutorProfileActivity.createIntent(
+            this@SelectTeacherFragment,
+            teachersList[holder.adapterPosition].tutorId
+          )
+        )
+      }*/
 
-      val teacher = teachersList[position]
+      val tutor = teachersList[position]
       launch(Dispatchers.Main) {
-        teacher.profilePicture = viewModel.findProfilePicture(teacher.tutorId)
+        tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
         Picasso.get()
-          .load(File(context?.filesDir, teacher.profilePicture!!.name))
+          .load(File(context?.filesDir, tutor.profilePicture!!.name))
           .placeholder(R.drawable.ic_custom_profile_secondary_dark_24)
           .error(R.drawable.ic_custom_profile_secondary_dark_24)
           .centerCrop()
           .fit()
-          .into(holder.teacherProfilePicture)
+          .into(holder.tutorProfilePicture)
       }.invokeOnCompletion {
-          holder.teacherName.text = "${teacher.firstName} ${teacher.lastName}"
-          holder.teacherCity.text = teacher.city
-          holder.teacherPrice.text = String.format(
+          holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
+          holder.tutorCity.text = tutor.city
+          holder.tutorPrice.text = String.format(
             "%.0f Kč/h",
-            teacher.pricePerHour
+            tutor.pricePerHour
           ) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
-          holder.teacherRating.text = String.format(Locale.US, "★ %.1f", teacher.rating)
+          holder.tutorRating.text = String.format(Locale.US, "★ %.1f", tutor.rating)
       }
     }
 
 
     /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
     inner class TeachersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-      val teacherProfilePicture: CircleImageView =
+      val tutorProfilePicture: CircleImageView =
         view.findViewById(R.id.profilePictureIconSelect)
-      val teacherName: TextView = view.findViewById(R.id.tutorName)
-      val teacherCity: TextView = view.findViewById(R.id.tutorCity)
-      val teacherPrice: TextView = view.findViewById(R.id.tutorPrice)
-      val teacherRating: TextView = view.findViewById(R.id.tutorRating)
+      val tutorName: TextView = view.findViewById(R.id.tutorName)
+      val tutorCity: TextView = view.findViewById(R.id.tutorCity)
+      val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
+      val tutorRating: TextView = view.findViewById(R.id.tutorRating)
       val buttonProfile: Button = view.findViewById(R.id.buttonProfile)
       val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
       val buttons: LinearLayout = view.findViewById(R.id.card_view_buttons)
-      val teacherCardView: CardView = view.findViewById(R.id.tutor_card_view)
+      val tutorCardView: CardView = view.findViewById(R.id.tutor_card_view)
     }
   }
-
 }

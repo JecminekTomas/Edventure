@@ -236,7 +236,7 @@ class SelectTutorActivity : BaseMVVMActivity<SelectTutorVM>(SelectTutorVM::class
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TutorViewHolder {
             val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.row_select_tutor, parent, false)
+                .inflate(R.layout.row_select_teacher, parent, false)
             return TutorViewHolder(view)
         }
 
