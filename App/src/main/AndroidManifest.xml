@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".TutorApplication"
+        android:name=".EdventureApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -28,11 +28,6 @@
         <activity
             android:name=".activities.NavigationActivity"
             android:label="@string/app_name">
-        </activity>
-        <activity
-            android:name=".activities.SelectTutorActivity"
-            android:label="@string/title_activity_select_tutor"
-            android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
             android:name=".activities.AddEditTutorActivity"

@@ -36,6 +36,7 @@ class NavigationActivity: BaseActivity() {
             R.id.navigation_home, R.id.navigation_search_teacher, R.id.navigation_chat, R.id.navigation_calendar, R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navView.selectedItemId = R.id.navigation_search_teacher
     }
 
 }

@@ -1,11 +1,10 @@
 package com.example.edventure.activities.ui.search
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,27 +13,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arch.activities.BaseMVVMActivity
 import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.R
-import com.example.edventure.activities.AddEditTutorActivity
-import com.example.edventure.activities.FilterTutorActivity
-import com.example.edventure.activities.TutorProfileActivity
-import com.example.edventure.activities.ui.profile.ProfileFragment
+import com.example.edventure.EdventureApplication.Companion.appContext
 import com.example.edventure.model.Tutor
 import com.example.edventure.sharedpreferences.SharedPreferencesManager
 import com.example.edventure.viewmodels.SelectTutorVM
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_select_tutor.*
-import kotlinx.android.synthetic.main.content_select_tutor.*
-import kotlinx.android.synthetic.main.fragment_search_teacher.*
 import kotlinx.android.synthetic.main.fragment_search_teacher.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
-import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 import java.io.File
 import java.util.*
 
@@ -64,22 +53,17 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
+    setHasOptionsMenu(true)
     val view = inflater.inflate(layout, container, false)
-
-    teachersAdapter = TeachersAdapter()
-    teachersLayoutManager = LinearLayoutManager(activity)
     view.searchTeacherRecyclerView.layoutManager = teachersLayoutManager
     view.searchTeacherRecyclerView.adapter = teachersAdapter
-
     return view
   }
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    //setSupportActionBar(toolbar)
-
-
+    teachersAdapter = TeachersAdapter()
+    teachersLayoutManager = LinearLayoutManager(activity)
     viewModel.getAll().observe(this, object : Observer<MutableList<Tutor>> {
       override fun onChanged(t: MutableList<Tutor>?) {
         t?.let {
@@ -110,9 +94,8 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
         /** DiffUtil je velice užitečné využívat, jelikož může velice zrychlit proces při načítání změny RV.*/
       }
     })
-    if (SharedPreferencesManager.isRunForFirstTime(this.context!!)) {
-      setHelp()
-      SharedPreferencesManager.saveFirstRun(this.context !!)
+    if (SharedPreferencesManager.isRunForFirstTime(appContext)) {
+      SharedPreferencesManager.saveFirstRun(appContext)
     }
   }
 
@@ -200,51 +183,6 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     }
   }
   */
-
-
-  private fun setHelp() {
-    val config = ShowcaseConfig()
-    val navHome = view?.findViewById<BottomNavigationItemView>(R.id.navigation_home)
-    val navSearch = view?.findViewById<BottomNavigationItemView>(R.id.navigation_search)
-    val navChat = view?.findViewById<BottomNavigationItemView>(R.id.navigation_chat)
-    val navCalendar = view?.findViewById<BottomNavigationItemView>(R.id.navigation_calendar)
-    val navProfile = view?.findViewById<BottomNavigationItemView>(R.id.navigation_profile)
-    config.delay = 500 // half second between each showcase view
-    config.maskColor = R.color.colorPrimary
-
-
-    val sequence = MaterialShowcaseSequence(this.activity, "Show me app")
-
-    sequence.setConfig(config)
-
-    sequence.addSequenceItem(
-      navHome,
-      "Here you can see...", "GOT IT"
-    )
-
-    sequence.addSequenceItem(
-      navSearch,
-      "Here you can see...", "GOT IT"
-    )
-
-    sequence.addSequenceItem(
-      navChat,
-      "Here you can see...", "GOT IT"
-    )
-
-    sequence.addSequenceItem(
-      navCalendar,
-      "Here you can see...", "GOT IT"
-    )
-
-    sequence.addSequenceItem(
-      navProfile,
-      "Here you can see...", "GOT IT"
-    )
-
-    sequence.start()
-  }
-
 
   inner class TeachersAdapter : RecyclerView.Adapter<TeachersAdapter.TeachersViewHolder>() {
 
