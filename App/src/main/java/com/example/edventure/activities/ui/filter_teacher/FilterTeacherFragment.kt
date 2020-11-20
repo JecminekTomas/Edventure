@@ -20,6 +20,7 @@ class FilterTeacherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.filter_teacher_fragment, container, false)
     }
 

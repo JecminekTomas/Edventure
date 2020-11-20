@@ -19,6 +19,7 @@ class ChatFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
+    setHasOptionsMenu(true)
     chatViewModel =
             ViewModelProvider(this).get(ChatViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_notifications, container, false)

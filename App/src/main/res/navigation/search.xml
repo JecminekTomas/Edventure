@@ -1,0 +1,11 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search"
+    app:startDestination="@+id/navigation_search_teacher">
+    <fragment
+        android:id="@+id/navigation_search_teacher"
+        android:name="com.example.edventure.activities.ui.search.SearchTeacherFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search_teacher" />
+</navigation>
