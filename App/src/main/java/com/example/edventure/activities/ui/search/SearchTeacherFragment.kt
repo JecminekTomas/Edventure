@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +51,6 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(layout, container, false)
     }
 
@@ -62,6 +62,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         teachersAdapter = TeachersAdapter()
         viewModel.getAll().observe(this, object : Observer<MutableList<Tutor>> {
             override fun onChanged(t: MutableList<Tutor>?) {
@@ -102,7 +103,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search_teacher, menu)
+        inflater.inflate(R.menu.menu_find_teachers, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -141,7 +142,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     }
 
     private fun onActionFilter() {
-        //startActivityForResult(FilterTutorActivity.createIntent(this), FILTER_TUTOR_REQUEST)
+        findNavController().navigate(R.id.action_filter_teacher)
     }
 
     private fun onActionSearch() {

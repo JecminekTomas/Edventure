@@ -7,5 +7,14 @@
         android:id="@+id/navigation_search_teacher"
         android:name="com.example.edventure.activities.ui.search.SearchTeacherFragment"
         android:label="@string/search"
-        tools:layout="@layout/fragment_search_teacher" />
+        tools:layout="@layout/fragment_search_teacher">
+        <action
+            android:id="@+id/action_filter_teacher"
+            app:destination="@+id/filter_teacher"/>
+    </fragment>
+    <fragment
+        android:id="@+id/filter_teacher"
+        android:name="com.example.edventure.activities.FilterTeacherFragment"
+        android:label="@string/filter_teachers"
+        tools:layout="@layout/fragment_filter_teacher" />
 </navigation>

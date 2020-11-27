@@ -137,7 +137,9 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.example.edventure.view.ClassInfoView
+
+   <!-- TODO: Implementovat CustomView
+   <com.example.edventure.view.ClassInfoView
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/saveFilter"
@@ -166,7 +168,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        />
+        /> -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

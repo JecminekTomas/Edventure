@@ -51,7 +51,7 @@ class FilterTutorActivity : BaseActivity() {
     }
 
     private fun setInteractionsListener() {
-        saveFilter.setOnClickListener { makeFilter() }
+        //saveFilter.setOnClickListener { makeFilter() }
 
         place_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -175,7 +175,7 @@ class FilterTutorActivity : BaseActivity() {
     }
 
     private fun saveFilterEnabled() {
-        saveFilter.setBackgroundColor(
+        /*saveFilter.setBackgroundColor(
             ContextCompat.getColor(
                 this,
                 R.color.colorPrimary
@@ -187,17 +187,17 @@ class FilterTutorActivity : BaseActivity() {
                 R.color.white
             )
         )
-        saveFilter.isEnabled = true
+        saveFilter.isEnabled = true*/
     }
 
     private fun saveFilterDisabled() {
-        saveFilter.setBackgroundColor(
+        /*saveFilter.setBackgroundColor(
             ContextCompat.getColor(
                 this,
                 R.color.colorSecondary
             )
         )
-        saveFilter.isEnabled = false
+        saveFilter.isEnabled = false*/
     }
 
     private fun setArrayAdapters() {
