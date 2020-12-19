@@ -6,6 +6,8 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import com.example.arch.fragments.BaseFragment
 import com.example.edventure.EdventureApplication.Companion.appContext
 import com.example.edventure.R
@@ -20,13 +22,11 @@ import kotlinx.android.synthetic.main.fragment_filter_teacher.*
 class FilterTeacherFragment: BaseFragment() {
     override val layout: Int = R.layout.fragment_filter_teacher
 
-
-
-//////////////////////////////////////////////////////////////////
     var filterRating: Double? = 0.0
     var filterPriceMin: Double? = 0.0
     var filterPriceMax: Double? = 0.0
     var filterPlace: String? = ""
+    var filterSubject: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +47,14 @@ class FilterTeacherFragment: BaseFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean {
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            // TODO: Špatně, po druhém kliknutí spadne.
+            android.R.id.home -> {
+                activity?.onBackPressed()
+                return true
+            }
             R.id.action_cancel_filter -> {
                 onActionCancelFilter()
                 return true
@@ -57,6 +63,8 @@ class FilterTeacherFragment: BaseFragment() {
         }
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_filter_teachers, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -64,6 +72,25 @@ class FilterTeacherFragment: BaseFragment() {
 
     private fun setInteractionsListener() {
         //saveFilter.setOnClickListener { makeFilter() }
+
+        subject_textview.addTextChangedListener (object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                filterSubject = s.toString().trim()
+                if (isFilled()) {
+                    saveFilterEnabled()
+                } else {
+                    saveFilterDisabled()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
+
 
         place_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -104,7 +131,11 @@ class FilterTeacherFragment: BaseFragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
+                filterRating = s.toString().toDoubleOrNull()
+                if (!isFilled()) {
+                    rating_layout.isErrorEnabled = false
+                    saveFilterDisabled()
+                }
             }
         })
 
@@ -148,18 +179,21 @@ class FilterTeacherFragment: BaseFragment() {
     }
 
     private fun onActionCancelFilter() {
-
+        subject_textview.text?.clear()
+        place_textview.text?.clear()
+        rating_edittext.text?.clear()
+        price_min_edittext.text?.clear()
+        price_max_edittext.text?.clear()
     }
-/*
-    private fun makeFilter() {
-        val returnIntent = Intent()
+
+    /*private fun makeFilter() {
+        val navController = findNavController()
         when {
+            //TODO: Upravit
             rating_edittext.text!!.isNotEmpty() -> {
-                returnIntent.putExtra("filter_type", "filter_rating")
-                returnIntent.putExtra("filter_rating", filterRating)
-                setResult(Activity.RESULT_OK, returnIntent)
-                finish()
+                navController.previousBackStackEntry?.savedStateHandle?.set("key", filterRating)
             }
+            /*
             place_textview.text!!.isNotEmpty() -> {
                 returnIntent.putExtra("filter_type", "filter_place")
                 returnIntent.putExtra("filter_place", filterPlace)
@@ -177,12 +211,11 @@ class FilterTeacherFragment: BaseFragment() {
                 returnIntent.putExtra("filter_price_max", filterPriceMin)
                 setResult(Activity.RESULT_OK, returnIntent)
                 finish()
-            }
+            }*/
         }
-    }
-*/
+    }*/
     private fun isFilled(): Boolean {
-        return place_textview.text!!.isNotEmpty() || rating_edittext.text!!.isNotEmpty()
+        return subject_textview.text!!.isNotEmpty() || place_textview.text!!.isNotEmpty() || rating_edittext.text!!.isNotEmpty()
                 || price_min_edittext.text!!.isNotEmpty() || price_max_edittext.text!!.isNotEmpty()
     }
 

@@ -44,19 +44,11 @@ class NavigationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener {
-            setResult(Activity.RESULT_CANCELED)
-            finish()
-        }
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        setupBottomNavigationBar()
-    }
 
     private fun hideBottomNavigationBar() {
         bottomNavigationView.visibility = GONE

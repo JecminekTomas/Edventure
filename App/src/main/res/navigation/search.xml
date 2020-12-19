@@ -11,10 +11,20 @@
         <action
             android:id="@+id/action_filter_teacher"
             app:destination="@+id/filter_teacher"/>
+        <action
+            android:id="@+id/action_add_teacher"
+            app:destination="@+id/add_teacher"/>
     </fragment>
     <fragment
         android:id="@+id/filter_teacher"
         android:name="com.example.edventure.activities.FilterTeacherFragment"
         android:label="@string/filter_teachers"
         tools:layout="@layout/fragment_filter_teacher" />
+    <fragment
+        android:id="@+id/add_edit_teacher"
+        android:name="com.example.edventure.activities.AddTeacherFragment"
+        android:label="Add teacher"
+        tools:layout="@layout/fragment_add_edit_teacher">
+
+    </fragment>
 </navigation>

@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.AddEditTutorActivity"
     tools:showIn="@layout/activity_filter_tutor">
-
-    <ScrollView
+<ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/basic_indentation"
@@ -17,13 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:fillViewport="false">
-
-        <LinearLayout
+<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-        <com.google.android.material.textfield.TextInputLayout
+<com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filter_subject_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,18 +30,14 @@
             app:boxBackgroundColor="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             app:startIconDrawable="@drawable/ic_baseline_subject_24">
-
-            <AutoCompleteTextView
+<AutoCompleteTextView
                 android:id="@+id/subject_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
+</com.google.android.material.textfield.TextInputLayout>
+<com.google.android.material.textfield.TextInputLayout
             android:id="@+id/flter_place_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,18 +47,14 @@
             app:boxBackgroundColor="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             app:startIconDrawable="@drawable/ic_baseline_place_24">
-
-            <AutoCompleteTextView
+<AutoCompleteTextView
                 android:id="@+id/place_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
+</com.google.android.material.textfield.TextInputLayout>
+<com.google.android.material.textfield.TextInputLayout
             android:id="@+id/rating_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

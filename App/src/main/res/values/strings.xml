@@ -54,6 +54,6 @@
     <string name="date">Date</string>
     <string name="currency_per_hour">$/hr</string>
     <string name="per_person">per person</string>
-    <string name="title_activity_bottom_navigation">MainActivity</string>
+    <string name="title_activity_bottom_navigation" translatable="false">MainActivity</string>
     <string name="filter_teachers">Filter teachers</string>
 </resources>

@@ -52,16 +52,16 @@ class TutorProfileActivity : BaseMVVMActivity<TutorProfileVM>(TutorProfileVM::cl
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_edit_tutor -> {
-                onActionEditTutor()
+                //onActionEditTutor()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun onActionEditTutor() {
+    /*private fun onActionEditTutor() {
         startActivity(AddEditTutorActivity.createIntent(this, id))
-    }
+    }*/
 
     private fun getTask() {
         launch {

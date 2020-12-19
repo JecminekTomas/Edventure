@@ -53,4 +53,5 @@
     <string name="date">Datum</string>
     <string name="currency_per_hour">€/h</string>
     <string name="per_person">za osobu</string>
+    <string name="filter_teachers">Filtrovat učitele</string>
 </resources>

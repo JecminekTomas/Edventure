@@ -37,9 +37,11 @@ import java.io.IOException
 import java.util.*
 
 
-class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::class.java),
-    ChooseImageSourceListener {
-
+class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::class.java)
+   {
+       override val layout: Int = R.layout.activity_add_edit_tutor
+   }
+    /*
     companion object {
 
         fun createIntent(context: Context, id: Long?): Intent {
@@ -460,10 +462,12 @@ class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::cl
             .fit()
             .into(newProfilePicture)
     }
-
+*/
 }
 
+
+/*
 interface ChooseImageSourceListener {
     fun captureWithCamera()
     fun selectFromGallery()
-}
+}*/

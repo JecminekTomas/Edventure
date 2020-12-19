@@ -2,15 +2,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/class_info_view"
+    style="@style/standard_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    style="@style/standard_cardview"
-    >
+    app:layout_constraintTop_toTopOf="parent">
 
-    <!--TODO: Vytvořit custom class pro CARDVIEW, které je používáno v aplikaci - MUSTR.-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

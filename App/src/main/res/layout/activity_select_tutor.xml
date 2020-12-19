@@ -5,10 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.SelectTutorActivity">
-
-    <!-- Vždy přidat kontext k vygenerovanému Const. L -->
-
-    <com.google.android.material.appbar.AppBarLayout
+<!-- Vždy přidat kontext k vygenerovanému Const. L -->
+<com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.App.AppBarOverlay">
@@ -20,11 +18,8 @@
             app:titleTextColor="@color/colorPrimary"
             app:popupTheme="@style/Theme.App.PopupOverlay"
             />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- app:title, není potřeba, jelikož je v Andr. Man. -->
-
-    <include layout="@layout/content_select_tutor"/>
+</com.google.android.material.appbar.AppBarLayout>
+<!-- app:title, není potřeba, jelikož je v Andr. Man. -->
+<include layout="@layout/content_select_tutor"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

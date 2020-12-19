@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.fragment_search_teacher.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
-import java.security.Provider
 import java.util.*
 
 class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::class.java) {
@@ -44,7 +43,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     private val FILTER_TEACHER_REQUEST = 100
     private lateinit var teachersAdapter: TeachersAdapter
 
-    /**  layoutManager se stará o pozicování - Existuje možnost i GridManageru, atd. */
+    /**  V onCreateView vždy pouze "inflatovat" layout */
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +55,13 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
+
+        /*navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("key")?.observe(
+            viewLifecycleOwner) { result ->
+
+        }*/
+
         searchTeacherRecyclerView.layoutManager = LinearLayoutManager(activity)
         searchTeacherRecyclerView.adapter = teachersAdapter
     }
@@ -110,7 +116,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_add_tutor -> {
-                onActionAddTutor()
+                onActionAddTeacher()
                 return true
             }
             R.id.action_filter -> {
@@ -137,8 +143,8 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
   }
  */
 
-    private fun onActionAddTutor() {
-        //startActivity(AddEditTutorActivity.createIntent(this, null))
+    private fun onActionAddTeacher() {
+        findNavController().navigate(R.id.action_add_teacher)
     }
 
     private fun onActionFilter() {
@@ -146,7 +152,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
     }
 
     private fun onActionSearch() {
-        // TODO: Vytvořit SearchTutorActivity
+        // TODO: Vytvořit SearchTeacherFragment
     }
 /*
   override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
