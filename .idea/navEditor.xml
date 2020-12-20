@@ -326,13 +326,13 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="add_teacher">
+                  <entry key="add_edit_teacher">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="488" />
-                            <option name="y" value="-341" />
+                            <option name="x" value="500" />
+                            <option name="y" value="-224" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -361,7 +361,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_add_teacher">
+                            <entry key="action_add_edit_teacher">
                               <value>
                                 <LayoutPositions />
                               </value>
