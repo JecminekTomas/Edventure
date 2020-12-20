@@ -1,4 +1,5 @@
 package com.example.edventure.activities
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.FragmentActivity
 import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.EdventureApplication.Companion.appContext
 import com.example.edventure.R
@@ -26,13 +28,30 @@ import com.example.edventure.viewmodels.AddEditTutorVM
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_add_edit_tutor.*
+import kotlinx.android.synthetic.main.content_add_edit_tutor.add_place_layout
+import kotlinx.android.synthetic.main.content_add_edit_tutor.add_place_textview
+import kotlinx.android.synthetic.main.content_add_edit_tutor.add_subject_textview
+import kotlinx.android.synthetic.main.content_add_edit_tutor.first_name
+import kotlinx.android.synthetic.main.content_add_edit_tutor.first_name_layout
+import kotlinx.android.synthetic.main.content_add_edit_tutor.last_name
+import kotlinx.android.synthetic.main.content_add_edit_tutor.last_name_layout
+import kotlinx.android.synthetic.main.content_add_edit_tutor.newProfilePicture
+import kotlinx.android.synthetic.main.content_add_edit_tutor.price_per_hour
+import kotlinx.android.synthetic.main.content_add_edit_tutor.price_per_hour_layout
+import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
+import kotlinx.android.synthetic.main.content_add_edit_tutor.rating_layout
+import kotlinx.android.synthetic.main.content_add_edit_tutor.stars
+import kotlinx.android.synthetic.main.content_add_edit_tutor.tutorChangePicture
+import kotlinx.android.synthetic.main.fragment_add_edit_teacher.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import java.util.*
 class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::class.java),
     ChooseImageSourceListener {
 
-    override val layout: Int = R.layout.activity_add_edit_tutor
+    override val layout: Int = R.layout.fragment_add_edit_teacher
     private var id: Long? = null
     private lateinit var tutor: Tutor
     private var tempPhotoFile: File? = null
@@ -52,6 +71,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         super.onViewCreated(view, savedInstanceState)
         loadArrayStrings()
         setInteractionsListener()
+        tutor = Tutor()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,20 +79,10 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         setHasOptionsMenu(true)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                activity?.onBackPressed()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun setInteractionsListener() {
-        //saveTutor.setOnClickListener { saveTutor() }
-        //profilePictureIcon.setOnClickListener { openAddImageBottomSheet() }
-        //tutorChangePicture.setOnClickListener { openAddImageBottomSheet() }
+        saveTeacherButton.setOnClickListener { saveTeacher() }
+        profilePictureIcon.setOnClickListener { openAddImageBottomSheet() }
+        tutorChangePicture.setOnClickListener { openAddImageBottomSheet() }
         first_name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 tutor.firstName = s.toString().trim()
@@ -83,9 +93,9 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 //TODO: Opravit ostatní
                 if (isFilled()) {
-                    saveTutorEnabled()
+                    saveTeacherEnabled()
                 } else {
-                    saveTutorDisabled()
+                    saveTeacherDisabled()
                 }
             }
         })
@@ -99,9 +109,9 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isFilled()) {
-                    saveTutorEnabled()
+                    saveTeacherEnabled()
                 } else {
-                    saveTutorDisabled()
+                    saveTeacherDisabled()
                 }
             }
         })
@@ -114,9 +124,9 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isFilled()) {
-                    saveTutorEnabled()
+                    saveTeacherEnabled()
                 } else {
-                    saveTutorDisabled()
+                    saveTeacherDisabled()
                 }
             }
         })
@@ -127,11 +137,11 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                tutor.pricePerHour = s.toString().toDouble()
+                tutor.pricePerHour = s.toString().toDoubleOrNull()
                 price_per_hour_layout.error = null
                 if (isFilled()) {
                     if (tutor.pricePerHour!! in 0.0..1000.0) {
-                        saveTutorEnabled()
+                        saveTeacherEnabled()
                     } else {
                         price_per_hour_layout.isErrorEnabled = true
                         if (tutor.pricePerHour!! < 0) {
@@ -142,7 +152,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
                         }
                     }
                 } else {
-                    saveTutorDisabled()
+                    saveTeacherDisabled()
                 }
             }
         })
@@ -157,37 +167,35 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
                     tutor.rating = s.toString().toDouble()
                     if (tutor.rating in 0.0..5.0) {
                         rating_layout.error = null
-                        saveTutorEnabled()
+                        saveTeacherEnabled()
                     } else {
                         rating_layout.isErrorEnabled = true
                         rating_layout.error = getString(R.string.required_field)
                     }
                 } else {
-                    saveTutorDisabled()
+                    saveTeacherDisabled()
                 }
             }
         })
     }
 
-    /*private fun saveTutor() {
+    private fun saveTeacher() {
         if (isFilled()) {
             id?.let {
                 launch {
                     viewModel.update(tutor)
                 }.invokeOnCompletion {
-                    setResult(Activity.RESULT_OK)
-                    finish()
+                    activity?.supportFragmentManager?.popBackStack()
                 }
             } ?: kotlin.run {
                 launch {
                     viewModel.insert(tutor)
                 }.invokeOnCompletion {
-                    setResult(Activity.RESULT_OK)
-                    finish()
+                    activity?.supportFragmentManager?.popBackStack()
                 }
             }
         }
-    }*/
+    }
 
     private fun fillLayout() {
         tutor.firstName.let {
@@ -213,29 +221,29 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         return first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty() && tutor.profilePicture != null
     }
 
-    private fun saveTutorEnabled() {
-        saveTutor.setBackgroundColor(
+    private fun saveTeacherEnabled() {
+        saveTeacherButton.setBackgroundColor(
             ContextCompat.getColor(
                 appContext,
                 R.color.colorPrimary
             )
         )
-        saveTutor.setTextColor(
+        saveTeacherButton.setTextColor(
             ContextCompat.getColor(
                 appContext,
                 R.color.white
             )
         )
-        saveTutor.isEnabled = true
+        saveTeacherButton.isEnabled = true
     }
-    private fun saveTutorDisabled() {
-        saveTutor.setBackgroundColor(
+    private fun saveTeacherDisabled() {
+        saveTeacherButton.setBackgroundColor(
             ContextCompat.getColor(
                 appContext,
                 R.color.colorSecondary
             )
         )
-        saveTutor.isEnabled = false
+        saveTeacherButton.isEnabled = false
     }
 
     private fun loadArrayStrings() {
@@ -276,7 +284,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
     }
 
     override fun captureWithCamera() {
-        if (PermissionUtil.checkCameraStoragePermission(appContext as AppCompatActivity)) {
+        if (PermissionUtil.checkCameraStoragePermission(appContext)) {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(takePictureIntent, 100)
             try {
@@ -294,15 +302,12 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         } else {
-            PermissionUtil.requestCameraStoragePermission(
-                appContext as AppCompatActivity,
-                PERMISSION_CAMERA_REQUEST_CODE
-            )
+            requestPermissions(arrayOf(android.Manifest.permission.CAMERA), PERMISSION_CAMERA_REQUEST_CODE)
         }
     }
 
     override fun selectFromGallery() {
-        if (PermissionUtil.checkWriteStoragePermission(appContext as AppCompatActivity)) {
+        if (PermissionUtil.checkWriteStoragePermission(appContext)) {
             val intent = Intent()
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
@@ -315,10 +320,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
                 ), GALLERY_IMAGE_REQUEST_CODE
             )
         } else {
-            PermissionUtil.requestWriteStoragePermission(
-                appContext as AppCompatActivity,
-                PERMISSION_SELECT_FROM_GALLERY_REQUEST_CODE
-            )
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_SELECT_FROM_GALLERY_REQUEST_CODE)
         }
     }
 
@@ -340,17 +342,17 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             }
         }
     }
-    /*
+
     private fun openAddImageBottomSheet() {
         val fragment = ChooseImageSourceBottomSheet()
         fragment.chooseImageSourceListener = this
-        fragment.show(supportFragmentManager, "choose_image_source")
+        fragment.show((activity as FragmentActivity).supportFragmentManager, "choose_image_source")
     }
     private fun saveImageFile(uri: Uri) {
         launch(Dispatchers.Main) {
             val path = FileUtils.getRealPath(appContext, uri)
             val sourceFile = File(path)
-            val destinationFile = File(filesDir, sourceFile.name)
+            val destinationFile = File(appContext.filesDir, sourceFile.name)
             try {
                 FileUtils.copy(sourceFile, destinationFile)
                 tutor.profilePicture =
@@ -359,7 +361,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
                 ex.printStackTrace()
             }
         }
-    }*/
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -373,13 +375,13 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
                 val count = data.clipData?.itemCount
                 (0 until count!!).forEach { i ->
                     val imageUri: Uri = data.clipData!!.getItemAt(i).uri
-                    //saveImageFile(imageUri)
+                    saveImageFile(imageUri)
                     showProfilePictureFromUri(imageUri)
                 }
             } else if (data?.data != null) {
                 val uri = data.data
                 uri?.let {
-                    //saveImageFile(uri)
+                    saveImageFile(uri)
                     showProfilePictureFromUri(uri)
                 }
             }

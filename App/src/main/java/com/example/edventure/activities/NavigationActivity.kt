@@ -24,7 +24,7 @@ class NavigationActivity : BaseActivity() {
     override val layout: Int = R.layout.activity_navigation
     lateinit var bottomNavigationView: BottomNavigationView
     private val listener = NavController.OnDestinationChangedListener{_, destination, _ ->
-        if(destination.id == R.id.filter_teacher) {
+        if(destination.id == R.id.filter_teacher || destination.id == R.id.add_edit_teacher) {
             hideBottomNavigationBar()
         } else {
             showBottomNavigationBar()
@@ -79,6 +79,7 @@ class NavigationActivity : BaseActivity() {
             setupActionBarWithNavController(controller)
             controller.addOnDestinationChangedListener(listener)
         })
+        currentNavController = navController
     }
 
     override fun onSupportNavigateUp(): Boolean {

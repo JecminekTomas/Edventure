@@ -115,7 +115,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_add_tutor -> {
+            R.id.action_add_teacher -> {
                 onActionAddTeacher()
                 return true
             }
@@ -144,7 +144,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
  */
 
     private fun onActionAddTeacher() {
-        findNavController().navigate(R.id.action_add_teacher)
+        findNavController().navigate(R.id.action_add_edit_teacher)
     }
 
     private fun onActionFilter() {

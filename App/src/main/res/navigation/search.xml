@@ -10,10 +10,10 @@
         tools:layout="@layout/fragment_search_teacher">
         <action
             android:id="@+id/action_filter_teacher"
-            app:destination="@+id/filter_teacher"/>
+            app:destination="@+id/filter_teacher" />
         <action
-            android:id="@+id/action_add_teacher"
-            app:destination="@+id/add_teacher"/>
+            android:id="@+id/action_add_edit_teacher"
+            app:destination="@+id/add_edit_teacher" />
     </fragment>
     <fragment
         android:id="@+id/filter_teacher"
@@ -22,9 +22,16 @@
         tools:layout="@layout/fragment_filter_teacher" />
     <fragment
         android:id="@+id/add_edit_teacher"
-        android:name="com.example.edventure.activities.AddTeacherFragment"
+        android:name="com.example.edventure.activities.AddEditTeacherFragment"
         android:label="Add teacher"
         tools:layout="@layout/fragment_add_edit_teacher">
-
+        <action
+            android:id="@+id/action_choose_image"
+            app:destination="@id/choose_image" />
     </fragment>
+    <dialog
+        android:id="@+id/choose_image"
+        android:name="com.example.edventure.activities.ChooseImageSourceBottomSheet"
+        tools:layout="@layout/dialog_choose_image_source"/>
+
 </navigation>

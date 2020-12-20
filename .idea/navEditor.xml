@@ -335,6 +335,27 @@
                             <option name="y" value="-224" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_choose_image">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="choose_image">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="800" />
+                            <option name="y" value="-230" />
+                          </Point>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>

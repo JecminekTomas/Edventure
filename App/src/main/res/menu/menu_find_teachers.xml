@@ -2,20 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_add_tutor"
+        android:id="@+id/action_add_teacher"
+        android:icon="@drawable/ic_custom_person_add_primary_24"
         android:title="@string/title_activity_add_tutor"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_custom_person_add_primary_24" />
+        app:showAsAction="ifRoom" />
     <item
-    android:id="@+id/action_search"
-    android:title="@string/search"
-    app:showAsAction="ifRoom"
-    android:icon="@drawable/ic_custom_search_primary_24" />
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_custom_search_primary_24"
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
     <item
-    android:id="@+id/action_filter"
-    android:title="@string/filter_teachers"
-    app:showAsAction="ifRoom"
-    android:icon="@drawable/ic_custom_tune_primary_24"
-        />
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_custom_tune_primary_24"
+        android:title="@string/filter_teachers"
+        app:showAsAction="ifRoom" />
 
 </menu>

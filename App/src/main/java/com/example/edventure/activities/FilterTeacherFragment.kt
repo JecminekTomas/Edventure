@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.content_filter_tutor.rating_layout
 import kotlinx.android.synthetic.main.content_filter_tutor.subject_textview
 import kotlinx.android.synthetic.main.fragment_filter_teacher.*
 
-class FilterTeacherFragment: BaseFragment() {
+class FilterTeacherFragment : BaseFragment() {
     override val layout: Int = R.layout.fragment_filter_teacher
 
     var filterRating: Double? = 0.0
@@ -50,11 +50,6 @@ class FilterTeacherFragment: BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            // TODO: Špatně, po druhém kliknutí spadne.
-            android.R.id.home -> {
-                activity?.onBackPressed()
-                return true
-            }
             R.id.action_cancel_filter -> {
                 onActionCancelFilter()
                 return true
@@ -62,7 +57,6 @@ class FilterTeacherFragment: BaseFragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,7 +67,7 @@ class FilterTeacherFragment: BaseFragment() {
     private fun setInteractionsListener() {
         //saveFilter.setOnClickListener { makeFilter() }
 
-        subject_textview.addTextChangedListener (object : TextWatcher {
+        subject_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 filterSubject = s.toString().trim()
                 if (isFilled()) {
@@ -116,8 +110,7 @@ class FilterTeacherFragment: BaseFragment() {
                 if (isFilled()) {
                     if (filterRating!! in 0.0..5.0) {
                         saveFilterEnabled()
-                    }
-                    else {
+                    } else {
                         rating_layout.isErrorEnabled = true
                         rating_layout.error = getString(R.string.range)
                         saveFilterDisabled()
@@ -179,11 +172,17 @@ class FilterTeacherFragment: BaseFragment() {
     }
 
     private fun onActionCancelFilter() {
+        //TODO: Udělat méně dummy
         subject_textview.text?.clear()
         place_textview.text?.clear()
         rating_edittext.text?.clear()
         price_min_edittext.text?.clear()
         price_max_edittext.text?.clear()
+        subject_textview.clearFocus()
+        place_textview.clearFocus()
+        rating_edittext.clearFocus()
+        price_min_edittext.clearFocus()
+        price_max_edittext.clearFocus()
     }
 
     /*private fun makeFilter() {
@@ -248,11 +247,12 @@ class FilterTeacherFragment: BaseFragment() {
     private fun setArrayAdapters() {
         val places: Array<String> = resources.getStringArray(R.array.places_cz)
         val subjects: Array<String> = resources.getStringArray(R.array.subjects_cz)
-        val arrayPlacesAdapter = ArrayAdapter(appContext, android.R.layout.simple_list_item_1, places)
+        val arrayPlacesAdapter =
+            ArrayAdapter(appContext, android.R.layout.simple_list_item_1, places)
         place_textview.setAdapter(arrayPlacesAdapter)
         val arrayActivitiesAdapter =
             ArrayAdapter(appContext, android.R.layout.simple_list_item_1, subjects)
-       subject_textview.setAdapter(arrayActivitiesAdapter)
+        subject_textview.setAdapter(arrayActivitiesAdapter)
     }
 
 }
