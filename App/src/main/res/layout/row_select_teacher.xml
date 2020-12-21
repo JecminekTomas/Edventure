@@ -1,127 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/tutor_card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/cardview_find_teacher"
     style="@style/standard_cardview"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_cardview_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
         android:layout_marginStart="@dimen/half_indentation"
         android:layout_marginEnd="@dimen/half_indentation"
-        >
+        android:animateLayoutChanges="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tutor_card_view_info"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageview_cardview"
+            android:layout_width="@dimen/civ_size"
+            android:layout_height="@dimen/civ_size"
+            android:layout_marginStart="@dimen/basic_indentation"
+            android:layout_marginTop="@dimen/basic_indentation"
+            android:layout_marginBottom="@dimen/basic_indentation"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="@dimen/zero_indentation"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/basic_indentation"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageview_cardview"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--TODO: Odstranit statický obrázek-->
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilePictureIconSelect"
-                android:layout_width="@dimen/civ_size"
-                android:layout_height="@dimen/civ_size"
-                android:layout_marginStart="@dimen/basic_indentation"
-                android:layout_marginTop="@dimen/basic_indentation"
-                android:layout_marginBottom="@dimen/basic_indentation"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textview_teacher_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="@dimen/zero_indentation"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/basic_indentation"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/profilePictureIconSelect"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tutorName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tutorCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/one_indentation"
-                    android:textColor="@color/colorPrimaryDark" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="@dimen/zero_indentation"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/basic_indentation"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tutorPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tutorRating"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/one_indentation"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorPrimaryDark" />
-
-                <!-- TODO: Předměty -->
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
-            android:id="@+id/card_view_buttons"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tutor_card_view_info"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonProfile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/profile"
-                android:layout_marginBottom="@dimen/basic_indentation"
-                android:layout_marginEnd="@dimen/basic_indentation"
-                app:icon="@drawable/ic_baseline_person_24"
-                />
-            <Button
-                android:id="@+id/buttonDelete"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginBottom="@dimen/basic_indentation"
-                android:text="@string/message"
-                app:icon="@drawable/ic_baseline_delete_forever_24"
-                />
-
+            <TextView
+                android:id="@+id/textview_teacher_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/one_indentation"
+                android:textColor="@color/colorPrimaryDark" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/zero_indentation"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/basic_indentation"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textview_teacher_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_teacher_rating"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/one_indentation"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimaryDark" />
+            <!-- TODO: Předměty -->
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

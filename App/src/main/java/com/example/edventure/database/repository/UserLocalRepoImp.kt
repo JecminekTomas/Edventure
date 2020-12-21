@@ -8,10 +8,11 @@ import com.example.edventure.database.dao.UserDao
 import com.example.edventure.model.ProfilePicture
 import com.example.edventure.model.User
 
-class UserLocalRepoImp (context: Context): IUserRepository {
+class UserLocalRepoImp(context: Context) : IUserRepository {
 
     private val userDao: UserDao = UserDB.getDatabase(context).userDao()
-    private val profilePictureDao: ProfilePictureDao = UserDB.getDatabase(context).profilePictureDao()
+    private val profilePictureDao: ProfilePictureDao =
+        UserDB.getDatabase(context).profilePictureDao()
 
     private val getAllLiveData: LiveData<MutableList<User>> = userDao.getAll()
 
@@ -29,7 +30,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
         return user
     }
 
-     override suspend fun findProfilePicture(userId: Long): ProfilePicture {
+    override suspend fun findProfilePicture(userId: Long): ProfilePicture {
         return profilePictureDao.getProfilePicture(userId)
     }
 
@@ -39,7 +40,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
     ): MutableList<User> {
         val users = userDao.findByName(firstName, lastName)
         users.let {
-            for (user in it){
+            for (user in it) {
                 user.profilePicture = profilePictureDao.getProfilePicture(user.userId)
             }
         }
@@ -49,7 +50,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
     override suspend fun findByCity(city: String): MutableList<User> {
         val users = userDao.findByCity(city)
         users.let {
-            for (user in it){
+            for (user in it) {
                 user.profilePicture = profilePictureDao.getProfilePicture(user.userId)
             }
         }
@@ -59,7 +60,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
     override suspend fun findByRating(rating: Double): MutableList<User> {
         val users = userDao.findByRating(rating)
         users.let {
-            for (user in it){
+            for (user in it) {
                 user.profilePicture = profilePictureDao.getProfilePicture(user.userId)
             }
         }
@@ -69,7 +70,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
     override suspend fun findByPriceLowerThan(pricePerHour: Double): MutableList<User> {
         val users = userDao.findByPriceLowerThan(pricePerHour)
         users.let {
-            for (user in it){
+            for (user in it) {
                 user.profilePicture = profilePictureDao.getProfilePicture(user.userId)
             }
         }
@@ -79,7 +80,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
     override suspend fun findByPriceHigherThan(pricePerHour: Double): MutableList<User> {
         val users = userDao.findByPriceLowerThan(pricePerHour)
         users.let {
-            for (user in it){
+            for (user in it) {
                 user.profilePicture = profilePictureDao.getProfilePicture(user.userId)
             }
         }
@@ -90,7 +91,7 @@ class UserLocalRepoImp (context: Context): IUserRepository {
     override suspend fun insert(user: User): Long {
         val id = userDao.insert(user)
         val profilePicture = user.profilePicture
-        if (profilePicture != null){
+        if (profilePicture != null) {
             profilePicture.userId = id
             profilePictureDao.insert(profilePicture)
         }
@@ -112,7 +113,4 @@ class UserLocalRepoImp (context: Context): IUserRepository {
         }
         userDao.delete(user)
     }
-
-    //TODO: userAvatorDao.getAvatar je velmi zvláštní. Opravit?
-
 }

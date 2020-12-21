@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".activities.AddEditTutorActivity"
-            android:label="@string/title_activity_add_tutor"
+            android:label="@string/title_fragment_add_teachers"
             android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity
@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".activities.FilterTutorActivity"
-            android:label="@string/title_activity_filter_tutor"
+            android:label="@string/title_fragment_filter_teachers"
             android:theme="@style/Theme.App.NoActionBar" >
         </activity>
         <activity

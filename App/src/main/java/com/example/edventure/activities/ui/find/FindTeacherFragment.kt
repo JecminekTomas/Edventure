@@ -135,8 +135,8 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
     }
 /*
   private fun onActionCancelFilter() {
-    tutorList = saveTutorList
-    selectTutorRecyclerView.adapter = tutorAdapter
+    teacherList = saveTutorList
+    selectTutorRecyclerView.adapter = teacherAdapter
     filtered = false
     invalidateOptionsMenu()
   }
@@ -157,9 +157,9 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
   override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
     menu?.clear()
     if (!filtered) {
-      menuInflater.inflate(R.menu.menu_select_tutor, menu)
+      menuInflater.inflate(R.menu.menu_select_teacher, menu)
     } else {
-      menuInflater.inflate(R.menu.menu_filter_tutor, menu)
+      menuInflater.inflate(R.menu.menu_filter_teacher, menu)
     }
     return true
   }
@@ -167,27 +167,27 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     if (requestCode == FILTER_TUTOR_REQUEST && resultCode == Activity.RESULT_OK) {
-      saveTutorList = tutorList.toMutableList()
+      saveTutorList = teacherList.toMutableList()
       when (data?.getStringExtra("filter_type")) {
         "filter_rating" -> {
           filterRating = data.getDoubleExtra("filter_rating", -1.0)
-          tutorList.removeAll { it.rating < filterRating!! }
+          teacherList.removeAll { it.rating < filterRating!! }
         }
         "filter_place" -> {
           filterPlace = data.getStringExtra("filter_place")
-          tutorList.removeAll { it.city != filterPlace }
+          teacherList.removeAll { it.city != filterPlace }
         }
         "filter_price_min" -> {
           filterPriceMin = data.getDoubleExtra("filter_price_min", -1.0)
-          tutorList.removeAll { it.pricePerHour!! <= filterPriceMin!! }
+          teacherList.removeAll { it.pricePerHour!! <= filterPriceMin!! }
         }
         "filter_price_max" -> {
           filterPriceMax = data.getDoubleExtra("filter_price_max", -1.0)
-          tutorList.removeAll { it.pricePerHour!! >= filterPriceMax!! }
+          teacherList.removeAll { it.pricePerHour!! >= filterPriceMax!! }
         }
       }
       filtered = true
-      selectTutorRecyclerView.adapter = tutorAdapter
+      selectTutorRecyclerView.adapter = teacherAdapter
       invalidateOptionsMenu()
     }
   }
@@ -203,54 +203,28 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
 
         override fun getItemCount() = teachersList.size
 
-        @SuppressLint("SetTextI18n")
+
         override fun onBindViewHolder(holder: TeachersViewHolder, position: Int) {
-            val isExpanded = position == mExpandedPosition
-            holder.buttons.visibility = if (isExpanded) View.VISIBLE else View.GONE
-            holder.tutorCardView.isActivated = isExpanded
 
-            if (isExpanded)
-                previousExpandedPosition = position
 
-            holder.tutorCardView.setOnClickListener {
-                mExpandedPosition = if (isExpanded) -1 else position
-                notifyItemChanged(previousExpandedPosition)
-                notifyItemChanged(position)
-            }
-
-            holder.buttonDelete.setOnClickListener {
-                launch {
-                    viewModel.delete(teachersList[holder.adapterPosition])
-                }
-            }
-
-            /*holder.buttonProfile.setOnClickListener {
-              startActivity(
-                TutorProfileActivity.createIntent(
-                  this@SelectTeacherFragment,
-                  teachersList[holder.adapterPosition].tutorId
-                )
-              )
-            }*/
-
-            val tutor = teachersList[position]
+            val teacher = teachersList[position]
             launch(Dispatchers.Main) {
-                tutor.profilePicture = viewModel.findProfilePicture(tutor.userId)
+                teacher.profilePicture = viewModel.findProfilePicture(teacher.userId)
                 Picasso.get()
-                    .load(File(context?.filesDir, tutor.profilePicture!!.name))
+                    .load(File(context?.filesDir, teacher.profilePicture!!.name))
                     .placeholder(R.drawable.ic_custom_profile_secondary_dark_24)
                     .error(R.drawable.ic_custom_profile_secondary_dark_24)
                     .centerCrop()
                     .fit()
-                    .into(holder.tutorProfilePicture)
+                    .into(holder.teacherProfilePicture)
             }.invokeOnCompletion {
-                holder.tutorName.text = "${tutor.firstName} ${tutor.lastName}"
-                holder.tutorCity.text = tutor.city
-                holder.tutorPrice.text = String.format(
+                holder.teacherName.text = "${teacher.firstName} ${teacher.lastName}"
+                holder.teacherCity.text = teacher.city
+                holder.teacherPrice.text = String.format(
                     "%.0f Kč/h",
-                    tutor.pricePerHour
-                ) //TODO: Kč/h změnit na tutor.mena -- v BUDOUCNU.
-                holder.tutorRating.text = String.format(Locale.US, "★ %.1f", tutor.rating)
+                    teacher.pricePerHour
+                ) //TODO: Kč/h změnit na teacher.mena -- v BUDOUCNU.
+                holder.teacherRating.text = String.format(Locale.US, "★ %.1f", teacher.rating)
             }
         }
 
@@ -258,16 +232,13 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
         // TODO: Přepsat na Teacher VŠECHNO
         inner class TeachersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tutorProfilePicture: CircleImageView =
-                view.findViewById(R.id.profilePictureIconSelect)
-            val tutorName: TextView = view.findViewById(R.id.tutorName)
-            val tutorCity: TextView = view.findViewById(R.id.tutorCity)
-            val tutorPrice: TextView = view.findViewById(R.id.tutorPrice)
-            val tutorRating: TextView = view.findViewById(R.id.tutorRating)
-            val buttonProfile: Button = view.findViewById(R.id.buttonProfile)
-            val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
-            val buttons: LinearLayout = view.findViewById(R.id.card_view_buttons)
-            val tutorCardView: CardView = view.findViewById(R.id.tutor_card_view)
+            val teacherProfilePicture: CircleImageView =
+                view.findViewById(R.id.imageview_cardview)
+            val teacherName: TextView = view.findViewById(R.id.textview_teacher_name)
+            val teacherCity: TextView = view.findViewById(R.id.textview_teacher_city)
+            val teacherPrice: TextView = view.findViewById(R.id.textview_teacher_price)
+            val teacherRating: TextView = view.findViewById(R.id.textview_teacher_rating)
+            val teacherCardView: CardView = view.findViewById(R.id.cardview_find_teacher)
         }
     }
 }

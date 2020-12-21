@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">EdVenture</string>
-    <string name="title_activity_filter_tutor">Filter teachers</string>
-    <string name="title_activity_select_tutor">Select a teacher</string>
-    <string name="title_activity_add_tutor">Add new teacher</string>
+    <string name="title_fragment_filter_teachers">Filter teachers</string>
+    <string name="title_fragment_discover_teachers">Select a teacher</string>
+    <string name="title_fragment_add_teachers">Add new teacher</string>
     <string name="title_cancel_filter">Cancel filter</string>
     <string name="title_activity_edit_tutor">Edit</string>
     <string name="welcome_phrase">Welcome to the EdVenture</string>

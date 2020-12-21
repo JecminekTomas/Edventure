@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_add_teacher"
         android:icon="@drawable/ic_custom_person_add_primary_24"
-        android:title="@string/title_activity_add_tutor"
+        android:title="@string/title_fragment_add_teachers"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_find"

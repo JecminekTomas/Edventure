@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EdVenture</string>
-    <string name="title_activity_filter_tutor">Filtrovanie učiteľov</string>
-    <string name="title_activity_select_tutor">Výběr učiteľov</string>
-    <string name="title_activity_add_tutor">Přidat učiteľa</string>
+    <string name="title_fragment_filter_teachers">Filtrovanie učiteľov</string>
+    <string name="title_fragment_discover_teachers">Výběr učiteľov</string>
+    <string name="title_fragment_add_teachers">Přidat učiteľa</string>
     <string name="title_cancel_filter">Zrušiť filter</string>
     <string name="title_activity_edit_tutor">Upraviť</string>
     <string name="welcome_phrase">Vitajte v aplikaci EdVenture</string>
