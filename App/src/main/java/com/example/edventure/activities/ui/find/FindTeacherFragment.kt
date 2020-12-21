@@ -1,4 +1,4 @@
-package com.example.edventure.activities.ui.search
+package com.example.edventure.activities.ui.find
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -15,22 +15,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.R
 import com.example.edventure.EdventureApplication.Companion.appContext
-import com.example.edventure.model.Tutor
+import com.example.edventure.model.User
 import com.example.edventure.sharedpreferences.SharedPreferencesManager
-import com.example.edventure.viewmodels.SelectTutorVM
+import com.example.edventure.viewmodels.SelectUserVM
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.fragment_search_teacher.*
+import kotlinx.android.synthetic.main.fragment_find_teacher.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
-class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::class.java) {
+class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.java) {
 
-    override val layout: Int = R.layout.fragment_search_teacher
-    private var teachersList: MutableList<Tutor> = mutableListOf()
-    private var savedTeachersList: MutableList<Tutor> = mutableListOf()
+    override val layout: Int = R.layout.fragment_find_teacher
+    private var teachersList: MutableList<User> = mutableListOf()
+    private var savedTeachersList: MutableList<User> = mutableListOf()
     private var mExpandedPosition = -1
     private var previousExpandedPosition = -1
     private var filtered: Boolean = false
@@ -55,30 +55,30 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = findNavController()
+        //val navController = findNavController()
 
         /*navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("key")?.observe(
             viewLifecycleOwner) { result ->
 
         }*/
 
-        searchTeacherRecyclerView.layoutManager = LinearLayoutManager(activity)
-        searchTeacherRecyclerView.adapter = teachersAdapter
+        findTeacherRecyclerView.layoutManager = LinearLayoutManager(activity)
+        findTeacherRecyclerView.adapter = teachersAdapter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         teachersAdapter = TeachersAdapter()
-        viewModel.getAll().observe(this, object : Observer<MutableList<Tutor>> {
-            override fun onChanged(t: MutableList<Tutor>?) {
+        viewModel.getAll().observe(this, object : Observer<MutableList<User>> {
+            override fun onChanged(t: MutableList<User>?) {
                 t?.let {
                     val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
                         override fun areItemsTheSame(
                             oldItemPosition: Int,
                             newItemPosition: Int
                         ): Boolean {
-                            return teachersList[oldItemPosition].tutorId == t[newItemPosition].tutorId
+                            return teachersList[oldItemPosition].userId == t[newItemPosition].userId
                         }
 
                         override fun areContentsTheSame(
@@ -95,7 +95,6 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
                     diffUtil.dispatchUpdatesTo(teachersAdapter)
                     teachersList.clear()
                     teachersList.addAll(it)
-
                 }
                 /** DiffUtil je velice užitečné využívat, jelikož může velice zrychlit proces při načítání změny RV.*/
             }
@@ -123,8 +122,8 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
                 onActionFilter()
                 return true
             }
-            R.id.action_search -> {
-                onActionSearch()
+            R.id.action_find -> {
+                onActionFind()
                 return true
             }
             /*R.id.action_cancel_filter -> {
@@ -151,8 +150,8 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
         findNavController().navigate(R.id.action_filter_teacher)
     }
 
-    private fun onActionSearch() {
-        // TODO: Vytvořit SearchTeacherFragment
+    private fun onActionFind() {
+        // TODO: Přidat SearchView
     }
 /*
   override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -236,7 +235,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
             val tutor = teachersList[position]
             launch(Dispatchers.Main) {
-                tutor.profilePicture = viewModel.findProfilePicture(tutor.tutorId)
+                tutor.profilePicture = viewModel.findProfilePicture(tutor.userId)
                 Picasso.get()
                     .load(File(context?.filesDir, tutor.profilePicture!!.name))
                     .placeholder(R.drawable.ic_custom_profile_secondary_dark_24)
@@ -257,6 +256,7 @@ class SearchTeacherFragment : BaseMVVMFragment<SelectTutorVM>(SelectTutorVM::cla
 
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
+        // TODO: Přepsat na Teacher VŠECHNO
         inner class TeachersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val tutorProfilePicture: CircleImageView =
                 view.findViewById(R.id.profilePictureIconSelect)

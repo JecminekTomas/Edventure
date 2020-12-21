@@ -1,43 +1,11 @@
 package com.example.edventure.activities
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import com.example.arch.activities.BaseMVVMActivity
 import com.example.edventure.R
-import com.example.edventure.constants.IntentConstants
-import com.example.edventure.model.Tutor
-import com.example.edventure.model.ProfilePicture
-import com.example.edventure.utils.FileUtils
-import com.example.edventure.utils.PermissionUtil
-import com.example.edventure.viewmodels.AddEditTutorVM
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_add_edit_tutor.*
-import kotlinx.android.synthetic.main.content_add_edit_tutor.*
-import kotlinx.android.synthetic.main.content_add_edit_tutor.profilePictureIcon
-import kotlinx.android.synthetic.main.content_add_edit_tutor.saveTutor
-import kotlinx.android.synthetic.main.content_add_edit_tutor.rating_layout
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.File
-import java.io.IOException
-import java.util.*
+import com.example.edventure.viewmodels.AddEditUserVM
 
 
-class AddEditTutorActivity : BaseMVVMActivity<AddEditTutorVM>(AddEditTutorVM::class.java)
+class AddEditTutorActivity : BaseMVVMActivity<AddEditUserVM>(AddEditUserVM::class.java)
    {
        override val layout: Int = R.layout.activity_add_edit_tutor
    }

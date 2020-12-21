@@ -4,11 +4,11 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tutor")
-data class Tutor(
+@Entity(tableName = "user")
+data class User(
     @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "tutor_id")
-    var tutorId: Long = 0,
+    @ColumnInfo(name = "user_id")
+    var userId: Long = 0,
 
     @ColumnInfo(name = "first_name")
     var firstName: String = "",
@@ -19,22 +19,20 @@ data class Tutor(
     @ColumnInfo(name = "city")
     var city: String = "",
 
-    //TODO:  Budoucnost - City bude nalezeno v DB
-
     @ColumnInfo(name = "phone_number")
-    var phoneNumber: String = "",
+    var phoneNumber: String? = "",
     /** Pokud bude chtít učitel sdělit telefonní číslo klientovi na jedno kliknutí */
 
     @ColumnInfo(name = "email")
-    var email: String = "",
+    var email: String? = "",
     /** Kontrolovat při vkládání */
 
-    // TODO: Chyba ... necessery
+    // TODO: Vložit do Teacher
     @ColumnInfo(name = "price_per_hour")
     var pricePerHour: Double? = 0.0,
 
     @ColumnInfo(name = "rating")
-    var rating: Double = 0.0,
+    var rating: Double? = 0.0,
 
     @Ignore
     var profilePicture: ProfilePicture? = null
@@ -43,10 +41,10 @@ data class Tutor(
 
     //Zdroj zápisu: Kotlin programming by example.
 
-    /** TODO: Je potřeba vytvořit stupnici od 0 do 5
-     ** TODO: V budoucnu - Předělat na mutable list .. aby bylo možno vypočíst průměr hodnocení.
-     ** TODO: Budoucnost - Bude jenom jednou v RV, ale pokud bude mít rozdílné sazby, stanoví se cena od.
-     ** TODO: Budoucnost - Pokud bude uživatel vyhledávat dle předmětu, zobrazí se již jenom cena za předmět.
+    /**
+     ** TODO: Předělat na mutable list ... aby bylo možno vypočíst průměr hodnocení.
+     ** TODO: Bude jenom jednou v RV, ale pokud bude mít rozdílné sazby, stanoví se cena od.
+     ** TODO: Pokud bude uživatel vyhledávat dle předmětu, zobrazí se již jenom cena za předmět.
      */
 
 )

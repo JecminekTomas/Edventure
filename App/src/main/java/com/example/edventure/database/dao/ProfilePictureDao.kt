@@ -5,8 +5,8 @@ import com.example.edventure.model.ProfilePicture
 
 @Dao
 interface ProfilePictureDao {
-    @Query("SELECT * FROM profile_picture WHERE tutor_id = :tutorId")
-    suspend fun getProfilePicture(tutorId: Long): ProfilePicture
+    @Query("SELECT * FROM profile_picture WHERE user_id = :userId")
+    suspend fun getProfilePicture(userId: Long): ProfilePicture
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(profilePicture: ProfilePicture): Long

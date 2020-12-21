@@ -5,9 +5,9 @@
     app:startDestination="@+id/navigation_search_teacher">
     <fragment
         android:id="@+id/navigation_search_teacher"
-        android:name="com.example.edventure.activities.ui.search.SearchTeacherFragment"
+        android:name="com.example.edventure.activities.ui.find.FindTeacherFragment"
         android:label="@string/search"
-        tools:layout="@layout/fragment_search_teacher">
+        tools:layout="@layout/fragment_find_teacher">
         <action
             android:id="@+id/action_filter_teacher"
             app:destination="@+id/filter_teacher" />
@@ -25,13 +25,14 @@
         android:name="com.example.edventure.activities.AddEditTeacherFragment"
         android:label="Add teacher"
         tools:layout="@layout/fragment_add_edit_teacher">
+        <!-- TODO: Implementovat
         <action
             android:id="@+id/action_choose_image"
-            app:destination="@id/choose_image" />
+            app:destination="@id/choose_image" >-->
     </fragment>
-    <dialog
+    <!--<dialog
         android:id="@+id/choose_image"
         android:name="com.example.edventure.activities.ChooseImageSourceBottomSheet"
-        tools:layout="@layout/dialog_choose_image_source"/>
+        tools:layout="@layout/dialog_choose_image_source"/>-->
 
 </navigation>

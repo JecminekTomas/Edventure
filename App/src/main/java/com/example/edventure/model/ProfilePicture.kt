@@ -10,9 +10,9 @@ import androidx.room.PrimaryKey
     foreignKeys =
     [
         ForeignKey(
-            entity = Tutor::class,
-            parentColumns = ["tutor_id"],
-            childColumns = ["tutor_id"],
+            entity = User::class,
+            parentColumns = ["user_id"],
+            childColumns = ["user_id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -25,6 +25,6 @@ class ProfilePicture(
     @ColumnInfo(name = "name")
     var name: String = "",
 
-    @ColumnInfo(name = "tutor_id")
-    var tutorId: Long = 0
+    @ColumnInfo(name = "user_id")
+    var userId: Long = 0
 )

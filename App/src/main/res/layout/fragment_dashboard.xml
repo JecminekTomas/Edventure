@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ui.search.SearchTeacherFragment" >
+    tools:context=".activities.ui.find.FindTeacherFragment" >
 
     <TextView
         android:id="@+id/text_dashboard"

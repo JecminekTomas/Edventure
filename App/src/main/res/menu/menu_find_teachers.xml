@@ -7,7 +7,7 @@
         android:title="@string/title_activity_add_tutor"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_find"
         android:icon="@drawable/ic_custom_search_primary_24"
         android:title="@string/search"
         app:showAsAction="ifRoom" />

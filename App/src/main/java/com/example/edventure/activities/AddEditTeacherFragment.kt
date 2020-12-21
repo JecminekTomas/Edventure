@@ -8,11 +8,9 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -21,13 +19,12 @@ import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.EdventureApplication.Companion.appContext
 import com.example.edventure.R
 import com.example.edventure.model.ProfilePicture
-import com.example.edventure.model.Tutor
+import com.example.edventure.model.User
 import com.example.edventure.utils.FileUtils
 import com.example.edventure.utils.PermissionUtil
-import com.example.edventure.viewmodels.AddEditTutorVM
+import com.example.edventure.viewmodels.AddEditUserVM
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.content_add_edit_tutor.*
 import kotlinx.android.synthetic.main.content_add_edit_tutor.add_place_layout
 import kotlinx.android.synthetic.main.content_add_edit_tutor.add_place_textview
 import kotlinx.android.synthetic.main.content_add_edit_tutor.add_subject_textview
@@ -48,12 +45,12 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import java.util.*
-class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::class.java),
+class AddEditTeacherFragment : BaseMVVMFragment<AddEditUserVM>(AddEditUserVM::class.java),
     ChooseImageSourceListener {
 
     override val layout: Int = R.layout.fragment_add_edit_teacher
     private var id: Long? = null
-    private lateinit var tutor: Tutor
+    private lateinit var user: User
     private var tempPhotoFile: File? = null
     private val REQUEST_IMAGE_CAPTURE = 100
     private val GALLERY_IMAGE_REQUEST_CODE = 101
@@ -71,7 +68,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         super.onViewCreated(view, savedInstanceState)
         loadArrayStrings()
         setInteractionsListener()
-        tutor = Tutor()
+        user = User()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +82,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         tutorChangePicture.setOnClickListener { openAddImageBottomSheet() }
         first_name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                tutor.firstName = s.toString().trim()
+                user.firstName = s.toString().trim()
                 first_name_layout.error = null
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -102,7 +99,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
 
         last_name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                tutor.lastName = s.toString().trim()
+                user.lastName = s.toString().trim()
                 last_name_layout.error = null
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -117,7 +114,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         })
         add_place_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                tutor.city = s.toString().trim()
+                user.city = s.toString().trim()
                 add_place_layout.error = null
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -137,14 +134,14 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                tutor.pricePerHour = s.toString().toDoubleOrNull()
+                user.pricePerHour = s.toString().toDoubleOrNull()
                 price_per_hour_layout.error = null
                 if (isFilled()) {
-                    if (tutor.pricePerHour!! in 0.0..1000.0) {
+                    if (user.pricePerHour!! in 0.0..1000.0) {
                         saveTeacherEnabled()
                     } else {
                         price_per_hour_layout.isErrorEnabled = true
-                        if (tutor.pricePerHour!! < 0) {
+                        if (user.pricePerHour!! < 0) {
                             price_per_hour_layout.error = getString(R.string.not_possible)
                         } else {
                             price_per_hour_layout.error =
@@ -164,8 +161,8 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (isFilled()) {
-                    tutor.rating = s.toString().toDouble()
-                    if (tutor.rating in 0.0..5.0) {
+                    user.rating = s.toString().toDouble()
+                    if (user.rating!! in 0.0..5.0) {
                         rating_layout.error = null
                         saveTeacherEnabled()
                     } else {
@@ -183,13 +180,13 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
         if (isFilled()) {
             id?.let {
                 launch {
-                    viewModel.update(tutor)
+                    viewModel.update(user)
                 }.invokeOnCompletion {
                     activity?.supportFragmentManager?.popBackStack()
                 }
             } ?: kotlin.run {
                 launch {
-                    viewModel.insert(tutor)
+                    viewModel.insert(user)
                 }.invokeOnCompletion {
                     activity?.supportFragmentManager?.popBackStack()
                 }
@@ -198,27 +195,27 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
     }
 
     private fun fillLayout() {
-        tutor.firstName.let {
+        user.firstName.let {
             first_name.setText(it)
         }
-        tutor.lastName.let {
+        user.lastName.let {
             last_name.setText(it)
         }
-        tutor.city.let {
+        user.city.let {
             add_place_textview.setText(it)
         }
-        tutor.firstName.let {
+        user.firstName.let {
             first_name.setText(it)
         }
-        tutor.pricePerHour.let {
+        user.pricePerHour.let {
             price_per_hour.setText(String.format("%.0f", it))
         }
-        tutor.rating.let {
+        user.rating.let {
             stars.setText(String.format("%.1f", it))
         }
     }
     private fun isFilled(): Boolean {
-        return first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty() && tutor.profilePicture != null
+        return first_name.text!!.isNotEmpty() && last_name.text!!.isNotEmpty() && add_place_textview.text!!.isNotEmpty() && price_per_hour.text!!.isNotEmpty() && stars.text!!.isNotEmpty() && user.profilePicture != null
     }
 
     private fun saveTeacherEnabled() {
@@ -355,7 +352,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
             val destinationFile = File(appContext.filesDir, sourceFile.name)
             try {
                 FileUtils.copy(sourceFile, destinationFile)
-                tutor.profilePicture =
+                user.profilePicture =
                     ProfilePicture(Calendar.getInstance().timeInMillis, destinationFile.name)
             } catch (ex: IOException) {
                 ex.printStackTrace()
@@ -366,7 +363,7 @@ class AddEditTeacherFragment : BaseMVVMFragment<AddEditTutorVM>(AddEditTutorVM::
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            tutor.profilePicture =
+            user.profilePicture =
                 ProfilePicture(Calendar.getInstance().timeInMillis, tempPhotoFile!!.name)
             showProfilePictureFromFile(tempPhotoFile!!)
         }

@@ -5,25 +5,25 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.edventure.database.dao.ProfilePictureDao
-import com.example.edventure.database.dao.TutorDao
-import com.example.edventure.model.Tutor
+import com.example.edventure.database.dao.UserDao
+import com.example.edventure.model.User
 import com.example.edventure.model.ProfilePicture
 
-@Database(entities = [Tutor::class, ProfilePicture::class], version = 3, exportSchema = false)
-abstract class TutorDB : RoomDatabase() {
-    abstract fun tutorDao(): TutorDao
+@Database(entities = [User::class, ProfilePicture::class], version = 1, exportSchema = false)
+abstract class UserDB : RoomDatabase() {
+    abstract fun userDao(): UserDao
     abstract fun profilePictureDao(): ProfilePictureDao
 
     companion object {
-        private var INSTANCE: TutorDB? = null
+        private var INSTANCE: UserDB? = null
 
-        fun getDatabase(context: Context): TutorDB{
+        fun getDatabase(context: Context): UserDB{
             if (INSTANCE == null){
-                synchronized(TutorDB::class.java){ /** synchronized znamená, že se bude provádět pouze toto vlákno v jeden moment*/
+                synchronized(UserDB::class.java){ /** synchronized znamená, že se bude provádět pouze toto vlákno v jeden moment*/
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
-                            TutorDB::class.java, "tutor_db"
+                            UserDB::class.java, "user_db"
                         )   .fallbackToDestructiveMigration()
                             .build()
                     }
