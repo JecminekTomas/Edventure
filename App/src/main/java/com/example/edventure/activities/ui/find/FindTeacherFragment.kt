@@ -1,12 +1,10 @@
 package com.example.edventure.activities.ui.find
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -15,32 +13,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.arch.fragments.BaseMVVMFragment
 import com.example.edventure.R
 import com.example.edventure.EdventureApplication.Companion.appContext
+import androidx.fragment.app.setFragmentResultListener
 import com.example.edventure.model.User
 import com.example.edventure.sharedpreferences.SharedPreferencesManager
-import com.example.edventure.viewmodels.SelectUserVM
+import com.example.edventure.viewmodels.FindTeacherVM
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import com.example.edventure.activities.TeachersFilter
 import kotlinx.android.synthetic.main.fragment_find_teacher.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
-class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.java) {
+class FindTeacherFragment : BaseMVVMFragment<FindTeacherVM>(FindTeacherVM::class.java) {
 
     override val layout: Int = R.layout.fragment_find_teacher
     private var teachersList: MutableList<User> = mutableListOf()
     private var savedTeachersList: MutableList<User> = mutableListOf()
-    private var mExpandedPosition = -1
-    private var previousExpandedPosition = -1
-    private var filtered: Boolean = false
+
 
     var filterRating: Double? = -1.0
     var filterPriceMin: Double? = -1.0
     var filterPriceMax: Double? = -1.0
     var filterPlace: String? = ""
 
-    private val FILTER_TEACHER_REQUEST = 100
+    private var filtered = false
+
+    private val emptyDoubleValue = -1.0
+    private val emptyStringValue = ""
+
+    private val FILTER_TEACHERS_REQUEST = 100
     private lateinit var teachersAdapter: TeachersAdapter
 
     /**  V onCreateView vždy pouze "inflatovat" layout */
@@ -50,11 +53,30 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setFragmentResultListener("FILTER_TEACHER") { _, bundle ->
+            val result = bundle.getParcelable<TeachersFilter>("bundleKey")
+            savedTeachersList = teachersList.toMutableList()
+            if (result!!.rating != emptyDoubleValue) {
+                teachersList.removeAll { it.rating!! < result.rating }
+            }
+            if (result.city != emptyStringValue) {
+                teachersList.removeAll { it.city != result.city}
+            }
+            if (result.maxPrice != emptyDoubleValue) {
+                teachersList.removeAll { it.pricePerHour!! > result.maxPrice}
+            }
+            if (result.minPrice != emptyDoubleValue) {
+                teachersList.removeAll { it.pricePerHour!! < result.minPrice }
+            }
+            filtered = true
+            requireActivity().invalidateOptionsMenu()
+        }
         //val navController = findNavController()
 
         /*navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("key")?.observe(
@@ -108,7 +130,11 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
     /** Metoda onOptionSelected slouží při kliknutí na položku v horní liště (filtrování a hledání) */
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_find_teachers, menu)
+        if (!filtered) {
+            inflater.inflate(R.menu.menu_find_teachers, menu)
+        } else {
+            inflater.inflate(R.menu.menu_cancel_filter, menu)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -126,21 +152,20 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
                 onActionFind()
                 return true
             }
-            /*R.id.action_cancel_filter -> {
+            R.id.action_cancel_filter -> {
               onActionCancelFilter()
               return true
-            }*/
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
-/*
+
   private fun onActionCancelFilter() {
-    teacherList = saveTutorList
-    selectTutorRecyclerView.adapter = teacherAdapter
-    filtered = false
-    invalidateOptionsMenu()
+      filtered = false
+      teachersList = savedTeachersList
+      findTeacherRecyclerView.adapter = teachersAdapter
+      requireActivity().invalidateOptionsMenu()
   }
- */
 
     private fun onActionAddTeacher() {
         findNavController().navigate(R.id.action_add_edit_teacher)
@@ -193,6 +218,7 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
   }
   */
 
+
     inner class TeachersAdapter : RecyclerView.Adapter<TeachersAdapter.TeachersViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeachersViewHolder {
@@ -230,7 +256,6 @@ class FindTeacherFragment : BaseMVVMFragment<SelectUserVM>(SelectUserVM::class.j
 
 
         /** ViewHolder slouží pro organizaconizaci požadavků na VIEW od jednotlivých elementů.*/
-        // TODO: Přepsat na Teacher VŠECHNO
         inner class TeachersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val teacherProfilePicture: CircleImageView =
                 view.findViewById(R.id.imageview_cardview)

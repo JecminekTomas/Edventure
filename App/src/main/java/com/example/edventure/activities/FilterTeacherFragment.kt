@@ -6,7 +6,8 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.arch.fragments.BaseFragment
 import com.example.edventure.EdventureApplication.Companion.appContext
@@ -21,12 +22,7 @@ import kotlinx.android.synthetic.main.fragment_filter_teacher.*
 
 class FilterTeacherFragment : BaseFragment() {
     override val layout: Int = R.layout.fragment_filter_teacher
-
-    var filterRating: Double? = 0.0
-    var filterPriceMin: Double? = 0.0
-    var filterPriceMax: Double? = 0.0
-    var filterPlace: String? = ""
-    var filterSubject: String? = ""
+    var teachersFilter: TeachersFilter = TeachersFilter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,16 +56,19 @@ class FilterTeacherFragment : BaseFragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_filter_teachers, menu)
+        inflater.inflate(R.menu.menu_cancel_filter, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun setInteractionsListener() {
-        //saveFilter.setOnClickListener { makeFilter() }
+        saveFilter.setOnClickListener {
+            setFragmentResult("FILTER_TEACHER", bundleOf("bundleKey" to teachersFilter))
+            findNavController().popBackStack()
+        }
 
         subject_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filterSubject = s.toString().trim()
+                teachersFilter.subject = s.toString().trim()
                 if (isFilled()) {
                     saveFilterEnabled()
                 } else {
@@ -88,7 +87,7 @@ class FilterTeacherFragment : BaseFragment() {
 
         place_textview.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filterPlace = s.toString().trim()
+                teachersFilter.city = s.toString().trim()
                 if (isFilled()) {
                     saveFilterEnabled()
                 } else {
@@ -106,9 +105,9 @@ class FilterTeacherFragment : BaseFragment() {
 
         rating_edittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filterRating = s.toString().toDoubleOrNull()
+                teachersFilter.rating = s.toString().toDouble()
                 if (isFilled()) {
-                    if (filterRating!! in 0.0..5.0) {
+                    if (teachersFilter.rating in 0.0..5.0) {
                         saveFilterEnabled()
                     } else {
                         rating_layout.isErrorEnabled = true
@@ -124,7 +123,12 @@ class FilterTeacherFragment : BaseFragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterRating = s.toString().toDoubleOrNull()
+                if (s != null) {
+                    teachersFilter.rating = s.toString().toDouble()
+                }
+                else {
+                    teachersFilter.rating = -1.0
+                }
                 if (!isFilled()) {
                     rating_layout.isErrorEnabled = false
                     saveFilterDisabled()
@@ -134,7 +138,12 @@ class FilterTeacherFragment : BaseFragment() {
 
         price_min_edittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filterPriceMin = s.toString().toDoubleOrNull()
+                if (s != null) {
+                    teachersFilter.minPrice = s.toString().toDouble()
+                } else {
+                    teachersFilter.minPrice = -1.0
+                }
+
                 if (isFilled()) {
                     saveFilterEnabled()
                 } else {
@@ -152,7 +161,11 @@ class FilterTeacherFragment : BaseFragment() {
 
         price_max_edittext.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filterPriceMax = s.toString().toDoubleOrNull()
+                if (s != null) {
+                    teachersFilter.maxPrice = s.toString().toDouble()
+                } else {
+                    teachersFilter.maxPrice = -1.0
+                }
                 if (isFilled()) {
                     saveFilterEnabled()
                 } else {
@@ -185,34 +198,6 @@ class FilterTeacherFragment : BaseFragment() {
         price_max_edittext.clearFocus()
     }
 
-    /*private fun makeFilter() {
-        val navController = findNavController()
-        when {
-            //TODO: Upravit
-            rating_edittext.text!!.isNotEmpty() -> {
-                navController.previousBackStackEntry?.savedStateHandle?.set("key", filterRating)
-            }
-            /*
-            place_textview.text!!.isNotEmpty() -> {
-                returnIntent.putExtra("filter_type", "filter_place")
-                returnIntent.putExtra("filter_place", filterPlace)
-                setResult(Activity.RESULT_OK, returnIntent)
-                finish()
-            }
-            price_min_edittext.text!!.isNotEmpty() -> {
-                returnIntent.putExtra("filter_type", "filter_price_min")
-                returnIntent.putExtra("filter_price_min", filterPriceMin)
-                setResult(Activity.RESULT_OK, returnIntent)
-                finish()
-            }
-            price_max_edittext.text!!.isNotEmpty() -> {
-                returnIntent.putExtra("filter_type", "filter_price_max")
-                returnIntent.putExtra("filter_price_max", filterPriceMin)
-                setResult(Activity.RESULT_OK, returnIntent)
-                finish()
-            }*/
-        }
-    }*/
     private fun isFilled(): Boolean {
         return subject_textview.text!!.isNotEmpty() || place_textview.text!!.isNotEmpty() || rating_edittext.text!!.isNotEmpty()
                 || price_min_edittext.text!!.isNotEmpty() || price_max_edittext.text!!.isNotEmpty()
